@@ -67,10 +67,11 @@ const DemoVariant1 = () => {
           <GooeyText
             texts={[
               "Comprehensive Session Notes.",
-              "Bayesian Patient Profiles.",
+              "High-signal Patient Profiles.",
               "Know your Patients like Never Before.",
+              "Powerful Math at your Fingertips.",
               "Never Miss a Detail.",
-              "Easy, Secure, and Highly Customizable.",
+              "Easy, Secure, and HIPAA Compliant.",
               "Data-driven Therapeutic Insights."
             ]}
             morphTime={1.5}
@@ -82,7 +83,8 @@ const DemoVariant1 = () => {
         
         {/* Coming soon with subtle design */}
         <p className="mt-8 text-lg font-semibold text-olive-600 md:text-xl tracking-wider uppercase" style={{ color: '#8A9536' }}>
-          Coming Soon
+          Coming Soon.
+          Copyright © Cradla 2025.
         </p>
       </div>
     </div>
