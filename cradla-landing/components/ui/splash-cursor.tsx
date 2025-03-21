@@ -23,8 +23,20 @@ function SplashCursor({
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
-    function pointerPrototype() {
+    interface Pointer {
+        id: number;
+        texcoordX: number;
+        texcoordY: number;
+        prevTexcoordX: number;
+        prevTexcoordY: number;
+        deltaX: number;
+        deltaY: number;
+        down: boolean;
+        moved: boolean;
+        color: any; // or more specific type like number[] or {r: number, g: number, b: number}
+    }
+    // @ts-ignore
+    function pointerPrototype(this: Pointer) {
       this.id = -1;
       this.texcoordX = 0;
       this.texcoordY = 0;
