@@ -66,12 +66,12 @@ const DemoVariant1 = () => {
         <div className="mt-10 h-28 w-full max-w-4xl">
           <GooeyText
             texts={[
-              "Comprehensive Session Notes.",
               "High-signal Patient Profiles.",
+              "Far Beyond Session Notes.",
               "Powerful Math at your Fingertips.",
-              "Never Miss a Detail.",
               "Know your Patients like Never Before.",
               "Easy, Secure, and HIPAA Compliant.",
+              "Never Miss a Detail.",
               "Get Started in Minutes.",
             ]}
             morphTime={1.5}
