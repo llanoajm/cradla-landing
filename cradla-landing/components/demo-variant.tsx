@@ -72,7 +72,7 @@ const DemoVariant1 = () => {
               "Powerful Math at your Fingertips.",
               "Never Miss a Detail.",
               "Easy, Secure, and HIPAA Compliant.",
-              "Data-driven Therapeutic Insights."
+              "Get Started in Minutes.",
             ]}
             morphTime={1.5}
             cooldownTime={2}
