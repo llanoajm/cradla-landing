@@ -86,6 +86,13 @@ const DemoVariant1 = () => {
           Coming Soon.
           Copyright © Cradla 2025.
         </p>
+        <a 
+          href="mailto:llano@stanford.edu" 
+          className="text-sm hover:text-gray-700 transition-colors" style={{ color: 'black', paddingTop: '10%'}}
+
+        >
+          Book a Demo
+        </a>
       </div>
     </div>
   );
