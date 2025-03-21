@@ -34,13 +34,17 @@ const DemoVariant1 = () => {
       />
 
       <div className="relative z-10 flex flex-col items-center justify-start h-full px-4 pt-32 text-center">
-        <div delay={0.4} duration={0.9}>
+        <motion.div 
+        initial={{ opacity: 0 }} 
+        animate={{ opacity: 1 }} 
+        transition={{ delay: 0.4, duration: 0.9 }}
+        >
           <DotLottieReact
             src="https://lottie.host/8cf4ba71-e5fb-44f3-8134-178c4d389417/0CCsdcgNIP.json"
             loop
             autoplay
           />
-        </div>
+        </motion.div>
         
         {/* Modern Cradla heading */}
         <h1 className="mt-8 text-5xl font-extrabold text-gray-800 md:text-6xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-blue-800">
