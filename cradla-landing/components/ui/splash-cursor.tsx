@@ -55,7 +55,7 @@ function SplashCursor({
   SPLAT_FORCE = 6000,
   SHADING = true,
   COLOR_UPDATE_SPEED = 10,
-  BACK_COLOR = { r: 0.5, g: 0, b: 0 },
+  BACK_COLOR = { r: 1, g: 1, b: 1 },
   TRANSPARENT = true,
 }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -1142,9 +1142,9 @@ function SplashCursor({
 
     function generateColor() {
         const colors = [
-            { r: 0.15, g: 0.4, b: 0.7 },  // Blue
-            { r: 0.75, g: 0.8, b: 0.35 },  // Olive/chartreuse
-            { r: 1.0, g: 0.5, b: 0.6 }   // Pink
+
+            { r: 255/255, g: 255/255, b: 255/255 },   // 240, 43, 105
+            { r: 171/255, g: 120/255, b: 162/255 } 
           ];
           
           // Pick a random color from the array
