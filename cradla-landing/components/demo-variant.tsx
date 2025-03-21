@@ -87,7 +87,7 @@ const DemoVariant1 = () => {
           Copyright © Cradla 2025.
         </p>
         <a 
-          href="mailto:llano@stanford.edu" 
+          href="mailto:llano@stanford.edu?subject=Demo%20Request%20for%20Cradla" 
           className="text-sm hover:text-gray-700 transition-colors" style={{ color: 'black', paddingTop: '10%'}}
 
         >
