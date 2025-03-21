@@ -68,9 +68,9 @@ const DemoVariant1 = () => {
             texts={[
               "Comprehensive Session Notes.",
               "High-signal Patient Profiles.",
-              "Know your Patients like Never Before.",
               "Powerful Math at your Fingertips.",
               "Never Miss a Detail.",
+              "Know your Patients like Never Before.",
               "Easy, Secure, and HIPAA Compliant.",
               "Get Started in Minutes.",
             ]}
