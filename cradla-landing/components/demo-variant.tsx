@@ -39,11 +39,6 @@ const DemoVariant1 = () => {
     />
 
      {/* Fluid cursor effect */}
-
-
-      
-
-
       <div className="relative z-10 flex flex-col items-center justify-start h-full px-4 pt-32 text-center">
         <motion.div 
         initial={{ opacity: 0 }} 
