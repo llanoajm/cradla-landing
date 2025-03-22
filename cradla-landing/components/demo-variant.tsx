@@ -1,6 +1,6 @@
 "use client"
 import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
-import { FlickeringGrid } from "@/components/ui/flickering-grid";
+import { SplashCursor } from "@/components/ui/splash-cursor";
 import { NoiseOverlay } from "@/components/ui/noise-overlay";
 import { GooeyText } from "@/components/ui/gooey-text-morphing";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
@@ -39,6 +39,15 @@ const DemoVariant1 = () => {
     />
 
      {/* Fluid cursor effect */}
+      <SplashCursor 
+        BACK_COLOR={{ r: 1, g: 1, b: 1 }}  // White background
+        TRANSPARENT={true}
+        DENSITY_DISSIPATION={2.5}
+        VELOCITY_DISSIPATION={1.8}
+        SPLAT_RADIUS={0.025}
+        COLOR_UPDATE_SPEED={1}
+      />
+
       <div className="relative z-10 flex flex-col items-center justify-start h-full px-4 pt-32 text-center">
         <motion.div 
         initial={{ opacity: 0 }} 
