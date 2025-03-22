@@ -35,7 +35,7 @@ const DemoVariant1 = () => {
       startingGap={125} // Match the gradient's startingGap
       firstStopThreshold={90} // Controls where the white center area ends
       transitionWidth={25}    // Creates a smooth fade transition (adjust as needed)
-      delayAppearance={0.9}
+      delayAppearance={0.7}
     />
 
      {/* Fluid cursor effect */}
