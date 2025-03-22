@@ -7,6 +7,8 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { AnimatePresence, motion, useInView, Variants } from "framer-motion";
 import { useRef } from "react";
 
+
+
 const DemoVariant1 = () => {
   return (
     <div className="relative w-full h-screen overflow-hidden">
@@ -31,10 +33,13 @@ const DemoVariant1 = () => {
       opacity={0.15}    // Adjust opacity as needed
       zIndex={30}       // High z-index to be above everything
       startingGap={125} // Match the gradient's startingGap
-      firstStopThreshold={80} // Controls where the white center area ends
-      transitionWidth={15}    // Creates a smooth fade transition (adjust as needed)
+      firstStopThreshold={90} // Controls where the white center area ends
+      transitionWidth={25}    // Creates a smooth fade transition (adjust as needed)
       delayAppearance={0.9}
     />
+
+     {/* Fluid cursor effect */}
+
 
       
 

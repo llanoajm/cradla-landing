@@ -12,7 +12,7 @@ interface StaticNoiseTextureProps {
   topOffset?: number;
   firstStopThreshold?: number;
   transitionWidth?: number;
-  delayAppearance?: number; // Delay in seconds before showing the noise
+  delayAppearance?: number;
 }
 
 const NoiseOverlay: React.FC<StaticNoiseTextureProps> = ({
@@ -21,10 +21,10 @@ const NoiseOverlay: React.FC<StaticNoiseTextureProps> = ({
   density = 0.6,
   className = "",
   startingGap = 125,
-  topOffset = 0,
+  topOffset = 20,
   firstStopThreshold = 60,
-  transitionWidth = 15,
-  delayAppearance = 2.5, // Slightly longer than the gradient animation (2s)
+  transitionWidth = 30, // Increased from 15 to 30 for a wider, smoother transition
+  delayAppearance = 2.5,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -33,7 +33,7 @@ const NoiseOverlay: React.FC<StaticNoiseTextureProps> = ({
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
-    }, delayAppearance * 1000); // Convert seconds to milliseconds
+    }, delayAppearance * 1000);
     
     return () => clearTimeout(timer);
   }, [delayAppearance]);
@@ -56,8 +56,8 @@ const NoiseOverlay: React.FC<StaticNoiseTextureProps> = ({
       const data = imageData.data;
       
       // Calculate parameters to match the gradient
-      const centerX = canvas.width * 0.5;    // 50% horizontally (matches gradient)
-      const centerY = canvas.height * 0.2;   // 20% from top (matches gradient)
+      const centerX = canvas.width * 0.5;
+      const centerY = canvas.height * 0.2;
       
       // The size of the gradient ellipse
       const gradientWidth = (canvas.width * startingGap) / 100;
@@ -80,22 +80,24 @@ const NoiseOverlay: React.FC<StaticNoiseTextureProps> = ({
             
             if (drawPixel) {
               // Grayscale value - darker for more texture
-              const value = Math.floor(Math.random() * 40); // Low values for subtle dark spots
+              const value = Math.floor(Math.random() * 40);
               
               // Set RGB values
-              data[index] = value;     // Red
-              data[index + 1] = value; // Green
-              data[index + 2] = value; // Blue
+              data[index] = value;
+              data[index + 1] = value;
+              data[index + 2] = value;
               
-              // Calculate fade factor for the transition zone
+              // Calculate fade factor for the transition zone with improved smoothing
               let alphaMultiplier = 1.0;
               
               // If in the transition zone, calculate a fading effect
               if (normalizedDistance < firstStopThreshold) {
                 // Linear gradient from 0 to 1 across the transition zone
-                alphaMultiplier = (normalizedDistance - (firstStopThreshold - transitionWidth)) / transitionWidth;
-                // Apply a smoother transition curve (ease-in)
-                alphaMultiplier = alphaMultiplier * alphaMultiplier; // Square for smoother transition
+                const rawProgress = (normalizedDistance - (firstStopThreshold - transitionWidth)) / transitionWidth;
+                
+                // Apply a cubic bezier easing function for much smoother transitions
+                // This creates an S-curve that starts and ends more gradually
+                alphaMultiplier = smootherStep(rawProgress);
               }
               
               // Apply the calculated alpha with transition fade
@@ -113,6 +115,15 @@ const NoiseOverlay: React.FC<StaticNoiseTextureProps> = ({
 
       ctx.putImageData(imageData, 0, 0);
     };
+
+    // Smootherstep function (improved version of smoothstep) for smoother transitions
+    // Returns a value between 0 and 1 with smoother acceleration/deceleration
+    function smootherStep(x) {
+      // Clamp the input between 0 and 1
+      x = Math.max(0, Math.min(1, x));
+      // Apply 6x^5 - 15x^4 + 10x^3 (smootherstep formula)
+      return x * x * x * (x * (x * 6 - 15) + 10);
+    }
 
     // Generate the noise texture once
     generateNoiseTexture();
@@ -140,7 +151,7 @@ const NoiseOverlay: React.FC<StaticNoiseTextureProps> = ({
           className={className}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
+          transition={{ duration: 1.5, ease: "easeInOut" }} // Longer, smoother animation
           exit={{ opacity: 0 }}
           style={{
             position: 'absolute',
