@@ -1,6 +1,5 @@
 "use client"
 import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
-import { SplashCursor } from "@/components/ui/splash-cursor";
 import { FlickeringGrid } from "@/components/ui/flickering-grid";
 import { NoiseOverlay } from "@/components/ui/noise-overlay";
 import { GooeyText } from "@/components/ui/gooey-text-morphing";
@@ -11,37 +10,34 @@ import { useRef } from "react";
 const DemoVariant1 = () => {
   return (
     <div className="relative w-full h-screen overflow-hidden">
-     
-      {/* Gradient Background with white center */}
-      <AnimatedGradientBackground 
-        gradientColors={[
-          "#FFFFFF", // White center
-          "#BFC261", // Olive/chartreuse color
-          "#E195AB", // Pink 
-          "#DE3163", // Original blue
-          "#FFD600",
-          "#00E676",
-          "#BFC261" // Olive/chartreuse color at the end
-        ]}
-        Breathing={true}
-        startingGap={125}
-      />
+
+    <AnimatedGradientBackground 
+      gradientColors={[
+        "#FFFFFF", // White center
+        "#BFC261", // Olive/chartreuse color
+        "#E195AB", // Pink 
+        "#DE3163", // Original blue
+        "#FFD600",
+        "#00E676",
+        "#BFC261" // Olive/chartreuse color at the end
+      ]}
       
-   
-      <NoiseOverlay 
-        opacity={0.15}    // Adjust opacity as needed
-        zIndex={30}       // High z-index to be above everything
-      />
+      Breathing={true}
+      startingGap={125}
+    />
+
+    {/* Updated NoiseOverlay that matches the gradient's geometry */}
+    <NoiseOverlay 
+      opacity={0.15}    // Adjust opacity as needed
+      zIndex={30}       // High z-index to be above everything
+      startingGap={125} // Match the gradient's startingGap
+      firstStopThreshold={80} // Controls where the white center area ends
+      transitionWidth={15}    // Creates a smooth fade transition (adjust as needed)
+      delayAppearance={0.9}
+    />
+
       
-      {/* Fluid cursor effect */}
-      <SplashCursor 
-        BACK_COLOR={{ r: 1, g: 1, b: 1 }}  // White background
-        TRANSPARENT={true}
-        DENSITY_DISSIPATION={2.5}
-        VELOCITY_DISSIPATION={1.8}
-        SPLAT_RADIUS={0.025}
-        COLOR_UPDATE_SPEED={1}
-      />
+
 
       <div className="relative z-10 flex flex-col items-center justify-start h-full px-4 pt-32 text-center">
         <motion.div 
