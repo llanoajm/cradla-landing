@@ -118,7 +118,7 @@ const NoiseOverlay: React.FC<StaticNoiseTextureProps> = ({
 
     // Smootherstep function (improved version of smoothstep) for smoother transitions
     // Returns a value between 0 and 1 with smoother acceleration/deceleration
-    function smootherStep(x) {
+    function smootherStep(x: number): number {
       // Clamp the input between 0 and 1
       x = Math.max(0, Math.min(1, x));
       // Apply 6x^5 - 15x^4 + 10x^3 (smootherstep formula)
