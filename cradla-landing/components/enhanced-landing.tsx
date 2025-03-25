@@ -12,7 +12,7 @@ const CradlaLanding = () => {
   const [activeSection, setActiveSection] = useState('hero');
   const [isInHeroSection, setIsInHeroSection] = useState(true);
   const sectionRefs = {
-    hero: useRef(null),
+    start: useRef(null),
     problem: useRef(null),
     solution: useRef(null),
     features: useRef(null),
@@ -20,59 +20,45 @@ const CradlaLanding = () => {
     contact: useRef(null)
   };
 
-
-
-const scrollToSection = (sectionId: keyof typeof sectionRefs) => {
-    // Make sure the ref exists and has an HTML element
-    const sectionRef = sectionRefs[sectionId];
-    if (sectionRef?.current instanceof HTMLElement) {
-      // First set the active section
-      setActiveSection(sectionId);
-      
-      // Calculate the offset to account for any fixed headers
-      const headerOffset = 80; // Adjust this value based on your header height
-      const elementPosition = sectionRef.current.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-      
-      // Scroll to the section with offset
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    } else {
-      console.error(`Reference to section "${sectionId}" is not available or not an HTML element`);
-    }
+  // Scroll to section when nav item is clicked
+  const scrollToSection = (sectionId) => {
+    setActiveSection(sectionId);
+    sectionRefs[sectionId].current.scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start'
+    });
   };
 
-  // Update active section based on scroll position
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 100;
-      
-      // Check if we're in the hero section without triggering re-renders too often
-      if (sectionRefs.hero.current) {
-        const heroSection = sectionRefs.hero.current;
-        const inHeroSection = scrollPosition < heroSection.offsetTop + heroSection.offsetHeight - 200;
+    // Update active section based on scroll position
+    useEffect(() => {
+        const handleScroll = () => {
+        const scrollPosition = window.scrollY + 100;
         
-        // Only update state if it changes to avoid unnecessary re-renders
-        if (inHeroSection !== isInHeroSection) {
-          setIsInHeroSection(inHeroSection);
+        // Check if we're in the hero section with proper null/undefined checks
+        if (sectionRefs.hero && sectionRefs.hero.current) {
+            const heroSection = sectionRefs.hero.current;
+            const inHeroSection = scrollPosition < heroSection.offsetTop + heroSection.offsetHeight - 200;
+            
+            // Only update state if it changes to avoid unnecessary re-renders
+            if (inHeroSection !== isInHeroSection) {
+            setIsInHeroSection(inHeroSection);
+            }
         }
-      }
-      
-      Object.entries(sectionRefs).forEach(([section, ref]) => {
-        if (ref.current && scrollPosition >= ref.current.offsetTop && 
-            scrollPosition < ref.current.offsetTop + ref.current.offsetHeight) {
-          if (section !== activeSection) {
-            setActiveSection(section);
-          }
-        }
-      });
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isInHeroSection, activeSection]);
+        
+        // Add null checks for all refs before using them
+        Object.entries(sectionRefs).forEach(([section, ref]) => {
+            if (ref && ref.current && scrollPosition >= ref.current.offsetTop && 
+                scrollPosition < ref.current.offsetTop + ref.current.offsetHeight) {
+            if (section !== activeSection) {
+                setActiveSection(section);
+            }
+            }
+        });
+        };
+    
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [isInHeroSection, activeSection]);
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-white">
@@ -206,25 +192,9 @@ const scrollToSection = (sectionId: keyof typeof sectionRefs) => {
               while preserving the therapeutic relationship—delivering care when it's needed, with the context that makes it effective.
             </p>
             <button 
-            onClick={() => {
-                // Get the problem section element directly by ID
-                const problemSection = document.getElementById('problem');
-                if (problemSection) {
-                // Set the active section state
-                setActiveSection('problem');
-                
-                // Calculate position with header offset
-                const headerOffset = 80; // Adjust based on your header height
-                const offsetPosition = problemSection.offsetTop - headerOffset;
-                
-                // Perform the scroll
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-                }
-            }}
-            className="mt-8 px-8 py-3 text-lg font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all"
+            onClick={() => scrollToSection('problem')}
+            className="mt-8 px-8 py-3 text-lg font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all relative z-20 pointer-events-auto"
+            style={{ position: 'relative' }}
             >
             Learn How
             </button>
