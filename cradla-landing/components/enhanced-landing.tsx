@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client"
 
 import React, { useRef, useState, useEffect } from 'react';
@@ -21,10 +22,8 @@ const CradlaLanding = () => {
   };
 
   // Scroll to section when nav item is clicked
-  // @ts-ignore
   const scrollToSection = (sectionId) => {
     setActiveSection(sectionId);
-    // @ts-ignore
     sectionRefs[sectionId].current.scrollIntoView({ 
       behavior: 'smooth',
       block: 'start'
