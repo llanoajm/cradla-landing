@@ -19,9 +19,9 @@ export function FeaturesSectionWithHoverEffects() {
       icon: <Terminal />,
     },
     {
-      title: "Ease of use",
+      title: "Power your Practitioners our Expert Therapy Copilot",
       description:
-        "It's as easy as using an Apple, and as expensive as buying one.",
+        "Give Therapists Access to our domain-expert AI copilot leveraging SOTA models carefully fine-tuned for therapy",
       icon: <MoveHorizontal />,
     },
     {
