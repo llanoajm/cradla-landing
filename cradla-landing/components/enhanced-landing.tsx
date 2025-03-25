@@ -126,7 +126,7 @@ const CradlaLanding = () => {
                 PRESSURE={0.1}
                 PRESSURE_ITERATIONS={16}
                 CURL={3}
-                SPLAT_RADIUS={0.5}
+                SPLAT_RADIUS={0.05}
                 SPLAT_FORCE={6000}
                 SHADING={true}
                 COLOR_UPDATE_SPEED={10}
@@ -174,7 +174,7 @@ const CradlaLanding = () => {
                 "HIPAA-compliant therapeutic intelligence."
               ]}
               morphTime={1.5}
-              cooldownTime={8}
+              cooldownTime={3.5}
               className="font-bold text-black w-full"
               textClassName="text-2xl md:text-3xl lg:text-4xl tracking-wide font-bold"
             />
