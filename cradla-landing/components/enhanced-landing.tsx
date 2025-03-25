@@ -9,7 +9,7 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { motion } from "framer-motion";
 
 const CradlaLanding = () => {
-  const [activeSection, setActiveSection] = useState('hero');
+  const [activeSection, setActiveSection] = useState('start');
   const [isInHeroSection, setIsInHeroSection] = useState(true);
   const sectionRefs = {
     start: useRef(null),
@@ -35,8 +35,8 @@ const CradlaLanding = () => {
       const scrollPosition = window.scrollY + 100;
       
       // Check if we're in the hero section without triggering re-renders too often
-      if (sectionRefs.hero.current) {
-        const heroSection = sectionRefs.hero.current;
+      if (sectionRefs.start.current) {
+        const heroSection = sectionRefs.start.current;
         const inHeroSection = scrollPosition < heroSection.offsetTop + heroSection.offsetHeight - 200;
         
         // Only update state if it changes to avoid unnecessary re-renders
@@ -88,7 +88,7 @@ const CradlaLanding = () => {
 
       {/* Navigation Bar */}
       <header className="fixed top-4 left-0 right-0 z-50 flex justify-center">
-        <nav className={`px-6 py-2 rounded-full transition-all duration-300 ${activeSection !== 'hero' ? 'bg-white/80 backdrop-blur-sm shadow-md' : 'bg-transparent'}`}>
+        <nav className={`px-6 py-2 rounded-full transition-all duration-300 ${activeSection !== 'start' ? 'bg-white/80 backdrop-blur-sm shadow-md' : 'bg-transparent'}`}>
           <div className="flex space-x-6">
             {Object.keys(sectionRefs).map((section) => (
               <button
@@ -111,8 +111,8 @@ const CradlaLanding = () => {
       <main className="relative pt-16">
         {/* Hero Section */}
         <section 
-          ref={sectionRefs.hero} 
-          id="hero"
+          ref={sectionRefs.start} 
+          id="start"
           className="min-h-screen flex flex-col items-center justify-center px-4 text-center py-24 relative"
         >
           {isInHeroSection && (
@@ -173,7 +173,7 @@ const CradlaLanding = () => {
                 "Never lose critical patient context again.",
                 "HIPAA-compliant therapeutic intelligence."
               ]}
-              morphTime={1.5}
+              morphTime={2}
               cooldownTime={5}
               className="font-bold text-black w-full"
               textClassName="text-2xl md:text-3xl lg:text-4xl tracking-wide font-bold"
