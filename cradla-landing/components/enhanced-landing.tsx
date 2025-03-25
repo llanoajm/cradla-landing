@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
 import { SplashCursor } from "@/components/ui/splash-cursor";
 import { NoiseOverlay } from "@/components/ui/noise-overlay";
-import { GooeyText } from "@/components/ui/gooey-text-morphing";
+import { FixedGooeyText } from "@/components/ui/gooey-text-morphing";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { motion } from "framer-motion";
 
@@ -12,7 +12,7 @@ const CradlaLanding = () => {
   const [activeSection, setActiveSection] = useState('hero');
   const [isInHeroSection, setIsInHeroSection] = useState(true);
   const sectionRefs = {
-    start: useRef(null),
+    hero: useRef(null),
     problem: useRef(null),
     solution: useRef(null),
     features: useRef(null),
@@ -87,9 +87,9 @@ const CradlaLanding = () => {
       </div>
 
       {/* Navigation Bar */}
-      <header className="fixed top-0 left-0 right-0 z-50">
-        <nav className="flex justify-center items-center px-4 py-4">
-          <div className="flex space-x-8">
+      <header className="fixed top-4 left-0 right-0 z-50 flex justify-center">
+        <nav className={`px-6 py-2 rounded-full transition-all duration-300 ${activeSection !== 'hero' ? 'bg-white/80 backdrop-blur-sm shadow-md' : 'bg-transparent'}`}>
+          <div className="flex space-x-6">
             {Object.keys(sectionRefs).map((section) => (
               <button
                 key={section}
@@ -118,15 +118,15 @@ const CradlaLanding = () => {
           {isInHeroSection && (
             <div className="absolute inset-0">
               <SplashCursor 
-                SIM_RESOLUTION={64}  // Reduced from default 128
-                DYE_RESOLUTION={1024}  // Reduced from default 1440
+                SIM_RESOLUTION={64}
+                DYE_RESOLUTION={1024}
                 CAPTURE_RESOLUTION={512}
                 DENSITY_DISSIPATION={4}
                 VELOCITY_DISSIPATION={2.5}
                 PRESSURE={0.1}
-                PRESSURE_ITERATIONS={16}  // Reduced from default 20
+                PRESSURE_ITERATIONS={16}
                 CURL={3}
-                SPLAT_RADIUS={0.2}
+                SPLAT_RADIUS={0.5}
                 SPLAT_FORCE={6000}
                 SHADING={true}
                 COLOR_UPDATE_SPEED={10}
@@ -164,7 +164,7 @@ const CradlaLanding = () => {
           </motion.div>
           
           <div className="mt-8 h-28 w-full max-w-4xl">
-            <GooeyText
+            <FixedGooeyText
               texts={[
                 "When patient appointments slip through the cracks, we catch them.",
                 "Reduce wait times by up to 18 days.",
@@ -173,8 +173,8 @@ const CradlaLanding = () => {
                 "Never lose critical patient context again.",
                 "HIPAA-compliant therapeutic intelligence."
               ]}
-              morphTime={3.5}
-              cooldownTime={5}
+              morphTime={1.5}
+              cooldownTime={8}
               className="font-bold text-black w-full"
               textClassName="text-2xl md:text-3xl lg:text-4xl tracking-wide font-bold"
             />
