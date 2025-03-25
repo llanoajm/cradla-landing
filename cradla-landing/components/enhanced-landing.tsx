@@ -20,13 +20,28 @@ const CradlaLanding = () => {
     contact: useRef(null)
   };
 
-  // Scroll to section when nav item is clicked
-  const scrollToSection = (sectionId) => {
-    setActiveSection(sectionId);
-    sectionRefs[sectionId].current.scrollIntoView({ 
-      behavior: 'smooth',
-      block: 'start'
-    });
+
+
+const scrollToSection = (sectionId: keyof typeof sectionRefs) => {
+    // Make sure the ref exists and has an HTML element
+    const sectionRef = sectionRefs[sectionId];
+    if (sectionRef?.current instanceof HTMLElement) {
+      // First set the active section
+      setActiveSection(sectionId);
+      
+      // Calculate the offset to account for any fixed headers
+      const headerOffset = 80; // Adjust this value based on your header height
+      const elementPosition = sectionRef.current.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      
+      // Scroll to the section with offset
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    } else {
+      console.error(`Reference to section "${sectionId}" is not available or not an HTML element`);
+    }
   };
 
   // Update active section based on scroll position
@@ -191,10 +206,27 @@ const CradlaLanding = () => {
               while preserving the therapeutic relationship—delivering care when it's needed, with the context that makes it effective.
             </p>
             <button 
-              onClick={() => scrollToSection('problem')}
-              className="mt-8 px-8 py-3 text-lg font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all"
+            onClick={() => {
+                // Get the problem section element directly by ID
+                const problemSection = document.getElementById('problem');
+                if (problemSection) {
+                // Set the active section state
+                setActiveSection('problem');
+                
+                // Calculate position with header offset
+                const headerOffset = 80; // Adjust based on your header height
+                const offsetPosition = problemSection.offsetTop - headerOffset;
+                
+                // Perform the scroll
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+                }
+            }}
+            className="mt-8 px-8 py-3 text-lg font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all"
             >
-              Learn How
+            Learn How
             </button>
           </motion.div>
         </section>
