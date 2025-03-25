@@ -10,7 +10,6 @@ interface GooeyTextProps {
   className?: string;
   textClassName?: string;
 }
-
 export function FixedGooeyText({
   texts,
   morphTime = 1,
@@ -20,8 +19,34 @@ export function FixedGooeyText({
 }: GooeyTextProps) {
   const text1Ref = React.useRef<HTMLSpanElement>(null);
   const text2Ref = React.useRef<HTMLSpanElement>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const requestRef = React.useRef<number>();
+  const [isVisible, setIsVisible] = React.useState(true);
+  const filterId = React.useId(); // Generate unique ID for filter
+
+  // Use Intersection Observer to detect visibility
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+    
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+    
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
+  }, []);
 
   React.useEffect(() => {
+    if (!isVisible) return; // Don't animate when not visible
+    
     let textIndex = texts.length - 1;
     let time = new Date();
     let morph = 0;
@@ -62,7 +87,6 @@ export function FixedGooeyText({
     };
 
     function animate() {
-      requestAnimationFrame(animate);
       const newTime = new Date();
       const shouldIncrementIndex = cooldown > 0;
       const dt = (newTime.getTime() - time.getTime()) / 1000;
@@ -82,20 +106,27 @@ export function FixedGooeyText({
       } else {
         doCooldown();
       }
+      
+      // Store the id so we can cancel it
+      requestRef.current = requestAnimationFrame(animate);
     }
 
-    animate();
+    // Start animation
+    requestRef.current = requestAnimationFrame(animate);
 
+    // Proper cleanup function
     return () => {
-      // Cleanup function if needed
+      if (requestRef.current) {
+        cancelAnimationFrame(requestRef.current);
+      }
     };
-  }, [texts, morphTime, cooldownTime]);
+  }, [texts, morphTime, cooldownTime, isVisible]); // Include isVisible in dependencies
 
   return (
-    <div className={cn("relative", className)}>
+    <div ref={containerRef} className={cn("relative", className)}>
       <svg className="absolute h-0 w-0" aria-hidden="true" focusable="false">
         <defs>
-          <filter id="threshold">
+          <filter id={filterId}>
             <feColorMatrix
               in="SourceGraphic"
               type="matrix"
@@ -110,7 +141,7 @@ export function FixedGooeyText({
 
       <div
         className="flex items-center justify-center"
-        style={{ filter: "url(#threshold)" }}
+        style={{ filter: `url(#${filterId})` }}
       >
         <span
           ref={text1Ref}
