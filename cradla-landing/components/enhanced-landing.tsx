@@ -29,36 +29,35 @@ const CradlaLanding = () => {
     });
   };
 
-    // Update active section based on scroll position
-    useEffect(() => {
-        const handleScroll = () => {
-        const scrollPosition = window.scrollY + 100;
+  // Update active section based on scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 100;
+      
+      // Check if we're in the hero section without triggering re-renders too often
+      if (sectionRefs.hero.current) {
+        const heroSection = sectionRefs.hero.current;
+        const inHeroSection = scrollPosition < heroSection.offsetTop + heroSection.offsetHeight - 200;
         
-        // Check if we're in the hero section with proper null/undefined checks
-        if (sectionRefs.hero && sectionRefs.hero.current) {
-            const heroSection = sectionRefs.hero.current;
-            const inHeroSection = scrollPosition < heroSection.offsetTop + heroSection.offsetHeight - 200;
-            
-            // Only update state if it changes to avoid unnecessary re-renders
-            if (inHeroSection !== isInHeroSection) {
-            setIsInHeroSection(inHeroSection);
-            }
+        // Only update state if it changes to avoid unnecessary re-renders
+        if (inHeroSection !== isInHeroSection) {
+          setIsInHeroSection(inHeroSection);
         }
-        
-        // Add null checks for all refs before using them
-        Object.entries(sectionRefs).forEach(([section, ref]) => {
-            if (ref && ref.current && scrollPosition >= ref.current.offsetTop && 
-                scrollPosition < ref.current.offsetTop + ref.current.offsetHeight) {
-            if (section !== activeSection) {
-                setActiveSection(section);
-            }
-            }
-        });
-        };
-    
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [isInHeroSection, activeSection]);
+      }
+      
+      Object.entries(sectionRefs).forEach(([section, ref]) => {
+        if (ref.current && scrollPosition >= ref.current.offsetTop && 
+            scrollPosition < ref.current.offsetTop + ref.current.offsetHeight) {
+          if (section !== activeSection) {
+            setActiveSection(section);
+          }
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isInHeroSection, activeSection]);
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-white">
@@ -127,7 +126,7 @@ const CradlaLanding = () => {
                 PRESSURE={0.1}
                 PRESSURE_ITERATIONS={16}
                 CURL={3}
-                SPLAT_RADIUS={0.05}
+                SPLAT_RADIUS={0.03}
                 SPLAT_FORCE={6000}
                 SHADING={true}
                 COLOR_UPDATE_SPEED={10}
@@ -175,7 +174,7 @@ const CradlaLanding = () => {
                 "HIPAA-compliant therapeutic intelligence."
               ]}
               morphTime={1.5}
-              cooldownTime={3.5}
+              cooldownTime={5}
               className="font-bold text-black w-full"
               textClassName="text-2xl md:text-3xl lg:text-4xl tracking-wide font-bold"
             />
@@ -193,8 +192,8 @@ const CradlaLanding = () => {
             </p>
             <button 
             onClick={() => scrollToSection('problem')}
-            className="mt-8 px-8 py-3 text-lg font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all relative z-20 pointer-events-auto"
-            style={{ position: 'relative' }}
+            className="mt-8 px-8 py-3 text-lg font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all"
+            style={{ position: 'relative', zIndex: 40, pointerEvents: 'auto' }}
             >
             Learn How
             </button>
