@@ -21,8 +21,10 @@ const CradlaLanding = () => {
   };
 
   // Scroll to section when nav item is clicked
+  // @ts-ignore
   const scrollToSection = (sectionId) => {
     setActiveSection(sectionId);
+    // @ts-ignore
     sectionRefs[sectionId].current.scrollIntoView({ 
       behavior: 'smooth',
       block: 'start'
@@ -174,7 +176,7 @@ const CradlaLanding = () => {
                 "HIPAA-compliant therapeutic intelligence."
               ]}
               morphTime={2}
-              cooldownTime={5}
+              cooldownTime={3.5}
               className="font-bold text-black w-full"
               textClassName="text-2xl md:text-3xl lg:text-4xl tracking-wide font-bold"
             />
