@@ -20,6 +20,7 @@ export function FixedGooeyText({
   const text1Ref = React.useRef<HTMLSpanElement>(null);
   const text2Ref = React.useRef<HTMLSpanElement>(null);
   const containerRef = React.useRef<HTMLDivElement>(null);
+  // @ts-ignore
   const requestRef = React.useRef<number>();
   const [isVisible, setIsVisible] = React.useState(true);
   const filterId = React.useId(); // Generate unique ID for filter
