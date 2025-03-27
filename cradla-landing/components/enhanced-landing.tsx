@@ -94,7 +94,7 @@ const CradlaLanding = () => {
       {/* Navigation Bar */}
       <header className="fixed top-4 left-0 right-0 z-50 flex justify-between items-center px-6">
         <div className="flex-1 flex items-center">
-          <span className="text-lg font-bold text-gray-900">Cradla</span>
+          <span className="text-2xl font-bold text-gray-900">Cradla</span>
         </div>
         
         <nav className={`px-6 py-2 rounded-full transition-all duration-300 ${activeSection !== 'start' ? 'bg-white/80 backdrop-blur-sm shadow-md' : 'bg-transparent'}`}>
@@ -116,7 +116,7 @@ const CradlaLanding = () => {
         </nav>
         
         <div className="flex-1 flex justify-end items-center">
-          <a href="#" className="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all">
+          <a href="#contact" className="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all">
             Get Started
           </a>
         </div>
@@ -128,7 +128,7 @@ const CradlaLanding = () => {
         <section 
           ref={sectionRefs.start} 
           id="start"
-          className="min-h-[85vh] flex flex-col items-center justify-center px-4 pt-8 pb-12 relative"
+          className="min-h-[75vh] flex flex-col items-center justify-center px-4 pt-4 pb-8 relative"
         >
           {isInHeroSection && (
             <div className="absolute inset-0">
@@ -151,7 +151,7 @@ const CradlaLanding = () => {
             </div>
           )}
           
-          <div className="container max-w-5xl mx-auto relative z-10 mt-[-60px]">
+          <div className="container max-w-5xl mx-auto relative z-10 mt-[-80px]">
             <div className="grid grid-cols-1 gap-6 items-center lg:grid-cols-2">
               <div className="flex flex-col">
                 <div className="flex items-center mb-2">
@@ -184,7 +184,7 @@ const CradlaLanding = () => {
                 </div>
                 
                 <div className="flex flex-col">
-                  <div className="h-28 w-full mt-12">
+                  <div className="h-28 w-full mb-6 pt-20 pb-14">
                     <FixedGooeyText
                       texts={[
                         "When patient appointments slip through the cracks, we catch them.",
@@ -236,7 +236,7 @@ const CradlaLanding = () => {
         <section 
           ref={sectionRefs.problem} 
           id="problem"
-          className="relative py-24 px-4 min-h-screen flex flex-col justify-center"
+          className="relative py-16 px-4 min-h-screen flex flex-col justify-center"
         >
           <div className="max-w-6xl mx-auto">
             <div className="bg-white bg-opacity-80 backdrop-filter backdrop-blur-md rounded-2xl p-8 shadow-xl">
