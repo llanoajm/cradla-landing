@@ -8,10 +8,11 @@ import { NoiseOverlay } from "@/components/ui/noise-overlay";
 import { FixedGooeyText } from "@/components/ui/gooey-text-morphing";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { motion } from "framer-motion";
-import { PhoneCall, MoveRight } from "lucide-react";
+import { PhoneCall, MoveRight, Brain, Clock, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { TextShimmer } from "@/components/ui/text-shimmer";
+import DisplayCards from "@/components/ui/display-cards";
 
 const CradlaLanding = () => {
   const [activeSection, setActiveSection] = useState('start');
@@ -116,7 +117,7 @@ const CradlaLanding = () => {
         </nav>
         
         <div className="flex-1 flex justify-end items-center">
-          <a href="#contact" className="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all">
+          <a href="#" className="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all">
             Get Started
           </a>
         </div>
@@ -152,7 +153,7 @@ const CradlaLanding = () => {
           )}
           
           <div className="container max-w-5xl mx-auto relative z-10 mt-[-80px]">
-            <div className="grid grid-cols-1 gap-6 items-center lg:grid-cols-2">
+            <div className="grid grid-cols-1 gap-6 items-center lg:grid-cols-2 h-full">
               <div className="flex flex-col">
                 <div className="flex items-center mb-2">
                   <motion.div 
@@ -178,7 +179,7 @@ const CradlaLanding = () => {
                       duration={1.5} 
                       className="text-xl md:text-2xl font-medium mt-1 text-left [--base-color:theme(colors.gray.600)] [--base-gradient-color:theme(colors.violet.500)]"
                     >
-                      SOTA AI Therapy Copilot
+                      Powerful AI Therapy Copilot
                     </TextShimmer>
                   </div>
                 </div>
@@ -227,7 +228,37 @@ const CradlaLanding = () => {
                 </div>
               </div>
               
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg aspect-square"></div>
+              <div className="flex items-center justify-center h-full mt-4 lg:mt-0">
+                <DisplayCards cards={[
+                  {
+                    icon: <Brain className="size-4 text-violet-300" />,
+                    title: "Context Preservation",
+                    description: "Never lose therapeutic insights",
+                    date: "Continuous",
+                    iconClassName: "text-violet-500",
+                    titleClassName: "text-violet-500",
+                    className: "[grid-area:stack] hover:-translate-y-10 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration:700 hover:grayscale-0 before:left-0 before:top-0",
+                  },
+                  {
+                    icon: <Clock className="size-4 text-blue-300" />,
+                    title: "Reduced Wait Times",
+                    description: "18 days faster on average",
+                    date: "Immediate",
+                    iconClassName: "text-blue-500",
+                    titleClassName: "text-blue-500",
+                    className: "[grid-area:stack] translate-x-16 translate-y-10 hover:-translate-y-1 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration:700 hover:grayscale-0 before:left-0 before:top-0",
+                  },
+                  {
+                    icon: <Users className="size-4 text-green-300" />,
+                    title: "31% More Throughput",
+                    description: "Serve more patients effectively",
+                    date: "Ongoing",
+                    iconClassName: "text-green-500",
+                    titleClassName: "text-green-500",
+                    className: "[grid-area:stack] translate-x-32 translate-y-20 hover:translate-y-10",
+                  },
+                ]} />
+              </div>
             </div>
           </div>
         </section>
