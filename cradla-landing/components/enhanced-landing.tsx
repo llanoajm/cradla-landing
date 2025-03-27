@@ -8,6 +8,10 @@ import { NoiseOverlay } from "@/components/ui/noise-overlay";
 import { FixedGooeyText } from "@/components/ui/gooey-text-morphing";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { motion } from "framer-motion";
+import { PhoneCall, MoveRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { TextShimmer } from "@/components/ui/text-shimmer";
 
 const CradlaLanding = () => {
   const [activeSection, setActiveSection] = useState('start');
@@ -88,7 +92,11 @@ const CradlaLanding = () => {
       </div>
 
       {/* Navigation Bar */}
-      <header className="fixed top-4 left-0 right-0 z-50 flex justify-center">
+      <header className="fixed top-4 left-0 right-0 z-50 flex justify-between items-center px-6">
+        <div className="flex-1 flex items-center">
+          <span className="text-lg font-bold text-gray-900">Cradla</span>
+        </div>
+        
         <nav className={`px-6 py-2 rounded-full transition-all duration-300 ${activeSection !== 'start' ? 'bg-white/80 backdrop-blur-sm shadow-md' : 'bg-transparent'}`}>
           <div className="flex space-x-6">
             {Object.keys(sectionRefs).map((section) => (
@@ -106,6 +114,12 @@ const CradlaLanding = () => {
             ))}
           </div>
         </nav>
+        
+        <div className="flex-1 flex justify-end items-center">
+          <a href="#" className="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all">
+            Get Started
+          </a>
+        </div>
       </header>
 
       {/* Main Content */}
@@ -114,7 +128,7 @@ const CradlaLanding = () => {
         <section 
           ref={sectionRefs.start} 
           id="start"
-          className="min-h-screen flex flex-col items-center justify-center px-4 text-center py-24 relative"
+          className="min-h-[85vh] flex flex-col items-center justify-center px-4 pt-8 pb-12 relative"
         >
           {isInHeroSection && (
             <div className="absolute inset-0">
@@ -136,69 +150,86 @@ const CradlaLanding = () => {
               />
             </div>
           )}
-          <motion.div 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
-            transition={{ delay: 0.4, duration: 0.9 }}
-            className="w-24 h-24 md:w-32 md:h-32"
-          >
-            <DotLottieReact
-              src="https://lottie.host/8cf4ba71-e5fb-44f3-8134-178c4d389417/0CCsdcgNIP.json"
-              loop
-              autoplay
-              speed={0.7}
-            />
-          </motion.div>
           
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            className="mt-4 mb-12"
-          >
-            <h1 className="text-5xl font-extrabold text-gray-800 md:text-6xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black">
-              Cradla
-            </h1>
-            <p className="mt-2 text-xl font-medium text-gray-700">
-              AI-Powered On-demand Therapy Platform
-            </p>
-          </motion.div>
-          
-          <div className="mt-8 h-28 w-full max-w-4xl">
-            <FixedGooeyText
-              texts={[
-                "When patient appointments slip through the cracks, we catch them.",
-                "Reduce wait times by up to 18 days.",
-                "Increase appointment throughput by 31%.",
-                "Maintain continuity when patients switch therapists.",
-                "Never lose critical patient context again.",
-                "HIPAA-compliant therapeutic intelligence."
-              ]}
-              morphTime={2}
-              cooldownTime={3.5}
-              className="font-bold text-black w-full"
-              textClassName="text-2xl md:text-3xl lg:text-4xl tracking-wide font-bold"
-            />
+          <div className="container max-w-5xl mx-auto relative z-10 mt-[-60px]">
+            <div className="grid grid-cols-1 gap-6 items-center lg:grid-cols-2">
+              <div className="flex flex-col">
+                <div className="flex items-center mb-2">
+                  <motion.div 
+                    initial={{ opacity: 0 }} 
+                    animate={{ opacity: 1 }} 
+                    transition={{ delay: 0.4, duration: 0.9 }}
+                    className="w-24 h-24 md:w-32 md:h-32 mr-4"
+                  >
+                    <DotLottieReact
+                      src="https://lottie.host/8cf4ba71-e5fb-44f3-8134-178c4d389417/0CCsdcgNIP.json"
+                      loop
+                      autoplay
+                      speed={0.7}
+                    />
+                  </motion.div>
+                
+                  <div className="flex flex-col">
+                    <h1 className="text-5xl font-extrabold text-gray-800 md:text-6xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black text-left">
+                      Cradla
+                    </h1>
+                    <TextShimmer 
+                      as="h2"
+                      duration={1.5} 
+                      className="text-xl md:text-2xl font-medium mt-1 text-left [--base-color:theme(colors.gray.600)] [--base-gradient-color:theme(colors.violet.500)]"
+                    >
+                      SOTA AI Therapy Copilot
+                    </TextShimmer>
+                  </div>
+                </div>
+                
+                <div className="flex flex-col">
+                  <div className="h-28 w-full mt-12">
+                    <FixedGooeyText
+                      texts={[
+                        "When patient appointments slip through the cracks, we catch them.",
+                        "Reduce wait times by up to 18 days.",
+                        "Increase appointment throughput by 31%.",
+                        "Maintain continuity when patients switch therapists.",
+                        "Never lose critical patient context again.",
+                        "HIPAA-compliant therapeutic intelligence."
+                      ]}
+                      morphTime={2}
+                      cooldownTime={3.5}
+                      className="font-bold text-black w-full"
+                      textClassName="text-2xl md:text-3xl lg:text-4xl tracking-wide font-bold text-left"
+                    />
+                  </div>
+                  
+                  <p className="text-xl font-medium text-gray-700 text-left max-w-lg mb-8">
+                    Cradla solves the mental healthcare context-sharing problem, enabling flexible provider allocation
+                    while preserving the therapeutic relationship—delivering care when it's needed, with the context that makes it effective.
+                  </p>
+                </div>
+                
+                <div className="flex flex-row gap-4">
+                  <Button 
+                    variant="outline"
+                    size="lg"
+                    onClick={() => scrollToSection('contact')}
+                    className="flex items-center gap-2"
+                  >
+                    Book a Demo <PhoneCall className="w-4 h-4" />
+                  </Button>
+                  <Button 
+                    variant="default"
+                    size="lg"
+                    onClick={() => scrollToSection('problem')}
+                    className="flex items-center gap-2"
+                  >
+                    Learn How <MoveRight className="w-4 h-4" />
+                  </Button>
+                </div>
+              </div>
+              
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg aspect-square"></div>
+            </div>
           </div>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9, duration: 0.8 }}
-            className="mt-10 max-w-3xl text-lg text-center"
-          >
-            <p className="mb-6 text-gray-800">
-              Cradla solves the mental healthcare context-sharing problem, enabling flexible provider allocation
-              while preserving the therapeutic relationship—delivering care when it's needed, with the context that makes it effective.
-            </p>
-            <button 
-            onClick={() => scrollToSection('problem')}
-            className="mt-8 px-8 py-3 text-lg font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all"
-            style={{ position: 'relative', zIndex: 40, pointerEvents: 'auto' }}
-            >
-            Learn How
-            </button>
-          </motion.div>
         </section>
 
         {/* Problem Section */}
@@ -307,7 +338,6 @@ const CradlaLanding = () => {
             </div>
           </div>
         </section>
-
         {/* Solution Section */}
         <section 
           ref={sectionRefs.solution} 
