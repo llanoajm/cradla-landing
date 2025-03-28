@@ -260,7 +260,7 @@ const FeaturesSection = () => {
             Key Features and Benefits
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            See how Cradla could help you. 
+            How Cradla impacts your business.
           </p>
         </div>
         

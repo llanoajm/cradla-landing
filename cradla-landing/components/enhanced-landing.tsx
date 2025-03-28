@@ -20,6 +20,7 @@ import FeaturesSection from "@/components/feature-section";
 
 const CradlaLanding = () => {
   const [activeSection, setActiveSection] = useState('start');
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isInHeroSection, setIsInHeroSection] = useState(true);
   const [therapistCount, setTherapistCount] = useState(10);
   const [patientCount, setPatientCount] = useState(300);
@@ -51,6 +52,8 @@ const CradlaLanding = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 100;
+      setIsScrolled(window.scrollY > 10);
+
       
       // Check if we're in the hero section without triggering re-renders too often
       if (sectionRefs.start.current) {
@@ -111,7 +114,9 @@ const CradlaLanding = () => {
         </div>
         
         {/* Desktop Navigation */}
-        <nav className={`hidden md:block px-4 md:px-6 py-2 rounded-full transition-all duration-300 ${activeSection !== 'start' ? 'bg-white/80 backdrop-blur-sm shadow-md' : 'bg-transparent'}`}>
+        <nav className={`hidden md:block px-4 md:px-6 py-2 rounded-full transition-all duration-300 ${
+          isScrolled ? 'bg-white/80 backdrop-blur-sm shadow-md' : 'bg-transparent'
+        }`}>
           <div className="flex space-x-3 md:space-x-6">
             {Object.keys(sectionRefs).map((section) => (
               <button
@@ -1112,7 +1117,7 @@ const CradlaLanding = () => {
         {/* Features Section */}
 
         <section
-          ref={sectionRefs.products}
+          ref={sectionRefs.features}
           id="features"
         >
           <FeaturesSection />
