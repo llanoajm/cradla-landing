@@ -13,12 +13,14 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { TextShimmer } from "@/components/ui/text-shimmer";
 import DisplayCards from "@/components/ui/display-cards";
+import ProductsSection from "@/components/products-section";
 
 const CradlaLanding = () => {
   const [activeSection, setActiveSection] = useState('start');
   const [isInHeroSection, setIsInHeroSection] = useState(true);
   const sectionRefs = {
     start: useRef(null),
+    products: useRef(null),
     problem: useRef(null),
     solution: useRef(null),
     features: useRef(null),
@@ -93,18 +95,19 @@ const CradlaLanding = () => {
       </div>
 
       {/* Navigation Bar */}
-      <header className="fixed top-4 left-0 right-0 z-50 flex justify-between items-center px-6">
-        <div className="flex-1 flex items-center">
-          <span className="text-2xl font-bold text-gray-900">Cradla</span>
+      <header className="fixed top-4 left-0 right-0 z-50 flex justify-between items-center px-4 md:px-6">
+        <div className="flex-shrink-0 flex items-center">
+          <span className="text-xl md:text-2xl font-bold text-gray-900">Cradla</span>
         </div>
         
-        <nav className={`px-6 py-2 rounded-full transition-all duration-300 ${activeSection !== 'start' ? 'bg-white/80 backdrop-blur-sm shadow-md' : 'bg-transparent'}`}>
-          <div className="flex space-x-6">
+        {/* Desktop Navigation */}
+        <nav className={`hidden md:block px-4 md:px-6 py-2 rounded-full transition-all duration-300 ${activeSection !== 'start' ? 'bg-white/80 backdrop-blur-sm shadow-md' : 'bg-transparent'}`}>
+          <div className="flex space-x-3 md:space-x-6">
             {Object.keys(sectionRefs).map((section) => (
               <button
                 key={section}
                 onClick={() => scrollToSection(section)}
-                className={`text-sm font-medium transition-colors ${
+                className={`text-xs md:text-sm font-medium transition-colors ${
                   activeSection === section 
                     ? 'text-gray-900 border-b-2 border-gray-900' 
                     : 'text-gray-600 hover:text-gray-900'
@@ -116,8 +119,18 @@ const CradlaLanding = () => {
           </div>
         </nav>
         
-        <div className="flex-1 flex justify-end items-center">
-          <a href="#" className="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all">
+        {/* Mobile Navigation - Just showing the current section */}
+        <div className="md:hidden">
+          <button 
+            onClick={() => scrollToSection(activeSection !== 'start' ? 'start' : 'products')}
+            className="px-2 py-1 text-xs font-medium bg-white/80 backdrop-blur-sm rounded-full shadow-sm"
+          >
+            {activeSection.charAt(0).toUpperCase() + activeSection.slice(1)}
+          </button>
+        </div>
+        
+        <div className="flex-shrink-0 flex justify-end items-center">
+          <a href="#contact" className="px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all">
             Get Started
           </a>
         </div>
@@ -160,7 +173,7 @@ const CradlaLanding = () => {
                     initial={{ opacity: 0 }} 
                     animate={{ opacity: 1 }} 
                     transition={{ delay: 0.4, duration: 0.9 }}
-                    className="w-24 h-24 md:w-32 md:h-32 mr-4"
+                    className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 mr-2 sm:mr-3 md:mr-4"
                   >
                     <DotLottieReact
                       src="https://lottie.host/8cf4ba71-e5fb-44f3-8134-178c4d389417/0CCsdcgNIP.json"
@@ -171,13 +184,13 @@ const CradlaLanding = () => {
                   </motion.div>
                 
                   <div className="flex flex-col">
-                    <h1 className="text-5xl font-extrabold text-gray-800 md:text-6xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black text-left">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-800 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black text-left">
                       Cradla
                     </h1>
                     <TextShimmer 
                       as="h2"
                       duration={1.5} 
-                      className="text-xl md:text-2xl font-medium mt-1 text-left [--base-color:theme(colors.gray.600)] [--base-gradient-color:theme(colors.violet.500)]"
+                      className="text-sm sm:text-lg md:text-xl lg:text-2xl font-medium mt-1 text-left [--base-color:theme(colors.gray.600)] [--base-gradient-color:theme(colors.violet.500)]"
                     >
                       Powerful AI Therapy Copilot
                     </TextShimmer>
@@ -185,7 +198,7 @@ const CradlaLanding = () => {
                 </div>
                 
                 <div className="flex flex-col">
-                  <div className="h-28 w-full mb-6 pt-20 pb-14">
+                  <div className="h-28 w-full mb-4 sm:mb-6 pt-10 sm:pt-20 pb-8 sm:pb-14">
                     <FixedGooeyText
                       texts={[
                         "When patient appointments slip through the cracks, we catch them.",
@@ -198,32 +211,32 @@ const CradlaLanding = () => {
                       morphTime={2}
                       cooldownTime={3.5}
                       className="font-bold text-black w-full"
-                      textClassName="text-2xl md:text-3xl lg:text-4xl tracking-wide font-bold text-left"
+                      textClassName="text-lg sm:text-xl md:text-2xl lg:text-4xl tracking-wide font-bold text-left"
                     />
                   </div>
                   
-                  <p className="text-xl font-medium text-gray-700 text-left max-w-lg mb-8">
+                  <p className="text-sm sm:text-base md:text-lg lg:text-xl font-medium text-gray-700 text-left max-w-lg mb-4 sm:mb-8">
                     Cradla solves the mental healthcare context-sharing problem, enabling flexible provider allocation
                     while preserving the therapeutic relationship—delivering care when it's needed, with the context that makes it effective.
                   </p>
                 </div>
                 
-                <div className="flex flex-row gap-4">
+                <div className="flex flex-row gap-2 sm:gap-4">
                   <Button 
                     variant="outline"
-                    size="lg"
+                    size="default"
                     onClick={() => scrollToSection('contact')}
-                    className="flex items-center gap-2"
+                    className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm py-2 px-3 md:py-3 md:px-4"
                   >
-                    Book a Demo <PhoneCall className="w-4 h-4" />
+                    Book a Demo <PhoneCall className="hidden sm:inline w-3 h-3 sm:w-4 sm:h-4" />
                   </Button>
                   <Button 
                     variant="default"
-                    size="lg"
-                    onClick={() => scrollToSection('problem')}
-                    className="flex items-center gap-2"
+                    size="default"
+                    onClick={() => scrollToSection('products')}
+                    className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm py-2 px-3 md:py-3 md:px-4"
                   >
-                    Learn How <MoveRight className="w-4 h-4" />
+                    Our Products <MoveRight className="hidden sm:inline w-3 h-3 sm:w-4 sm:h-4" />
                   </Button>
                 </div>
               </div>
@@ -263,35 +276,43 @@ const CradlaLanding = () => {
           </div>
         </section>
 
+        {/* Products Section */}
+        <section
+          ref={sectionRefs.products}
+          id="products"
+        >
+          <ProductsSection />
+        </section>
+
         {/* Problem Section */}
         <section 
           ref={sectionRefs.problem} 
           id="problem"
-          className="relative py-16 px-4 min-h-screen flex flex-col justify-center"
+          className="relative py-12 md:py-16 px-4 min-h-screen flex flex-col justify-center"
         >
           <div className="max-w-6xl mx-auto">
-            <div className="bg-white bg-opacity-80 backdrop-filter backdrop-blur-md rounded-2xl p-8 shadow-xl">
-              <h2 className="text-4xl font-bold text-gray-900 mb-8 text-center">Patient Appointments Are Slipping Through The Cracks</h2>
+            <div className="bg-white bg-opacity-80 backdrop-filter backdrop-blur-md rounded-2xl p-4 sm:p-6 md:p-8 shadow-xl">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 md:mb-8 text-center">Patient Appointments Are Slipping Through The Cracks</h2>
               
-              <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div>
-                  <h3 className="text-2xl font-semibold text-gray-800 mb-4">The Current Crisis</h3>
-                  <ul className="space-y-4">
+                  <h3 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4">The Current Crisis</h3>
+                  <ul className="space-y-3 md:space-y-4">
                     <li className="flex items-start">
-                      <span className="text-red-500 mr-2">•</span>
-                      <p><strong>48 days</strong> - Average wait time for therapy appointments in the US</p>
+                      <span className="text-red-500 mr-2 flex-shrink-0">•</span>
+                      <p className="text-sm md:text-base"><strong>48 days</strong> - Average wait time for therapy appointments in the US</p>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-red-500 mr-2">•</span>
-                      <p><strong>80%</strong> of patients report negative experiences when switching therapists due to "painful amount of mental energy" required to start over</p>
+                      <span className="text-red-500 mr-2 flex-shrink-0">•</span>
+                      <p className="text-sm md:text-base"><strong>80%</strong> of patients report negative experiences when switching therapists due to "painful amount of mental energy" required to start over</p>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-red-500 mr-2">•</span>
-                      <p>Therapists handle only <strong>25-30 patients weekly</strong> due to rigid provider-patient relationships</p>
+                      <span className="text-red-500 mr-2 flex-shrink-0">•</span>
+                      <p className="text-sm md:text-base">Therapists handle only <strong>25-30 patients weekly</strong> due to rigid provider-patient relationships</p>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-red-500 mr-2">•</span>
-                      <p>BetterHelp's ratio of <strong>1:143</strong> therapist-to-patient still results in long wait times</p>
+                      <span className="text-red-500 mr-2 flex-shrink-0">•</span>
+                      <p className="text-sm md:text-base">BetterHelp's ratio of <strong>1:143</strong> therapist-to-patient still results in long wait times</p>
                     </li>
                   </ul>
                   
@@ -369,17 +390,18 @@ const CradlaLanding = () => {
             </div>
           </div>
         </section>
+
         {/* Solution Section */}
         <section 
           ref={sectionRefs.solution} 
           id="solution"
-          className="relative py-24 px-4 min-h-screen flex flex-col justify-center"
+          className="relative py-16 md:py-24 px-4 min-h-screen flex flex-col justify-center"
         >
           <div className="max-w-6xl mx-auto">
-            <div className="bg-white bg-opacity-80 backdrop-filter backdrop-blur-md rounded-2xl p-8 shadow-xl">
-              <h2 className="text-4xl font-bold text-gray-900 mb-8 text-center">How Cradla Works</h2>
+            <div className="bg-white bg-opacity-80 backdrop-filter backdrop-blur-md rounded-2xl p-4 sm:p-6 md:p-8 shadow-xl">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 md:mb-8 text-center">How Cradla Works</h2>
               
-              <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div>
                   <h3 className="text-2xl font-semibold text-gray-800 mb-6">Understanding Therapy at a Fundamental Level</h3>
                   <p className="text-gray-700 mb-4">
@@ -501,13 +523,13 @@ const CradlaLanding = () => {
         <section 
           ref={sectionRefs.features} 
           id="features"
-          className="relative py-24 px-4 min-h-screen flex flex-col justify-center"
+          className="relative py-16 md:py-24 px-4 min-h-screen flex flex-col justify-center"
         >
           <div className="max-w-6xl mx-auto">
-            <div className="bg-white bg-opacity-80 backdrop-filter backdrop-blur-md rounded-2xl p-8 shadow-xl">
-              <h2 className="text-4xl font-bold text-gray-900 mb-8 text-center">Key Features & Benefits</h2>
+            <div className="bg-white bg-opacity-80 backdrop-filter backdrop-blur-md rounded-2xl p-4 sm:p-6 md:p-8 shadow-xl">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 md:mb-8 text-center">Key Features & Benefits</h2>
               
-              <div className="grid md:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
                 <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 shadow-md">
                   <div className="rounded-full bg-blue-200 w-12 h-12 flex items-center justify-center mb-4">
                     <svg className="w-6 h-6 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -606,22 +628,30 @@ const CradlaLanding = () => {
         <section 
           ref={sectionRefs.comparison} 
           id="comparison"
-          className="relative py-24 px-4 min-h-screen flex flex-col justify-center"
+          className="relative py-16 md:py-24 px-4 min-h-screen flex flex-col justify-center"
         >
           <div className="max-w-6xl mx-auto">
-            <div className="bg-white bg-opacity-80 backdrop-filter backdrop-blur-md rounded-2xl p-8 shadow-xl">
-              <h2 className="text-4xl font-bold text-gray-900 mb-2 text-center">Competitive Advantage</h2>
-              <p className="text-xl text-gray-600 mb-10 text-center">How Cradla compares to other solutions in the market</p>
+            <div className="bg-white bg-opacity-80 backdrop-filter backdrop-blur-md rounded-2xl p-4 sm:p-6 md:p-8 shadow-xl">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 text-center">Competitive Advantage</h2>
+              <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 md:mb-10 text-center">How Cradla compares to other solutions in the market</p>
               
-              <div className="overflow-x-auto">
-                <table className="min-w-full bg-white rounded-lg overflow-hidden">
+              {/* Mobile view comparison message */}
+              <div className="md:hidden p-4 bg-blue-50 rounded-lg text-center">
+                <p className="text-sm text-gray-700 font-medium mb-2">Cradla outperforms competitors in all key metrics</p>
+                <p className="text-xs text-gray-600">View on a larger screen to see our detailed comparison table</p>
+              </div>
+              
+              {/* Desktop comparison table */}
+              <div className="hidden md:block overflow-x-auto">
+                <div className="min-w-full">
+                  <table className="w-full bg-white rounded-lg overflow-hidden text-xs sm:text-sm md:text-base">
                   <thead className="bg-gray-50">
                     <tr>
-                      <th className="px-6 py-4 text-left text-sm font-medium text-gray-500 uppercase tracking-wider w-1/4">Feature</th>
-                      <th className="px-6 py-4 text-center text-sm font-medium text-gray-500 uppercase tracking-wider w-1/4">
+                      <th className="px-3 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider w-1/4">Feature</th>
+                      <th className="px-3 py-3 sm:px-6 sm:py-4 text-center text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider w-1/4">
                         <div className="flex flex-col items-center">
-                          <div className="rounded-full bg-blue-100 w-12 h-12 flex items-center justify-center mb-2">
-                            <svg className="w-6 h-6 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <div className="rounded-full bg-blue-100 w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center mb-2">
+                            <svg className="w-4 h-4 sm:w-6 sm:h-6 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
                           </div>
@@ -630,8 +660,8 @@ const CradlaLanding = () => {
                       </th>
                       <th className="px-6 py-4 text-center text-sm font-medium text-gray-500 uppercase tracking-wider w-1/4">
                         <div className="flex flex-col items-center">
-                          <div className="rounded-full bg-gray-100 w-12 h-12 flex items-center justify-center mb-2">
-                            <svg className="w-6 h-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <div className="rounded-full bg-gray-100 w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center mb-2">
+                            <svg className="w-4 h-4 sm:w-6 sm:h-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                             </svg>
                           </div>
@@ -640,8 +670,8 @@ const CradlaLanding = () => {
                       </th>
                       <th className="px-6 py-4 text-center text-sm font-medium text-gray-500 uppercase tracking-wider w-1/4">
                         <div className="flex flex-col items-center">
-                          <div className="rounded-full bg-gray-100 w-12 h-12 flex items-center justify-center mb-2">
-                            <svg className="w-6 h-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <div className="rounded-full bg-gray-100 w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center mb-2">
+                            <svg className="w-4 h-4 sm:w-6 sm:h-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                             </svg>
                           </div>
@@ -652,111 +682,112 @@ const CradlaLanding = () => {
                   </thead>
                   <tbody className="divide-y divide-gray-200">
                     <tr>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Focus Area</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-900">Focus Area</td>
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-center text-gray-700">
                         <span className="font-medium text-blue-800">Mental healthcare specific</span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">Mental healthcare specific</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">General healthcare documentation</td>
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-center text-gray-700">Mental healthcare specific</td>
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-center text-gray-700">General healthcare documentation</td>
                     </tr>
                     <tr>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Dynamic Provider Allocation</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">
-                        <svg className="w-6 h-6 text-green-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-900">Dynamic Provider Allocation</td>
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-center text-gray-700">
+                        <svg className="w-5 h-5 text-green-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">
-                        <svg className="w-6 h-6 text-red-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-center text-gray-700">
+                        <svg className="w-5 h-5 text-red-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                         </svg>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">
-                        <svg className="w-6 h-6 text-red-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-center text-gray-700">
+                        <svg className="w-5 h-5 text-red-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                         </svg>
                       </td>
                     </tr>
                     <tr>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Therapeutic Intelligence</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-900">Therapeutic Intelligence</td>
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-center text-gray-700">
+                        <span className="inline-flex items-center px-1.5 py-0.5 sm:px-2.5 sm:py-0.5 rounded-full text-xxs sm:text-xs font-medium bg-green-100 text-green-800">
                           Deep understanding
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-center text-gray-700">
+                        <span className="inline-flex items-center px-1.5 py-0.5 sm:px-2.5 sm:py-0.5 rounded-full text-xxs sm:text-xs font-medium bg-yellow-100 text-yellow-800">
                           Basic analysis
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-center text-gray-700">
+                        <span className="inline-flex items-center px-1.5 py-0.5 sm:px-2.5 sm:py-0.5 rounded-full text-xxs sm:text-xs font-medium bg-red-100 text-red-800">
                           Minimal
                         </span>
                       </td>
                     </tr>
                     <tr>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Live Session Guidance</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">
-                        <svg className="w-6 h-6 text-green-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-900">Live Session Guidance</td>
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-center text-gray-700">
+                        <svg className="w-5 h-5 text-green-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">
-                        <svg className="w-6 h-6 text-red-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-center text-gray-700">
+                        <svg className="w-5 h-5 text-red-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                         </svg>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">
-                        <svg className="w-6 h-6 text-red-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-center text-gray-700">
+                        <svg className="w-5 h-5 text-red-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                         </svg>
                       </td>
                     </tr>
                     <tr>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Documentation Time Savings</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-900">Documentation Time Savings</td>
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-center text-gray-700">
                         <span className="font-medium">75%+</span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-center text-gray-700">
                         <span>73.8%</span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-center text-gray-700">
                         <span>50-60%</span>
                       </td>
                     </tr>
                     <tr>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Emotional Pattern Recognition</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">
-                        <svg className="w-6 h-6 text-green-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-900">Emotional Pattern Recognition</td>
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-center text-gray-700">
+                        <svg className="w-5 h-5 text-green-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">
-                        <svg className="w-6 h-6 text-yellow-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-center text-gray-700">
+                        <svg className="w-5 h-5 text-yellow-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                         </svg>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">
-                        <svg className="w-6 h-6 text-red-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-center text-gray-700">
+                        <svg className="w-5 h-5 text-red-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                         </svg>
                       </td>
                     </tr>
                     <tr>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Throughput Improvement</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-900">Throughput Improvement</td>
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-center text-gray-700">
                         <span className="font-medium text-blue-800">31%</span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-center text-gray-700">
                         <span>Not applicable</span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">
+                      <td className="px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-center text-gray-700">
                         <span>Not applicable</span>
                       </td>
                     </tr>
                   </tbody>
-                </table>
+                  </table>
+                </div>
               </div>
               
               <div className="mt-10 bg-blue-50 rounded-lg p-6 border border-blue-200">
@@ -776,11 +807,11 @@ const CradlaLanding = () => {
         <section 
           ref={sectionRefs.contact} 
           id="contact"
-          className="relative py-24 px-4 min-h-screen flex flex-col justify-center"
+          className="relative py-16 md:py-24 px-4 min-h-screen flex flex-col justify-center"
         >
           <div className="max-w-6xl mx-auto">
-            <div className="bg-white bg-opacity-80 backdrop-filter backdrop-blur-md rounded-2xl p-8 shadow-xl">
-              <h2 className="text-4xl font-bold text-gray-900 mb-8 text-center">Ready to Transform Your Practice?</h2>
+            <div className="bg-white bg-opacity-80 backdrop-filter backdrop-blur-md rounded-2xl p-4 sm:p-6 md:p-8 shadow-xl">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 md:mb-8 text-center">Ready to Transform Your Practice?</h2>
               
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 <div>
