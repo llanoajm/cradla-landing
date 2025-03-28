@@ -209,7 +209,7 @@ const CradlaLanding = () => {
                     <FixedGooeyText
                       texts={[
                         "When patient appointments slip through the cracks, we catch them.",
-                        "Reduce wait times by to minutes",
+                        "Reduce wait times to minutes",
                         "Increase appointment throughput by 31%.",
                         "Cut down documentation time by 75%",
                         "Maintain continuity when patients switch therapists.",
@@ -360,7 +360,7 @@ const CradlaLanding = () => {
                     <p className="text-sm text-violet-700 mb-1 font-medium">About These Calculations</p>
                     <p className="text-xs text-violet-600">
                       Based on research showing dynamic allocation models generate a 31% increase in appointment throughput 
-                      without sacrificing quality of care, reducing wait times by an average of 18 days.
+                      without sacrificing quality of care, reducing wait times to minutes.
                     </p>
                   </div>
                 </div>
@@ -444,7 +444,7 @@ const CradlaLanding = () => {
                 </div>
                 <h4 className="text-lg font-semibold text-gray-800 mb-2">Reduced Wait Times</h4>
                 <p className="text-gray-600">
-                  Cut patient wait times by an average of 18 days with more efficient provider allocation.
+                  Cut patient wait times with more efficient provider allocation.
                 </p>
               </div>
               
@@ -686,7 +686,7 @@ const CradlaLanding = () => {
                 <div className="mt-8 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg">
                   <h4 className="font-semibold text-lg mb-4">Think of it Like Modern Software Development</h4>
                   <p className="text-gray-700 mb-4">
-                    Just as software developers can now collaborate efficiently without excessive documentation, Cradla enables therapists to work together seamlessly:
+                    Just as AI Copilots now allow software developers to collaborate efficiently without excessive documentation, Cradla enables therapists to work together seamlessly:
                   </p>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="bg-white p-4 rounded-lg shadow-sm">
@@ -899,7 +899,7 @@ const CradlaLanding = () => {
                     </li>
                     <li className="flex items-start">
                       <span className="text-red-500 mr-2 flex-shrink-0">•</span>
-                      <p className="text-sm md:text-base">BetterHelp's ratio of <strong>1:143</strong> therapist-to-patient still results in long wait times</p>
+                      <p className="text-sm md:text-base">BetterHelp's ratio of <strong>1:143</strong> therapist-to-patient still results in long week-long wait times</p>
                     </li>
                   </ul>
                   
