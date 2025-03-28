@@ -28,7 +28,7 @@ type Product = {
 const PRODUCTS: Product[] = [
   {
     name: 'Cradla Provider Hub',
-    description: 'Comprehensive platform for mental health professionals',
+    description: 'Comprehensive platform for vertically-integrated insurance providers with in-house mental therapy services.',
     longDescription: 'Cradla Provider Hub is an all-in-one platform that empowers mental health professionals with AI-powered tools for managing patient relationships, documentation, and practice administration. Experience 31% increased appointment throughput and reduced wait times.',
     features: [
       'AI-assisted note taking and documentation',
@@ -156,7 +156,7 @@ export default function ProductsSection() {
     <section className="relative py-24 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="bg-white bg-opacity-80 backdrop-filter backdrop-blur-md rounded-2xl p-8 shadow-xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 md:mb-8 text-center">Our Product Suite</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 md:mb-8 text-center">Our Product</h2>
           <p className="text-lg md:text-xl text-gray-600 mb-8 md:mb-12 text-center max-w-3xl mx-auto">
             Cradla offers a comprehensive suite of tools designed to transform mental healthcare delivery,
             enabling flexible provider allocation while preserving therapeutic relationships.

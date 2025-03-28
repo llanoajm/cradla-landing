@@ -18,7 +18,14 @@ import ProductsSection from "@/components/products-section";
 const CradlaLanding = () => {
   const [activeSection, setActiveSection] = useState('start');
   const [isInHeroSection, setIsInHeroSection] = useState(true);
-  const sectionRefs = {
+  const [therapistCount, setTherapistCount] = useState(10);
+  const [patientCount, setPatientCount] = useState(300);
+  const [sessionPrice, setSessionPrice] = useState(120);
+  const newPatientCount = Math.round(patientCount * 1.31); // 31% increase
+  const additionalPatients = newPatientCount - patientCount;
+  const additionalRevenue = additionalPatients * sessionPrice;
+  const annualIncrease = additionalRevenue * 52; // 52 weeks in a year
+    const sectionRefs = {
     start: useRef(null),
     products: useRef(null),
     problem: useRef(null),
@@ -192,7 +199,7 @@ const CradlaLanding = () => {
                       duration={1.5} 
                       className="text-sm sm:text-lg md:text-xl lg:text-2xl font-medium mt-1 text-left [--base-color:theme(colors.gray.600)] [--base-gradient-color:theme(colors.violet.500)]"
                     >
-                      Powerful AI Therapy Copilot
+                      SOTA AI Therapy Copilot
                     </TextShimmer>
                   </div>
                 </div>
@@ -202,8 +209,9 @@ const CradlaLanding = () => {
                     <FixedGooeyText
                       texts={[
                         "When patient appointments slip through the cracks, we catch them.",
-                        "Reduce wait times by up to 18 days.",
+                        "Reduce wait times by to minutes",
                         "Increase appointment throughput by 31%.",
+                        "Cut down documentation time by 75%",
                         "Maintain continuity when patients switch therapists.",
                         "Never lose critical patient context again.",
                         "HIPAA-compliant therapeutic intelligence."
@@ -276,12 +284,591 @@ const CradlaLanding = () => {
           </div>
         </section>
 
+
         {/* Products Section */}
         <section
           ref={sectionRefs.products}
           id="products"
         >
           <ProductsSection />
+        </section>
+
+        {/* Modern Calculator Section - Not in navbar */}
+        <section className="relative py-16 px-4 w-full bg-white">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 tracking-tight">
+                On-Demand Therapy
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Just as ride-sharing apps ensure you get to your destination without needing a specific driver, Cradla enables any qualified therapist to guide a patient's journey without losing context. Our AI copilot preserves therapeutic history, emotional patterns, and treatment progress—so switching therapists feels like switching Uber drivers: effortless, intuitive, and always moving forward. By removing bottlenecks, we make therapy more accessible and flexible than ever before, and allow therapists in your network to cut down time spent on paperwork by 75% while increasing patient throughput by 31%, ultimately reducing wait times and improving care availability when patients need it most.
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              {/* Left side: Calculator */}
+              <div className="bg-white rounded-xl p-8 shadow-lg border border-gray-100">
+                <h3 className="text-2xl font-semibold text-gray-800 mb-6">Calculate Your Practice ROI</h3>
+                
+                <div className="space-y-6">
+                  <div>
+                    <label className="flex justify-between text-gray-700 mb-2 text-sm font-medium">
+                      <span>Number of Therapists</span>
+                      <span className="text-violet-600 font-semibold">{therapistCount}</span>
+                    </label>
+                    <input 
+                      type="range" 
+                      min="1" 
+                      max="50"
+                      value={therapistCount}
+                      onChange={(e) => setTherapistCount(parseInt(e.target.value))}
+                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-violet-600"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="flex justify-between text-gray-700 mb-2 text-sm font-medium">
+                      <span>Current Patients per Week (total)</span>
+                      <span className="text-violet-600 font-semibold">{patientCount}</span>
+                    </label>
+                    <input 
+                      type="range" 
+                      min="50" 
+                      max="1000"
+                      value={patientCount}
+                      onChange={(e) => setPatientCount(parseInt(e.target.value))}
+                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-violet-600"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-gray-700 mb-2 text-sm font-medium">Average Session Price ($)</label>
+                    <div className="relative">
+                      <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">$</span>
+                      <input 
+                        type="number" 
+                        min="50" 
+                        max="500"
+                        value={sessionPrice}
+                        onChange={(e) => setSessionPrice(parseInt(e.target.value))}
+                        className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="bg-violet-50 p-4 rounded-lg mt-6">
+                    <p className="text-sm text-violet-700 mb-1 font-medium">About These Calculations</p>
+                    <p className="text-xs text-violet-600">
+                      Based on research showing dynamic allocation models generate a 31% increase in appointment throughput 
+                      without sacrificing quality of care, reducing wait times by an average of 18 days.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Right side: Results */}
+              <div className="bg-gradient-to-br from-violet-50 to-indigo-50 rounded-xl p-8 shadow-lg">
+                <div className="flex items-center mb-6">
+                  <div className="w-12 h-12 bg-violet-100 rounded-full flex items-center justify-center mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-semibold text-gray-800">Your Results with Cradla</h3>
+                </div>
+                
+                <div className="space-y-5">
+                  <div className="flex items-center justify-between pb-3 border-b border-indigo-100">
+                    <div>
+                      <p className="text-gray-600 text-sm">Total Weekly Patients</p>
+                      <div className="flex items-center mt-1">
+                        <p className="text-gray-500 text-sm line-through mr-2">{patientCount}</p>
+                        <p className="text-2xl font-bold text-gray-900">{newPatientCount}</p>
+                      </div>
+                    </div>
+                    <div className="bg-green-100 px-3 py-1 rounded-full">
+                      <p className="text-green-700 font-medium text-sm">+31%</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between pb-3 border-b border-indigo-100">
+                    <div>
+                      <p className="text-gray-600 text-sm">Additional Patients Weekly</p>
+                      <p className="text-2xl font-bold text-gray-900">+{additionalPatients}</p>
+                    </div>
+                    <div className="bg-blue-100 px-3 py-1 rounded-full">
+                      <p className="text-blue-700 font-medium text-sm">Per Week</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between pb-3 border-b border-indigo-100">
+                    <div>
+                      <p className="text-gray-600 text-sm">Additional Weekly Revenue</p>
+                      <p className="text-2xl font-bold text-violet-700">${additionalRevenue.toLocaleString()}</p>
+                    </div>
+                    <div className="bg-violet-100 px-3 py-1 rounded-full">
+                      <p className="text-violet-700 font-medium text-sm">Weekly</p>
+                    </div>
+                  </div>
+                  
+                  <div className="pt-3">
+                    <div className="flex items-center justify-between">
+                      <p className="text-gray-700 font-medium">Annual Revenue Increase</p>
+                      <div className="bg-indigo-100 px-3 py-1 rounded-full">
+                        <p className="text-indigo-700 font-medium text-sm">Per Year</p>
+                      </div>
+                    </div>
+                    <p className="text-3xl mt-2 font-bold text-indigo-700">${annualIncrease.toLocaleString()}</p>
+                  </div>
+                </div>
+                
+                <div className="mt-8">
+                  <a 
+                    href="#contact" 
+                    onClick={() => scrollToSection('contact')}
+                    className="inline-flex items-center justify-center w-full px-6 py-3 text-base font-medium text-white bg-violet-600 rounded-lg shadow-sm hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 transition-colors"
+                  >
+                    Book a Demo
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            {/* Additional Benefits */}
+            <div className="mt-16 grid md:grid-cols-3 gap-6">
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h4 className="text-lg font-semibold text-gray-800 mb-2">Reduced Wait Times</h4>
+                <p className="text-gray-600">
+                  Cut patient wait times by an average of 18 days with more efficient provider allocation.
+                </p>
+              </div>
+              
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                </div>
+                <h4 className="text-lg font-semibold text-gray-800 mb-2">Preserved Therapeutic Relationship</h4>
+                <p className="text-gray-600">
+                  Maintain continuity of care with seamless context transfer between therapists.
+                </p>
+              </div>
+              
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                <div className="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                <h4 className="text-lg font-semibold text-gray-800 mb-2">HIPAA-Compliant Security</h4>
+                <p className="text-gray-600">
+                  Our platform maintains the highest standards of privacy and data protection.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* AI Context Transfer Section */}
+        <section 
+          ref={sectionRefs.aiContext} 
+          id="aiContext"
+          className="relative py-24 px-4 min-h-screen flex flex-col justify-center"
+        >
+          <div className="max-w-6xl mx-auto">
+            <div className="bg-white bg-opacity-80 backdrop-filter backdrop-blur-md rounded-2xl p-8 shadow-xl">
+              <h2 className="text-4xl font-bold text-gray-900 mb-6 text-center">Beyond Documentation: True Context Transfer</h2>
+              <p className="text-xl text-gray-600 mb-12 text-center max-w-4xl mx-auto">
+                Many services claim to streamline documentation, but Cradla is the first to capture the <span className="italic">full therapeutic context</span> by understanding not just <span className="font-semibold">what</span> is said, but <span className="font-semibold">how</span> it's expressed.
+              </p>
+              
+              {/* Multimodal AI Visualization */}
+              <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+                <div>
+                  <h3 className="text-2xl font-semibold text-gray-800 mb-4">Multimodal Intelligence That Truly Understands</h3>
+                  <p className="text-gray-700 mb-4">
+                    <span className="font-medium">Therapy is fundamentally multimodal</span> — the meaning lies not just in words spoken, but in tone, expression, and emotional context.
+                  </p>
+                  <p className="text-gray-700 mb-6">
+                    Our state-of-the-art AI technology captures facial emotional cues, vocal prosody, and dozens of clinical variables that traditional notes miss. This creates an experience where new therapists gain insights as rich as if they had attended all previous sessions themselves.
+                  </p>
+                  
+                  <div className="space-y-6">
+                    <div className="flex items-start">
+                      <div className="bg-blue-100 p-2 rounded-full mr-4">
+                        <svg className="w-6 h-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-gray-800">Semantic Understanding</h4>
+                        <p className="text-gray-600">Analyzes therapeutic dialogue and extracts meaningful patterns and insights.</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="bg-purple-100 p-2 rounded-full mr-4">
+                        <svg className="w-6 h-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-gray-800">Emotional Intelligence</h4>
+                        <p className="text-gray-600">Detects subtle emotional cues through facial expressions, voice tone, and prosody analysis to capture the full emotional context.</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="bg-green-100 p-2 rounded-full mr-4">
+                        <svg className="w-6 h-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-gray-800">Behavioral Patterns</h4>
+                        <p className="text-gray-600">Recognizes recurring behaviors, responses to interventions, and progress indicators.</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="bg-amber-100 p-2 rounded-full mr-4">
+                        <svg className="w-6 h-6 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-gray-800">Therapeutic Guidance</h4>
+                        <p className="text-gray-600">Trained on evidence-based approaches including CBT, Psychoanalysis, and other modalities.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="relative">
+                  <div className="absolute -left-10 -top-10 w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 rounded-xl transform rotate-3"></div>
+                  <div className="relative bg-white rounded-xl shadow-lg p-6 z-10">
+                    <h3 className="text-xl font-semibold text-center mb-4">How Cradla Processes Therapy Sessions</h3>
+                    <div className="aspect-w-16 aspect-h-9 mb-4">
+                      <div className="w-full h-64 bg-gray-100 rounded-lg overflow-hidden relative">
+                        <div className="absolute inset-0 flex flex-col">
+                          {/* Visualize AI processing layers */}
+                          <div className="flex-1 border-b border-dashed border-gray-300 flex items-center justify-center">
+                            <div className="text-center px-4">
+                              <div className="text-sm font-medium text-blue-600 mb-1">Session Recording</div>
+                              <div className="flex justify-center space-x-6">
+                                <div className="flex flex-col items-center">
+                                  <svg className="w-8 h-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                                  </svg>
+                                  <span className="text-xs mt-1">Audio</span>
+                                </div>
+                                <div className="flex flex-col items-center">
+                                  <svg className="w-8 h-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                  </svg>
+                                  <span className="text-xs mt-1">Video</span>
+                                </div>
+                                <div className="flex flex-col items-center">
+                                  <svg className="w-8 h-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                                  </svg>
+                                  <span className="text-xs mt-1">Transcript</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div className="flex-1 border-b border-dashed border-gray-300 flex items-center justify-center">
+                            <div className="text-center px-4">
+                              <div className="text-sm font-medium text-purple-600 mb-1">Multimodal Analysis</div>
+                              <div className="grid grid-cols-3 gap-2">
+                                <div className="bg-purple-50 rounded p-1 text-xs">Sentiment</div>
+                                <div className="bg-purple-50 rounded p-1 text-xs">Emotions</div>
+                                <div className="bg-purple-50 rounded p-1 text-xs">Patterns</div>
+                                <div className="bg-purple-50 rounded p-1 text-xs">Concepts</div>
+                                <div className="bg-purple-50 rounded p-1 text-xs">Techniques</div>
+                                <div className="bg-purple-50 rounded p-1 text-xs">Progress</div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div className="flex-1 flex items-center justify-center">
+                            <div className="text-center px-4">
+                              <div className="text-sm font-medium text-green-600 mb-1">Therapeutic Context Model</div>
+                              <div className="bg-green-50 rounded-lg p-2 flex items-center justify-center">
+                                <svg className="w-6 h-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                </svg>
+                                <span className="text-sm">HIPAA-Compliant Patient Profile</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <p className="text-sm text-gray-500 italic text-center">Cradla's AI processes multiple dimensions of therapeutic data to build a comprehensive context model.</p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Developer Analogy */}
+              <div className="bg-gray-50 rounded-xl p-8 mb-16">
+                <h3 className="text-2xl font-semibold text-gray-800 mb-6 text-center">From Documentation Burden to Seamless Collaboration</h3>
+                
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div className="bg-white rounded-lg shadow-md p-6">
+                    <h4 className="font-semibold text-lg mb-3 text-red-600">The Traditional Approach</h4>
+                    <div className="space-y-4">
+                      <div className="flex items-start">
+                        <svg className="w-5 h-5 text-red-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                        <p className="text-gray-700">Therapists spend 30-40% of their time on documentation</p>
+                      </div>
+                      <div className="flex items-start">
+                        <svg className="w-5 h-5 text-red-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                        <p className="text-gray-700">Information gets lost between practitioners</p>
+                      </div>
+                      <div className="flex items-start">
+                        <svg className="w-5 h-5 text-red-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                        <p className="text-gray-700">Patients must "start over" with each new therapist</p>
+                      </div>
+                      <div className="flex items-start">
+                        <svg className="w-5 h-5 text-red-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                        <p className="text-gray-700">Nuanced therapeutic insights are rarely captured in notes</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-white rounded-lg shadow-md p-6">
+                    <h4 className="font-semibold text-lg mb-3 text-green-600">The Cradla Approach</h4>
+                    <div className="space-y-4">
+                      <div className="flex items-start">
+                        <svg className="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <p className="text-gray-700">Documenting while understanding the complete therapeutic context</p>
+                      </div>
+                      <div className="flex items-start">
+                        <svg className="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <p className="text-gray-700">Therapists focus on patients, not documentation</p>
+                      </div>
+                      <div className="flex items-start">
+                        <svg className="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <p className="text-gray-700">Rich context transfer with zero additional effort</p>
+                      </div>
+                      <div className="flex items-start">
+                        <svg className="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <p className="text-gray-700">On-demand guidance based on complete patient history</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="mt-8 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg">
+                  <h4 className="font-semibold text-lg mb-4">Think of it Like Modern Software Development</h4>
+                  <p className="text-gray-700 mb-4">
+                    Just as software developers can now collaborate efficiently without excessive documentation, Cradla enables therapists to work together seamlessly:
+                  </p>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="bg-white p-4 rounded-lg shadow-sm">
+                      <h5 className="font-medium text-blue-800 mb-2">Traditional Software Teams</h5>
+                      <ul className="space-y-2 text-sm">
+                        <li className="flex items-start">
+                          <svg className="w-4 h-4 text-blue-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                          <span>New developers needed extensive onboarding</span>
+                        </li>
+                        <li className="flex items-start">
+                          <svg className="w-4 h-4 text-blue-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                          <span>Detailed documentation required for every component</span>
+                        </li>
+                        <li className="flex items-start">
+                          <svg className="w-4 h-4 text-blue-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                          <span>Knowledge transfer was slow and error-prone</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="bg-white p-4 rounded-lg shadow-sm">
+                      <h5 className="font-medium text-green-800 mb-2">Modern Software Teams</h5>
+                      <ul className="space-y-2 text-sm">
+                        <li className="flex items-start">
+                          <svg className="w-4 h-4 text-green-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                          <span>Developers join teams with minimal friction</span>
+                        </li>
+                        <li className="flex items-start">
+                          <svg className="w-4 h-4 text-green-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                          <span>Tools provide context automatically</span>
+                        </li>
+                        <li className="flex items-start">
+                          <svg className="w-4 h-4 text-green-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                          <span>Focus on creating value, not documentation</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Context Transfer Process */}
+              <div>
+                <h3 className="text-2xl font-semibold text-gray-800 mb-6 text-center">HIPAA-Compliant Context Transfer Between Therapists</h3>
+                
+                <div className="relative py-10">
+                  {/* Timeline connector */}
+                  <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-blue-100 transform -translate-x-1/2"></div>
+                  
+                  {/* Step 1 */}
+                  <div className="relative z-10 mb-12">
+                    <div className="flex items-center mb-2">
+                      <div className="flex-1 text-right pr-8 md:pr-12">
+                        <h4 className="text-lg font-medium text-gray-900">Initial Session & Consent</h4>
+                      </div>
+                      <div className="bg-white border-4 border-blue-500 rounded-full w-10 h-10 flex items-center justify-center">
+                        <span className="text-blue-500 font-bold">1</span>
+                      </div>
+                      <div className="flex-1 pl-8 md:pl-12">
+                        <p className="text-gray-600">Patient provides consent for AI-assisted therapy and specifies information sharing preferences</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Step 2 */}
+                  <div className="relative z-10 mb-12">
+                    <div className="flex items-center mb-2">
+                      <div className="flex-1 text-right pr-8 md:pr-12">
+                        <p className="text-gray-600">AI captures multi-dimensional therapeutic context throughout the session</p>
+                      </div>
+                      <div className="bg-white border-4 border-purple-500 rounded-full w-10 h-10 flex items-center justify-center">
+                        <span className="text-purple-500 font-bold">2</span>
+                      </div>
+                      <div className="flex-1 pl-8 md:pl-12">
+                        <h4 className="text-lg font-medium text-gray-900">Context Acquisition</h4>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Step 3 */}
+                  <div className="relative z-10 mb-12">
+                    <div className="flex items-center mb-2">
+                      <div className="flex-1 text-right pr-8 md:pr-12">
+                        <h4 className="text-lg font-medium text-gray-900">Structured Context Model</h4>
+                      </div>
+                      <div className="bg-white border-4 border-green-500 rounded-full w-10 h-10 flex items-center justify-center">
+                        <span className="text-green-500 font-bold">3</span>
+                      </div>
+                      <div className="flex-1 pl-8 md:pl-12">
+                        <p className="text-gray-600">Information is organized into a comprehensive, HIPAA-compliant patient profile</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Step 4 */}
+                  <div className="relative z-10 mb-12">
+                    <div className="flex items-center mb-2">
+                      <div className="flex-1 text-right pr-8 md:pr-12">
+                        <p className="text-gray-600">When a new therapist is assigned, they receive appropriate context based on patient-approved sharing settings</p>
+                      </div>
+                      <div className="bg-white border-4 border-amber-500 rounded-full w-10 h-10 flex items-center justify-center">
+                        <span className="text-amber-500 font-bold">4</span>
+                      </div>
+                      <div className="flex-1 pl-8 md:pl-12">
+                        <h4 className="text-lg font-medium text-gray-900">Context Transfer</h4>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Step 5 */}
+                  <div className="relative z-10">
+                    <div className="flex items-center mb-2">
+                      <div className="flex-1 text-right pr-8 md:pr-12">
+                        <h4 className="text-lg font-medium text-gray-900">Real-time Assistance</h4>
+                      </div>
+                      <div className="bg-white border-4 border-pink-500 rounded-full w-10 h-10 flex items-center justify-center">
+                        <span className="text-pink-500 font-bold">5</span>
+                      </div>
+                      <div className="flex-1 pl-8 md:pl-12">
+                        <p className="text-gray-600">During the session, the new therapist receives guidance informed by the patient's complete history</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-gray-50 rounded-lg p-6 mt-8">
+                  <h4 className="font-semibold text-center mb-4">Patient Control & Privacy</h4>
+                  <div className="grid md:grid-cols-3 gap-4">
+                    <div className="bg-white p-4 rounded-lg shadow-sm">
+                      <div className="bg-blue-100 p-2 rounded-full w-10 h-10 flex items-center justify-center mx-auto mb-3">
+                        <svg className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                      </div>
+                      <h5 className="text-center font-medium mb-2">Granular Consent</h5>
+                      <p className="text-sm text-center text-gray-600">Patients control exactly what information is shared with each provider</p>
+                    </div>
+                    <div className="bg-white p-4 rounded-lg shadow-sm">
+                      <div className="bg-blue-100 p-2 rounded-full w-10 h-10 flex items-center justify-center mx-auto mb-3">
+                        <svg className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                      </div>
+                      <h5 className="text-center font-medium mb-2">End-to-End Encryption</h5>
+                      <p className="text-sm text-center text-gray-600">All multimodal data (text, voice patterns, emotional indicators) is encrypted in transit and at rest with security that exceeds HIPAA requirements</p>
+                    </div>
+                    <div className="bg-white p-4 rounded-lg shadow-sm">
+                      <div className="bg-blue-100 p-2 rounded-full w-10 h-10 flex items-center justify-center mx-auto mb-3">
+                        <svg className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                      </div>
+                      <h5 className="text-center font-medium mb-2">Audit Trails</h5>
+                      <p className="text-sm text-center text-gray-600">Complete transparency about who accessed what information and when</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="mt-12 text-center">
+                <Button 
+                  variant="default"
+                  size="lg"
+                  onClick={() => scrollToSection('contact')}
+                  className="flex items-center gap-2 mx-auto"
+                >
+                  See How It Works <MoveRight className="w-4 h-4" />
+                </Button>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* Problem Section */}
@@ -316,7 +903,7 @@ const CradlaLanding = () => {
                     </li>
                   </ul>
                   
-                  <h3 className="text-2xl font-semibold text-gray-800 mt-8 mb-4">Why Dynamic Allocation Matters</h3>
+                  <h3 className="text-2xl font-semibold text-gray-800 mt-8 mb-4">Why Dynamic Therapist Allocation Matters</h3>
                   <p className="text-gray-700 mb-4">
                     Mental healthcare is particularly vulnerable to availability bottlenecks and continuity gaps. The therapeutic relationship is deliberately long-term, with practitioners accumulating deep, nuanced understanding of their clients.
                   </p>
@@ -839,7 +1426,7 @@ const CradlaLanding = () => {
                         <svg className="w-5 h-5 text-green-500 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <span>How dynamic allocation can reduce wait times by up to 18 days</span>
+                        <span>How dynamic allocation can reduce wait times to minutes</span>
                       </li>
                       <li className="flex items-start">
                         <svg className="w-5 h-5 text-green-500 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -861,7 +1448,7 @@ const CradlaLanding = () => {
                 <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-8 shadow-lg">
                   <h3 className="text-xl font-semibold text-gray-800 mb-4">Our Vision</h3>
                   <p className="text-gray-700 mb-6 italic">
-                    "The future of mental healthcare demands both accessibility and continuity. By solving the context transfer problem that has historically limited flexibility, Cradla creates a new opportunity that benefits patients, providers, and healthcare systems alike — delivering care when it's needed, with the context that makes it effective."
+                    The future of mental healthcare demands both accessibility and continuity. By solving the context transfer problem that has historically limited flexibility, Cradla creates a new opportunity that benefits patients, providers, and healthcare systems alike — delivering care when it's needed, with the context that makes it effective.
                   </p>
                   
                   <div className="border-t border-blue-200 pt-6 mt-6">
