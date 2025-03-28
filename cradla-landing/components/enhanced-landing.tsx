@@ -17,6 +17,7 @@ import ProductsSection from "@/components/products-section";
 import { themeColors } from "@/components/ui/button";
 import { GradientCard } from "@/components/ui/gradient-card";
 import FeaturesSection from "@/components/feature-section";
+import Footer from './ui/footer';
 
 const CradlaLanding = () => {
   const [activeSection, setActiveSection] = useState('start');
@@ -1321,7 +1322,7 @@ const CradlaLanding = () => {
                 </div>
               </div>
               
-              <div className="mt-10 bg-blue-50 rounded-lg p-6 border border-blue-200">
+              <div className="mt-10 bg-[#eddrf44] rounded-lg p-6 border border-blue-200">
                 <h3 className="text-xl font-semibold text-gray-800 mb-4">Why Choose Cradla?</h3>
                 <p className="text-gray-700 mb-4">
                   While Eleos Health offers valuable AI-assisted note-taking, and Microsoft recently launched Dragon Copilot for healthcare documentation, Cradla provides a more comprehensive ecosystem that fundamentally transforms how mental healthcare is delivered.
@@ -1389,29 +1390,26 @@ const CradlaLanding = () => {
                   </a>
                 </div>
                 
-                <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-8 shadow-lg">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-4">Our Vision</h3>
-                  <p className="text-gray-700 mb-6 italic">
+                <div className="bg-gradient-to-br bg-white rounded-xl p-8 shadow-lg">
+                  
+                  <h3 className="text-xl font-semibold text-black mb-4">Our Vision</h3>
+                  <p className="text-black mb-6 italic">
                     The future of mental healthcare demands both accessibility and continuity. By solving the context transfer problem that has historically limited flexibility, Cradla creates a new opportunity that benefits patients, providers, and healthcare systems alike — delivering care when it's needed, with the context that makes it effective.
                   </p>
                   
                   <div className="border-t border-blue-200 pt-6 mt-6">
-                    <h4 className="font-semibold text-gray-800 mb-2">Coming Soon</h4>
-                    <p className="text-gray-700">
+                    <h4 className="font-semibold text-black mb-2">Coming Soon</h4>
+                    <p className="text-black">
                       Cradla is currently in private beta with select practices. Join our waitlist to be among the first to experience the future of mental healthcare delivery.
                     </p>
                   </div>
                 </div>
               </div>
               
-              <div className="mt-16 text-center">
-                <p className="text-sm text-gray-600">
-                  Copyright © Cradla 2025
-                </p>
-              </div>
             </div>
           </div>
         </section>
+        <Footer></Footer>
       </main>
     </div>
   );
