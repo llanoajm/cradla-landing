@@ -1,8 +1,9 @@
 // components/products-section.tsx
 "use client";
 
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { XIcon } from "lucide-react";
+import { motion } from "framer-motion";
 import {
   MorphingDialog,
   MorphingDialogTrigger,
@@ -21,7 +22,7 @@ type Product = {
   features: string[];
   video: string;
   id: string;
-  bgColor: string;
+  gradientColors: string[];
   textColor: string;
 };
 
@@ -39,8 +40,12 @@ const PRODUCTS: Product[] = [
     ],
     video: 'https://www.youtube.com/watch?v=-aFMDuSvPDc&feature=youtu.be',
     id: 'provider-hub',
-    bgColor: 'from-violet-100 to-violet-200',
-    textColor: 'text-violet-700'
+    gradientColors: [
+      "#171729", // Deep tech navy
+      "#5546B8", // Techy purple
+      "#DE3163", // Accent pink from main gradient
+    ],
+    textColor: 'text-white'
   },
   {
     name: 'Cradla Therapist Copilot',
@@ -55,8 +60,12 @@ const PRODUCTS: Product[] = [
     ],
     video: 'https://placehold.co/1280x720/fae8e8/333333.mp4',
     id: 'insights',
-    bgColor: 'from-blue-100 to-blue-200',
-    textColor: 'text-blue-700'
+    gradientColors: [
+      "#17293D", // Deep tech blue
+      "#1E78C2", // Bright tech blue
+      "#00E676", // Accent green from main gradient
+    ],
+    textColor: 'text-white'
   },
   {
     name: "Cradla Connect",
@@ -72,10 +81,136 @@ const PRODUCTS: Product[] = [
     ],
     video: "https://placehold.co/1280x720/d1f0e0/333333.mp4",
     id: "connect",
-    bgColor: "from-green-100 to-green-200",
-    textColor: "text-green-700"
+    gradientColors: [
+      "#FF8A8A", // Pink
+      "#008080", // Pink other
+      "#FFDAB9", // Accent olive from main gradient
+    ],
+    textColor: "text-white"
   }
 ];
+
+// Custom DiagonalNoiseCanvas component
+const DiagonalNoiseCanvas = ({ colors }: { colors: string[] }) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    
+    // Set canvas size
+    const resizeCanvas = () => {
+      const rect = canvas.parentElement?.getBoundingClientRect();
+      if (rect) {
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+        generateDiagonalPattern();
+      }
+    };
+    
+    // Function to generate diagonal gradient pattern with noise
+    const generateDiagonalPattern = () => {
+      const width = canvas.width;
+      const height = canvas.height;
+      
+      // Clear canvas
+      ctx.clearRect(0, 0, width, height);
+      
+      // Draw a curvy diagonal gradient
+      const diagonal = ctx.createLinearGradient(0, 0, width, height);
+      diagonal.addColorStop(0, colors[0]);
+      diagonal.addColorStop(0.5, colors[1]);
+      diagonal.addColorStop(1, colors[2]);
+      
+      ctx.fillStyle = diagonal;
+      ctx.fillRect(0, 0, width, height);
+      
+      // Create curved areas of color
+      const curvePath = new Path2D();
+      curvePath.moveTo(0, 0);
+      curvePath.bezierCurveTo(
+        width * 0.3, height * 0.2,  // Control point 1
+        width * 0.6, height * 0.3,  // Control point 2
+        width, height * 0.7         // End point
+      );
+      curvePath.lineTo(width, 0);
+      curvePath.closePath();
+      
+      const secondCurve = new Path2D();
+      secondCurve.moveTo(0, height);
+      secondCurve.bezierCurveTo(
+        width * 0.4, height * 0.8,   // Control point 1
+        width * 0.7, height * 0.6,   // Control point 2
+        width, height * 0.3          // End point
+      );
+      secondCurve.lineTo(0, height);
+      secondCurve.closePath();
+      
+      // Apply subtle curved overlays
+      ctx.fillStyle = `${colors[1]}33`; // Using hex alpha for transparency
+      ctx.fill(curvePath);
+      
+      ctx.fillStyle = `${colors[2]}22`; // Even more transparent
+      ctx.fill(secondCurve);
+      
+      // Apply noise to the entire card, but with varying intensity
+      addNoiseLayer(ctx, width, height);
+    };
+    
+    // Separate function to add noise with varying intensity
+    const addNoiseLayer = (ctx: CanvasRenderingContext2D, width: number, height: number) => {
+      const imageData = ctx.getImageData(0, 0, width, height);
+      const data = imageData.data;
+      
+      const noisePattern = new Uint8Array(width * height);
+      for (let i = 0; i < noisePattern.length; i++) {
+        noisePattern[i] = Math.random() < 0.6 ? 1 : 0; // Generate static noise pattern
+      }
+      
+      for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+          const index = (y * width + x) * 4;
+          
+          // Calculate diagonal progress (0 at top-left, 1 at bottom-right)
+          const diagonalProgress = (x / width + y / height) / 2;
+          
+          // Modulate noise intensity by position
+          // Less noise in top-left, more in bottom-right
+          const noiseOpacity = 0.07 + (diagonalProgress * 0.1);
+          
+          if (noisePattern[y * width + x]) {
+            // Apply noise pixel
+            const noiseValue = Math.floor(Math.random() * 40); // Noise darkness
+            
+            // Blend noise with the background
+            data[index] = Math.floor(data[index] * (1 - noiseOpacity) + noiseValue * noiseOpacity);
+            data[index + 1] = Math.floor(data[index + 1] * (1 - noiseOpacity) + noiseValue * noiseOpacity);
+            data[index + 2] = Math.floor(data[index + 2] * (1 - noiseOpacity) + noiseValue * noiseOpacity);
+          }
+        }
+      }
+      
+      ctx.putImageData(imageData, 0, 0);
+    };
+    
+    resizeCanvas();
+    
+    window.addEventListener('resize', resizeCanvas);
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+    };
+  }, [colors]);
+  
+  return (
+    <canvas 
+      ref={canvasRef} 
+      className="absolute inset-0 w-full h-full rounded-xl" 
+    />
+  );
+};
 
 function ProductCard({ product }: { product: Product }) {
   return (
@@ -87,17 +222,46 @@ function ProductCard({ product }: { product: Product }) {
       }}
     >
       <MorphingDialogTrigger>
-        <div className={`rounded-xl bg-gradient-to-br ${product.bgColor} p-6 shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1`}>
-          <h3 className={`text-xl font-semibold mb-2 ${product.textColor}`}>{product.name}</h3>
-          <p className="text-gray-700">{product.description}</p>
-          <div className="mt-4 text-sm text-gray-600 flex justify-between items-center">
-            <span>Learn more</span>
-            <span className="text-xs bg-white/80 px-2 py-1 rounded-full">Click to expand</span>
+        <motion.div 
+          className="rounded-xl shadow-lg relative overflow-hidden h-80 group"
+          whileHover={{ 
+            y: -8,
+            transition: { duration: 0.3, ease: 'easeOut' }
+          }}
+        >
+          {/* Background with diagonal pattern and noise */}
+          <div className="absolute inset-0 w-full h-full">
+            <DiagonalNoiseCanvas colors={product.gradientColors} />
           </div>
-        </div>
+          
+          {/* Content */}
+          <div className="relative z-10 p-6 h-full flex flex-col">
+            <h3 className={`text-xl font-semibold mb-2 ${product.textColor}`}>{product.name}</h3>
+            <p className="text-gray-100 text-opacity-90">{product.description}</p>
+            
+            <div className="mt-auto flex justify-between items-center">
+              <span className={`text-sm font-medium text-white text-opacity-80`}>Learn more</span>
+              <span className="text-xs bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full transition-all duration-300 opacity-80 group-hover:opacity-100 group-hover:bg-white/30">
+                Explore
+              </span>
+            </div>
+          </div>
+          
+          {/* Tech pattern overlay */}
+          <div className="absolute inset-0 pointer-events-none opacity-5 mix-blend-overlay">
+            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="techgrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="white" strokeWidth="0.5" />
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#techgrid)" />
+            </svg>
+          </div>
+        </motion.div>
       </MorphingDialogTrigger>
       <MorphingDialogContainer>
-        <MorphingDialogContent className="relative max-w-3xl rounded-2xl bg-white p-6 shadow-2xl">
+        <MorphingDialogContent className="relative max-w-3xl rounded-2xl bg-white p-6 shadow-2xl border border-gray-200">
           <MorphingDialogTitle className="text-2xl font-bold mb-2 text-gray-900">
             {product.name}
           </MorphingDialogTitle>
@@ -112,11 +276,11 @@ function ProductCard({ product }: { product: Product }) {
             <p className="text-lg mb-4">{product.longDescription}</p>
             
             <div className="mb-6">
-              <h4 className="font-semibold mb-2 text-gray-800">Key Features:</h4>
+              <h4 className="font-semibold mb-2 text-gray-900">Key Features:</h4>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 {product.features.map((feature, index) => (
                   <li key={index} className="flex items-start">
-                    <svg className="w-5 h-5 mr-2 text-green-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-5 h-5 mr-2 text-green-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     <span>{feature}</span>
@@ -157,7 +321,7 @@ export default function ProductsSection() {
     <section className="relative py-24 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="bg-white bg-opacity-80 backdrop-filter backdrop-blur-md rounded-2xl p-8 shadow-xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 md:mb-8 text-center">Our Product</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 md:mb-8 text-center">Our Products</h2>
           <p className="text-lg md:text-xl text-gray-600 mb-8 md:mb-12 text-center max-w-3xl mx-auto">
             Cradla offers a comprehensive suite of tools designed to transform mental healthcare delivery,
             enabling flexible provider allocation while preserving therapeutic relationships.

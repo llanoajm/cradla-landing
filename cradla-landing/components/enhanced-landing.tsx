@@ -263,7 +263,7 @@ const CradlaLanding = () => {
                   {
                     icon: <Clock className="size-4 text-blue-300" />,
                     title: "Reduced Wait Times",
-                    description: "18 days faster on average",
+                    description: "From Weeks to Under an Hour",
                     date: "Immediate",
                     iconClassName: "text-blue-500",
                     titleClassName: "text-blue-500",
