@@ -16,6 +16,7 @@ import DisplayCards from "@/components/ui/display-cards";
 import ProductsSection from "@/components/products-section";
 import { themeColors } from "@/components/ui/button";
 import { GradientCard } from "@/components/ui/gradient-card";
+import FeaturesSection from "@/components/feature-section";
 
 const CradlaLanding = () => {
   const [activeSection, setActiveSection] = useState('start');
@@ -1109,108 +1110,12 @@ const CradlaLanding = () => {
         </section>
 
         {/* Features Section */}
-        <section 
-          ref={sectionRefs.features} 
+
+        <section
+          ref={sectionRefs.products}
           id="features"
-          className="relative py-16 md:py-24 px-4 min-h-screen flex flex-col justify-center"
         >
-          <div className="max-w-6xl mx-auto">
-            <div className="bg-white bg-opacity-80 backdrop-filter backdrop-blur-md rounded-2xl p-4 sm:p-6 md:p-8 shadow-xl">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 md:mb-8 text-center">Key Features & Benefits</h2>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
-                <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 shadow-md">
-                  <div className="rounded-full bg-blue-200 w-12 h-12 flex items-center justify-center mb-4">
-                    <svg className="w-6 h-6 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">Continuous Therapeutic Record</h3>
-                  <p className="text-gray-700">
-                    Maintains the full context of a patient's journey, enabling truly on-demand care without sacrificing relationship quality.
-                  </p>
-                  <div className="mt-4 pt-4 border-t border-blue-200">
-                    <p className="text-sm text-blue-800 font-medium">Benefit: Near full reduction in "getting to know you" time when patients see different therapists</p>
-                  </div>
-                </div>
-                
-                <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 shadow-md">
-                  <div className="rounded-full bg-purple-200 w-12 h-12 flex items-center justify-center mb-4">
-                    <svg className="w-6 h-6 text-purple-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">Dynamic Practitioner Allocation</h3>
-                  <p className="text-gray-700">
-                    Enables flexible scheduling with any qualified therapist while preserving therapeutic relationships and context continuity.
-                  </p>
-                  <div className="mt-4 pt-4 border-t border-purple-200">
-                    <p className="text-sm text-purple-800 font-medium">Benefit: 31% increase in appointment throughput and reduced wait times by an average of 18 days</p>
-                  </div>
-                </div>
-                
-                <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 shadow-md">
-                  <div className="rounded-full bg-green-200 w-12 h-12 flex items-center justify-center mb-4">
-                    <svg className="w-6 h-6 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">Real-time Therapeutic Guidance</h3>
-                  <p className="text-gray-700">
-                    Provides suggestions during sessions based on patient responses and emotional cues, creating value during the actual therapeutic interaction.
-                  </p>
-                  <div className="mt-4 pt-4 border-t border-green-200">
-                    <p className="text-sm text-green-800 font-medium">Benefit: Enhanced therapeutic efficacy and improved patient outcomes</p>
-                  </div>
-                </div>
-                
-                <div className="bg-gradient-to-br from-amber-50 to-amber-100 rounded-xl p-6 shadow-md">
-                  <div className="rounded-full bg-amber-200 w-12 h-12 flex items-center justify-center mb-4">
-                    <svg className="w-6 h-6 text-amber-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">HIPAA-Compliant Security</h3>
-                  <p className="text-gray-700">
-                    End-to-end encryption and granular access controls that limit information sharing as consented by the patient.
-                  </p>
-                  <div className="mt-4 pt-4 border-t border-amber-200">
-                    <p className="text-sm text-amber-800 font-medium">Benefit: Peace of mind with legal and regulatory compliance</p>
-                  </div>
-                </div>
-                
-                <div className="bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl p-6 shadow-md">
-                  <div className="rounded-full bg-pink-200 w-12 h-12 flex items-center justify-center mb-4">
-                    <svg className="w-6 h-6 text-pink-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">Advanced Analytics</h3>
-                  <p className="text-gray-700">
-                    Track treatment progress, identify patterns, and gain insights into therapeutic efficacy across your practice.
-                  </p>
-                  <div className="mt-4 pt-4 border-t border-pink-200">
-                    <p className="text-sm text-pink-800 font-medium">Benefit: Data-driven insights to improve care standards and practice management</p>
-                  </div>
-                </div>
-                
-                <div className="bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-xl p-6 shadow-md">
-                  <div className="rounded-full bg-cyan-200 w-12 h-12 flex items-center justify-center mb-4">
-                    <svg className="w-6 h-6 text-cyan-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">Automated Note Generation</h3>
-                  <p className="text-gray-700">
-                    Reduces administrative burden while improving documentation quality and completeness compared to manually generated notes.
-                  </p>
-                  <div className="mt-4 pt-4 border-t border-cyan-200">
-                    <p className="text-sm text-cyan-800 font-medium">Benefit: 73.8% time savings for documentation, allowing more time for patient care</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <FeaturesSection />
         </section>
 
         {/* Comparison Section */}
