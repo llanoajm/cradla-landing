@@ -360,7 +360,7 @@ const CradlaLanding = () => {
                     <p className="text-sm text-violet-700 mb-1 font-medium">About These Calculations</p>
                     <p className="text-xs text-violet-600">
                       Based on research showing dynamic allocation models generate a 31% increase in appointment throughput 
-                      without sacrificing quality of care, reducing wait times to less than an hour.
+                      without sacrificing quality of care, reducing wait times to less than an hour. Documentation speed-ups of 75% might increase throughput even further.
                     </p>
                   </div>
                 </div>
