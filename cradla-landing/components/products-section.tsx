@@ -60,7 +60,7 @@ const PRODUCTS: Product[] = [
     ],
     video: "https://placehold.co/1280x720/fae8e8/333333.mp4",
     id: "insights",
-    gradientColors: ["#17293D", "#1E78C2", "#00E676"],
+    gradientColors: ["#17293D", "#1E78C2", "#FFDAB9"],
     textColor: "text-white",
   },
   {

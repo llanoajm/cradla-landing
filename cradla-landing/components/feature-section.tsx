@@ -215,14 +215,6 @@ function FeatureCard({ feature }: { feature: Feature }) {
         <p className="text-gray-200 text-opacity-80 text-sm mt-4">
           {feature.longDescription}
         </p>
-        <div className="mt-auto flex justify-between items-center">
-          <span className={`text-sm font-medium text-white text-opacity-80`}>
-            Learn more
-          </span>
-          <span className="text-xs bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full transition-all duration-300 opacity-80 group-hover:opacity-100 group-hover:bg-white/30">
-            Explore
-          </span>
-        </div>
       </div>
       <div className="absolute inset-0 pointer-events-none opacity-5 mix-blend-overlay">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">

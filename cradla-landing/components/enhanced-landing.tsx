@@ -33,8 +33,8 @@ const CradlaLanding = () => {
     start: useRef(null),
     products: useRef(null),
     problem: useRef(null),
-    solution: useRef(null),
     features: useRef(null),
+    solution: useRef(null),
     comparison: useRef(null),
     contact: useRef(null)
   };
@@ -322,7 +322,7 @@ const CradlaLanding = () => {
                   <div>
                     <label className="flex justify-between text-gray-700 mb-2 text-sm font-medium">
                       <span>Number of Therapists</span>
-                      <span className="text-violet-600 font-semibold">{therapistCount}</span>
+                      <span className="text-[#008080] font-semibold">{therapistCount}</span>
                     </label>
                     <input 
                       type="range" 
@@ -330,14 +330,14 @@ const CradlaLanding = () => {
                       max="50"
                       value={therapistCount}
                       onChange={(e) => setTherapistCount(parseInt(e.target.value))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-violet-600"
+                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#008080]"
                     />
                   </div>
                   
                   <div>
                     <label className="flex justify-between text-gray-700 mb-2 text-sm font-medium">
                       <span>Current Patients per Week (total)</span>
-                      <span className="text-violet-600 font-semibold">{patientCount}</span>
+                      <span className="text-[#008080] font-semibold">{patientCount}</span>
                     </label>
                     <input 
                       type="range" 
@@ -345,10 +345,9 @@ const CradlaLanding = () => {
                       max="1000"
                       value={patientCount}
                       onChange={(e) => setPatientCount(parseInt(e.target.value))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-violet-600"
+                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#008080]"
                     />
                   </div>
-                  
                   <div>
                     <label className="block text-gray-700 mb-2 text-sm font-medium">Average Session Price ($)</label>
                     <div className="relative">
@@ -363,81 +362,112 @@ const CradlaLanding = () => {
                       />
                     </div>
                   </div>
-                  
-                  <div className="bg-violet-50 p-4 rounded-lg mt-6">
-                    <p className="text-sm text-violet-700 mb-1 font-medium">About These Calculations</p>
-                    <p className="text-xs text-violet-600">
+
+                  <div className="bg-gray-100 p-4 rounded-lg mt-6">
+                    <p className="text-sm text-[#008080] mb-1 font-medium">About These Calculations</p>
+                    <p className="text-xs text-[#008080]">
                       Based on research showing dynamic allocation models generate a 31% increase in appointment throughput 
                       without sacrificing quality of care, reducing wait times to less than an hour. Documentation speed-ups of 75% might increase throughput even further.
                     </p>
                   </div>
                 </div>
-              </div>
-              
+              </div>            
               {/* Right side: Results */}
-              <div className="bg-gradient-to-br from-violet-50 to-indigo-50 rounded-xl p-8 shadow-lg">
-                <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 bg-violet-100 rounded-full flex items-center justify-center mr-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-2xl font-semibold text-gray-800">Your Results with Cradla</h3>
-                </div>
+
+              <div className="relative bg-gradient-to-br from-green-50 to-emerald-200 rounded-xl p-8 shadow-lg overflow-hidden">
+              {/* Green Gradient Background with canvas for more control */}
+              <div className="absolute inset-0" style={{
+                background: "linear-gradient(135deg, #FF8A8A 0%, #008080 50%, #FFDAB9 100%)",
+                opacity: 0.85
+              }}>
+                {/* Noise Overlay */}
+                <div 
+                  className="absolute inset-0 opacity-10 mix-blend-multiply" 
+                  style={{
+                    backgroundImage: "url('data:image/svg+xml;charset=utf-8,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')",
+                    width: "200%",
+                    height: "200%"
+                  }}
+                />
                 
-                <div className="space-y-5">
-                  <div className="flex items-center justify-between pb-3 border-b border-indigo-100">
-                    <div>
-                      <p className="text-gray-600 text-sm">Total Weekly Patients</p>
-                      <div className="flex items-center mt-1">
-                        <p className="text-gray-500 text-sm line-through mr-2">{patientCount}</p>
-                        <p className="text-2xl font-bold text-gray-900">{newPatientCount}</p>
+                {/* Wave Pattern Element */}
+                <div className="absolute inset-0 overflow-hidden">
+                  <div className="absolute bottom-0 left-0 right-0 h-20 opacity-20 bg-white" 
+                    style={{
+                      borderTopLeftRadius: "50%",
+                      borderTopRightRadius: "50%",
+                      transform: "scale(1.5)",
+                      bottom: "-10px"
+                    }}
+                  />
+                </div>
+              </div>
+
+                {/* Content */}
+                <div className="relative z-10">
+                  <div className="flex items-center mb-6">
+                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mr-4 shadow-md">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-2xl font-semibold text-white">Your Results with Cradla</h3>
+                  </div>
+                  
+                  <div className="space-y-5">
+                    <div className="flex items-center justify-between pb-3 border-b border-white/20">
+                      <div>
+                        <p className="text-white/80 text-sm">Total Weekly Patients</p>
+                        <div className="flex items-center mt-1">
+                          <p className="text-white/50 text-sm line-through mr-2">{patientCount}</p>
+                          <p className="text-2xl font-bold text-white">{newPatientCount}</p>
+                        </div>
+                      </div>
+                      <div className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full">
+                        <p className="text-white font-medium text-sm">+31%</p>
                       </div>
                     </div>
-                    <div className="bg-green-100 px-3 py-1 rounded-full">
-                      <p className="text-green-700 font-medium text-sm">+31%</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center justify-between pb-3 border-b border-indigo-100">
-                    <div>
-                      <p className="text-gray-600 text-sm">Additional Patients Weekly</p>
-                      <p className="text-2xl font-bold text-gray-900">+{additionalPatients}</p>
-                    </div>
-                    <div className="bg-blue-100 px-3 py-1 rounded-full">
-                      <p className="text-blue-700 font-medium text-sm">Per Week</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center justify-between pb-3 border-b border-indigo-100">
-                    <div>
-                      <p className="text-gray-600 text-sm">Additional Weekly Revenue</p>
-                      <p className="text-2xl font-bold text-violet-700">${additionalRevenue.toLocaleString()}</p>
-                    </div>
-                    <div className="bg-violet-100 px-3 py-1 rounded-full">
-                      <p className="text-violet-700 font-medium text-sm">Weekly</p>
-                    </div>
-                  </div>
-                  
-                  <div className="pt-3">
-                    <div className="flex items-center justify-between">
-                      <p className="text-gray-700 font-medium">Annual Revenue Increase</p>
-                      <div className="bg-indigo-100 px-3 py-1 rounded-full">
-                        <p className="text-indigo-700 font-medium text-sm">Per Year</p>
+                    
+                    <div className="flex items-center justify-between pb-3 border-b border-white/20">
+                      <div>
+                        <p className="text-white/80 text-sm">Additional Patients Weekly</p>
+                        <p className="text-2xl font-bold text-white">+{additionalPatients}</p>
+                      </div>
+                      <div className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full">
+                        <p className="text-white font-medium text-sm">Per Week</p>
                       </div>
                     </div>
-                    <p className="text-3xl mt-2 font-bold text-indigo-700">${annualIncrease.toLocaleString()}</p>
+                    
+                    <div className="flex items-center justify-between pb-3 border-b border-white/20">
+                      <div>
+                        <p className="text-white/80 text-sm">Additional Weekly Revenue</p>
+                        <p className="text-2xl font-bold text-white">${additionalRevenue.toLocaleString()}</p>
+                      </div>
+                      <div className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full">
+                        <p className="text-white font-medium text-sm">Weekly</p>
+                      </div>
+                    </div>
+                    
+                    <div className="pt-3">
+                      <div className="flex items-center justify-between">
+                        <p className="text-white font-medium">Annual Revenue Increase</p>
+                        <div className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full">
+                          <p className="text-white font-medium text-sm">Per Year</p>
+                        </div>
+                      </div>
+                      <p className="text-3xl mt-2 font-bold text-white">${annualIncrease.toLocaleString()}</p>
+                    </div>
                   </div>
-                </div>
-                
-                <div className="mt-8">
-                  <a 
-                    href="#contact" 
-                    onClick={() => scrollToSection('contact')}
-                    className="inline-flex items-center justify-center w-full px-6 py-3 text-base font-medium text-white bg-violet-600 rounded-lg shadow-sm hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 transition-colors"
-                  >
-                    Book a Demo
-                  </a>
+                  
+                  <div className="mt-8">
+                    <a 
+                      href="#contact" 
+                      onClick={() => scrollToSection('contact')}
+                      className="inline-flex items-center justify-center w-full px-6 py-3 text-base font-medium text-emerald-800 bg-white rounded-lg shadow-sm hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors"
+                    >
+                      Book a Demo
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -986,6 +1016,15 @@ const CradlaLanding = () => {
           </div>
         </section>
 
+         {/* Features Section */}
+
+         <section
+          ref={sectionRefs.features}
+          id="features"
+        >
+          <FeaturesSection />
+        </section>
+
         {/* Solution Section */}
         <section 
           ref={sectionRefs.solution} 
@@ -1114,14 +1153,7 @@ const CradlaLanding = () => {
           </div>
         </section>
 
-        {/* Features Section */}
-
-        <section
-          ref={sectionRefs.features}
-          id="features"
-        >
-          <FeaturesSection />
-        </section>
+       
 
         {/* Comparison Section */}
         <section 
