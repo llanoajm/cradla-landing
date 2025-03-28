@@ -14,6 +14,8 @@ import { Badge } from "@/components/ui/badge";
 import { TextShimmer } from "@/components/ui/text-shimmer";
 import DisplayCards from "@/components/ui/display-cards";
 import ProductsSection from "@/components/products-section";
+import { themeColors } from "@/components/ui/button";
+import { GradientCard } from "@/components/ui/gradient-card";
 
 const CradlaLanding = () => {
   const [activeSection, setActiveSection] = useState('start');
