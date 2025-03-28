@@ -209,7 +209,7 @@ const CradlaLanding = () => {
                     <FixedGooeyText
                       texts={[
                         "When patient appointments slip through the cracks, we catch them.",
-                        "Reduce wait times to minutes",
+                        "Reduce wait times to less than an hour",
                         "Increase appointment throughput by 31%.",
                         "Cut down documentation time by 75%",
                         "Maintain continuity when patients switch therapists.",
@@ -360,7 +360,7 @@ const CradlaLanding = () => {
                     <p className="text-sm text-violet-700 mb-1 font-medium">About These Calculations</p>
                     <p className="text-xs text-violet-600">
                       Based on research showing dynamic allocation models generate a 31% increase in appointment throughput 
-                      without sacrificing quality of care, reducing wait times to minutes.
+                      without sacrificing quality of care, reducing wait times to less than an hour.
                     </p>
                   </div>
                 </div>
@@ -1426,7 +1426,7 @@ const CradlaLanding = () => {
                         <svg className="w-5 h-5 text-green-500 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <span>How dynamic allocation can reduce wait times to minutes</span>
+                        <span>How dynamic allocation can reduce wait times to less than an hour</span>
                       </li>
                       <li className="flex items-start">
                         <svg className="w-5 h-5 text-green-500 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">

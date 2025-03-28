@@ -27,41 +27,9 @@ type Product = {
 
 const PRODUCTS: Product[] = [
   {
-    name: 'Cradla Provider Hub',
-    description: 'Comprehensive platform for vertically-integrated insurance providers with in-house mental therapy services.',
-    longDescription: 'Cradla Provider Hub is an all-in-one platform that empowers mental health professionals with AI-powered tools for managing patient relationships, documentation, and practice administration. Experience 31% increased appointment throughput and reduced wait times.',
-    features: [
-      'AI-assisted note taking and documentation',
-      'Dynamic provider allocation system',
-      'Therapeutic relationship management',
-      'Real-time session guidance',
-      'HIPAA-compliant secure messaging'
-    ],
-    video: 'https://placehold.co/1280x720/d9d9f3/333333.mp4',
-    id: 'provider-hub',
-    bgColor: 'from-violet-100 to-violet-200',
-    textColor: 'text-violet-700'
-  },
-  {
-    name: 'Cradla Connect',
-    description: 'Patient engagement and continuity platform',
-    longDescription: 'Cradla Connect ensures a seamless therapeutic journey for patients, even when switching providers. Our innovative context transfer system preserves the therapeutic relationship, eliminates repetitive intake processes, and provides continuous care regardless of provider availability.',
-    features: [
-      'Seamless provider transitions',
-      'Continuous therapy history',
-      'Personalized care recommendations',
-      'Appointment flexibility',
-      'Secure patient portal'
-    ],
-    video: 'https://placehold.co/1280x720/d1f0e0/333333.mp4',
-    id: 'connect',
-    bgColor: 'from-green-100 to-green-200',
-    textColor: 'text-green-700'
-  },
-  {
-    name: 'Cradla Insights',
-    description: 'Analytics and practice optimization',
-    longDescription: 'Cradla Insights provides powerful analytics and reporting tools that help practices understand patient outcomes, optimize scheduling, and improve operational efficiency. Gain deep understanding of practice performance and patient progress with our comprehensive dashboards.',
+    name: 'Cradla Network',
+    description: 'End-to-end solution that helps insurance providers with in-house mental health services maximize therapist utilization, reduce wait times, and improve care quality through AI-powered context sharing.',
+    longDescription: 'Cradla Insights provides powerful analytics and reporting tools that help therapy networks and practices understand patient outcomes, optimize scheduling, and improve operational efficiency. Gain deep understanding of practice performance and patient progress with our comprehensive dashboards.',
     features: [
       'Provider performance metrics',
       'Patient progress tracking',
@@ -69,10 +37,43 @@ const PRODUCTS: Product[] = [
       'Revenue analysis',
       'Custom reporting tools'
     ],
+    video: 'https://www.youtube.com/watch?v=-aFMDuSvPDc&feature=youtu.be',
+    id: 'provider-hub',
+    bgColor: 'from-violet-100 to-violet-200',
+    textColor: 'text-violet-700'
+  },
+  {
+    name: 'Cradla Therapist Copilot',
+    description: 'AI Copilot that reduces therapist documentation time by 75% while providing comprehensive patient context, enabling seamless transitions between clients and increasing capacity to serve more patients without sacrificing quality of care.',
+    longDescription: 'Cradla Therapist Copilot is an all-in-one platform that empowers mental health professionals with AI-powered tools for managing patient relationships, documentation, and practice administration. Experience 31% increased appointment throughput and reduced wait times.',
+    features: [
+      'AI-assisted note taking and documentation',
+      'Dynamic provider allocation system',
+      'Therapeutic relationship management',
+      'Real-time session guidance',
+      'HIPAA-compliant secure messaging'
+    ],
     video: 'https://placehold.co/1280x720/fae8e8/333333.mp4',
     id: 'insights',
     bgColor: 'from-blue-100 to-blue-200',
     textColor: 'text-blue-700'
+  },
+  {
+    name: "Cradla Connect",
+    longDescription: "Seamless mental health care that remembers your journey, allowing you to see any available therapist without repeating your story or starting over—reducing wait times and delivering personalized support exactly when you need it.",
+    description: "Get videocall therapy sessions within the hour, without retelling your story. Cradla Connect preserves your complete therapeutic journey, allowing you to see any available therapist in your network who instantly understands your history, progress, and needs, making every session feel like continuing with your regular therapist.",
+    features: [
+      "See available therapists without repeating your story",
+      "Reduce wait times from weeks to days",
+      "Maintain consistent care even when your regular therapist is unavailable",
+      "Schedule appointments that fit your life, not your therapist's calendar",
+      "Control exactly what information is shared between therapists, maintaining confidentiality",
+      "Access your secure therapy journey through our protected patient portal"
+    ],
+    video: "https://placehold.co/1280x720/d1f0e0/333333.mp4",
+    id: "connect",
+    bgColor: "from-green-100 to-green-200",
+    textColor: "text-green-700"
   }
 ];
 
@@ -171,6 +172,8 @@ export default function ProductsSection() {
           <div className="mt-12 text-center">
             <p className="text-gray-700 mb-6">
               All Cradla products work seamlessly together to create a unified platform for mental healthcare providers and patients.
+              <br />
+              Watch a demo video of our old offering: <a href="https://www.youtube.com/watch?v=-aFMDuSvPDc&feature=youtu.be" className="text-blue-600">Sigmund</a>
             </p>
             <a 
               href="#contact" 
