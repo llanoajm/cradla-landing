@@ -926,7 +926,7 @@ const CradlaLanding = () => {
                   <ul className="space-y-3 md:space-y-4">
                     <li className="flex items-start">
                       <span className="text-red-500 mr-2 flex-shrink-0">•</span>
-                      <p className="text-sm md:text-base"><strong>48 days</strong> - Average wait time for therapy appointments in the US</p>
+                      <p className="text-sm md:text-base"><strong>42 days</strong> - Average wait time for therapy appointments in the US</p>
                     </li>
                     <li className="flex items-start">
                       <span className="text-red-500 mr-2 flex-shrink-0">•</span>
