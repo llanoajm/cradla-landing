@@ -412,7 +412,8 @@ export default function ProductsSection() {
           </div>
 
           {/* New slideshow section */}
-          <div className="mt-12">
+          
+{/*           <div className="mt-12">
             <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
               Product Interfaces
             </h3>
@@ -430,7 +431,7 @@ export default function ProductsSection() {
               ))}
             </div>
             <Slideshow images={slideshowImages[selectedProduct]} />
-          </div>
+          </div> */}
 
           <div className="mt-12 text-center">
             <p className="text-gray-700 mb-6">

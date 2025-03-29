@@ -79,22 +79,7 @@ const PitchDeckPage: React.FC = () => {
         </div>
         
         <div className="flex-shrink-0">
-          <button
-            onClick={toggleFullscreen}
-            className="px-3 py-1.5 text-xs md:text-sm font-medium bg-gray-100 text-gray-800 rounded-lg hover:bg-gray-200 transition-all flex items-center gap-1"
-          >
-            {isFullscreen ? (
-              <>
-                <MinimizeIcon className="w-4 h-4" />
-                Exit Fullscreen
-              </>
-            ) : (
-              <>
-                <Fullscreen className="w-4 h-4" />
-                Fullscreen
-              </>
-            )}
-          </button>
+
         </div>
       </header>
 
