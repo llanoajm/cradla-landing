@@ -18,6 +18,7 @@ import { themeColors } from "@/components/ui/button";
 import { GradientCard } from "@/components/ui/gradient-card";
 import FeaturesSection from "@/components/feature-section";
 import Footer from './ui/footer';
+import { Menu, X } from "lucide-react";
 
 const CradlaLanding = () => {
   const [activeSection, setActiveSection] = useState('start');
@@ -26,6 +27,7 @@ const CradlaLanding = () => {
   const [therapistCount, setTherapistCount] = useState(10);
   const [patientCount, setPatientCount] = useState(300);
   const [sessionPrice, setSessionPrice] = useState(120);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const newPatientCount = Math.round(patientCount * 1.31); // 31% increase
   const additionalPatients = newPatientCount - patientCount;
   const additionalRevenue = additionalPatients * sessionPrice;
@@ -110,10 +112,11 @@ const CradlaLanding = () => {
 
       {/* Navigation Bar */}
       <header className="fixed top-4 left-0 right-0 z-50 flex justify-between items-center px-4 md:px-6">
+        {/* Logo */}
         <div className="flex-shrink-0 flex items-center">
           <span className="text-xl md:text-2xl font-bold text-gray-900">Cradla</span>
         </div>
-        
+
         {/* Desktop Navigation */}
         <nav className={`hidden md:block px-4 md:px-6 py-2 rounded-full transition-all duration-300 ${
           isScrolled ? 'bg-white/80 backdrop-blur-sm shadow-md' : 'bg-transparent'
@@ -134,22 +137,61 @@ const CradlaLanding = () => {
             ))}
           </div>
         </nav>
-        
-        {/* Mobile Navigation - Just showing the current section */}
-        <div className="md:hidden">
-          <button 
-            onClick={() => scrollToSection(activeSection !== 'start' ? 'start' : 'products')}
-            className="px-2 py-1 text-xs font-medium bg-white/80 backdrop-blur-sm rounded-full shadow-sm"
+
+        {/* Mobile Navigation - Hamburger Menu */}
+        <div className="md:hidden flex items-center">
+          <a href="#contact" className="px-3 py-1.5 text-xs font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all mr-2">
+            Get Started
+          </a>
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 rounded-md bg-white/80 backdrop-blur-sm shadow-sm focus:outline-none"
+            aria-label="Toggle menu"
           >
-            {activeSection.charAt(0).toUpperCase() + activeSection.slice(1)}
+            {mobileMenuOpen ? (
+              <X className="h-5 w-5 text-gray-800" />
+            ) : (
+              <Menu className="h-5 w-5 text-gray-800" />
+            )}
           </button>
         </div>
-        
-        <div className="flex-shrink-0 flex justify-end items-center">
+
+        {/* Desktop CTA */}
+        <div className="hidden md:flex flex-shrink-0 justify-end items-center">
           <a href="#contact" className="px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all">
             Get Started
           </a>
         </div>
+
+        {/* Mobile Menu Overlay */}
+        {mobileMenuOpen && (
+          <div className="absolute top-full left-0 right-0 mt-2 mx-4 md:hidden">
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.2 }}
+              className="bg-white rounded-lg shadow-lg py-2 px-4"
+            >
+              {Object.keys(sectionRefs).map((section) => (
+                <button
+                  key={section}
+                  onClick={() => {
+                    scrollToSection(section);
+                    setMobileMenuOpen(false);
+                  }}
+                  className={`block w-full text-left py-3 px-2 text-sm font-medium ${
+                    activeSection === section 
+                      ? 'text-gray-900 bg-gray-100 rounded-md' 
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md'
+                  }`}
+                >
+                  {section.charAt(0).toUpperCase() + section.slice(1)}
+                </button>
+              ))}
+            </motion.div>
+          </div>
+        )}
       </header>
 
       {/* Main Content */}
@@ -182,115 +224,118 @@ const CradlaLanding = () => {
           )}
           
           <div className="container max-w-5xl mx-auto relative z-10 mt-[-80px]">
-            <div className="grid grid-cols-1 gap-6 items-center lg:grid-cols-2 h-full">
-              <div className="flex flex-col">
-                <div className="flex items-center mb-2">
-                  <motion.div 
-                    initial={{ opacity: 0 }} 
-                    animate={{ opacity: 1 }} 
-                    transition={{ delay: 0.4, duration: 0.9 }}
-                    className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 mr-2 sm:mr-3 md:mr-4"
-                  >
-                    <DotLottieReact
-                      src="https://lottie.host/8cf4ba71-e5fb-44f3-8134-178c4d389417/0CCsdcgNIP.json"
-                      loop
-                      autoplay
-                      speed={0.7}
-                    />
-                  </motion.div>
-                
-                  <div className="flex flex-col">
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-800 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black text-left">
-                      Cradla
-                    </h1>
-                    <TextShimmer 
-                      as="h2"
-                      duration={1.5} 
-                      className="text-sm sm:text-lg md:text-xl lg:text-2xl font-medium mt-1 text-left [--base-color:theme(colors.gray.600)] [--base-gradient-color:theme(colors.violet.500)]"
-                    >
-                      SOTA AI Therapy Copilot
-                    </TextShimmer>
-                  </div>
-                </div>
-                
+          <div className="grid grid-cols-1 gap-6 items-center lg:grid-cols-2 h-full">
+            <div className="flex flex-col">
+              {/* Hide the Cradla logo + DotLottie animation on mobile */}
+              <div className="flex items-center mb-2 lg:mb-4">
+                <motion.div 
+                  initial={{ opacity: 0 }} 
+                  animate={{ opacity: 1 }} 
+                  transition={{ delay: 0.4, duration: 0.9 }}
+                  className="hidden sm:block w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 mr-2 sm:mr-3 md:mr-4"
+                >
+                  <DotLottieReact
+                    src="https://lottie.host/8cf4ba71-e5fb-44f3-8134-178c4d389417/0CCsdcgNIP.json"
+                    loop
+                    autoplay
+                    speed={0.7}
+                  />
+                </motion.div>
+              
                 <div className="flex flex-col">
-                  <div className="h-28 w-full mb-4 sm:mb-6 pt-10 sm:pt-20 pb-8 sm:pb-14">
-                    <FixedGooeyText
-                      texts={[
-                        "When patient appointments slip through the cracks, we catch them.",
-                        "Reduce wait times to less than an hour",
-                        "Increase appointment throughput by 31%.",
-                        "Cut down documentation time by 75%",
-                        "Maintain continuity when patients switch therapists.",
-                        "Never lose critical patient context again.",
-                        "HIPAA-compliant therapeutic intelligence."
-                      ]}
-                      morphTime={2}
-                      cooldownTime={3.5}
-                      className="font-bold text-black w-full"
-                      textClassName="text-lg sm:text-xl md:text-2xl lg:text-4xl tracking-wide font-bold text-left"
-                    />
-                  </div>
-                  
-                  <p className="text-sm sm:text-base md:text-lg lg:text-xl font-medium text-gray-700 text-left max-w-lg mb-4 sm:mb-8">
-                    Cradla solves the mental healthcare context-sharing problem, enabling flexible provider allocation
-                    while preserving the therapeutic relationship—delivering care when it's needed, with the context that makes it effective.
-                  </p>
-                </div>
-                
-                <div className="flex flex-row gap-2 sm:gap-4">
-                  <Button 
-                    variant="outline"
-                    size="default"
-                    onClick={() => scrollToSection('contact')}
-                    className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm py-2 px-3 md:py-3 md:px-4"
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-800 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black text-left">
+                    Cradla
+                  </h1>
+                  <TextShimmer 
+                    as="h2"
+                    duration={1.5} 
+                    className="text-sm sm:text-lg md:text-xl lg:text-2xl font-medium mt-1 text-left [--base-color:theme(colors.gray.600)] [--base-gradient-color:theme(colors.violet.500)]"
                   >
-                    Book a Demo <PhoneCall className="hidden sm:inline w-3 h-3 sm:w-4 sm:h-4" />
-                  </Button>
-                  <Button 
-                    variant="default"
-                    size="default"
-                    onClick={() => scrollToSection('products')}
-                    className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm py-2 px-3 md:py-3 md:px-4"
-                  >
-                    Our Products <MoveRight className="hidden sm:inline w-3 h-3 sm:w-4 sm:h-4" />
-                  </Button>
+                    SOTA AI Therapy Copilot
+                  </TextShimmer>
                 </div>
               </div>
               
-              <div className="flex items-center justify-center h-full mt-4 lg:mt-0">
-                <DisplayCards cards={[
-                  {
-                    icon: <Brain className="size-4 text-violet-300" />,
-                    title: "Context Preservation",
-                    description: "Never lose therapeutic insights",
-                    date: "Continuous",
-                    iconClassName: "text-violet-500",
-                    titleClassName: "text-violet-500",
-                    className: "[grid-area:stack] hover:-translate-y-10 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration:700 hover:grayscale-0 before:left-0 before:top-0",
-                  },
-                  {
-                    icon: <Clock className="size-4 text-blue-300" />,
-                    title: "Reduced Wait Times",
-                    description: "From Weeks to Under an Hour",
-                    date: "Immediate",
-                    iconClassName: "text-blue-500",
-                    titleClassName: "text-blue-500",
-                    className: "[grid-area:stack] translate-x-16 translate-y-10 hover:-translate-y-1 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration:700 hover:grayscale-0 before:left-0 before:top-0",
-                  },
-                  {
-                    icon: <Users className="size-4 text-green-300" />,
-                    title: "31% More Throughput",
-                    description: "Serve more patients effectively",
-                    date: "Ongoing",
-                    iconClassName: "text-green-500",
-                    titleClassName: "text-green-500",
-                    className: "[grid-area:stack] translate-x-32 translate-y-20 hover:translate-y-10",
-                  },
-                ]} />
+              <div className="flex flex-col">
+                {/* Increase the height for the gooey text on mobile */}
+                <div className="h-40 sm:h-32 w-full mb-4 sm:mb-6 pt-6 sm:pt-20 pb-8 sm:pb-14">
+                  <FixedGooeyText
+                    texts={[
+                      "When patient appointments slip through the cracks, we catch them.",
+                      "Reduce wait times to less than an hour",
+                      "Increase appointment throughput by 31%.",
+                      "Cut down documentation time by 75%",
+                      "Maintain continuity when patients switch therapists.",
+                      "Never lose critical patient context again.",
+                      "HIPAA-compliant therapeutic intelligence."
+                    ]}
+                    morphTime={2}
+                    cooldownTime={3.5}
+                    className="font-bold text-black w-full"
+                    textClassName="text-xl sm:text-xl md:text-2xl lg:text-4xl tracking-wide font-bold text-left"
+                  />
+                </div>
+                
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl font-medium text-gray-700 text-left max-w-lg mb-4 sm:mb-8">
+                  Cradla solves the mental healthcare context-sharing problem, enabling flexible provider allocation
+                  while preserving the therapeutic relationship—delivering care when it's needed, with the context that makes it effective.
+                </p>
+              </div>
+              
+              <div className="flex flex-row gap-2 sm:gap-4">
+                <Button 
+                  variant="outline"
+                  size="default"
+                  onClick={() => scrollToSection('contact')}
+                  className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm py-2 px-3 md:py-3 md:px-4"
+                >
+                  Book a Demo <PhoneCall className="hidden sm:inline w-3 h-3 sm:w-4 sm:h-4" />
+                </Button>
+                <Button 
+                  variant="default"
+                  size="default"
+                  onClick={() => scrollToSection('products')}
+                  className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm py-2 px-3 md:py-3 md:px-4"
+                >
+                  Our Products <MoveRight className="hidden sm:inline w-3 h-3 sm:w-4 sm:h-4" />
+                </Button>
               </div>
             </div>
+            
+            {/* Make the display cards smaller and more compressed on mobile */}
+            <div className="flex items-center justify-center h-full mt-4 lg:mt-0 scale-75 sm:scale-90 md:scale-100">
+              <DisplayCards cards={[
+                {
+                  icon: <Brain className="size-4 text-violet-300" />,
+                  title: "Context Preservation",
+                  description: "Never lose therapeutic insights",
+                  date: "Continuous",
+                  iconClassName: "text-violet-500",
+                  titleClassName: "text-violet-500",
+                  className: "[grid-area:stack] hover:-translate-y-10 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration:700 hover:grayscale-0 before:left-0 before:top-0",
+                },
+                {
+                  icon: <Clock className="size-4 text-blue-300" />,
+                  title: "Reduced Wait Times",
+                  description: "From Weeks to Under an Hour",
+                  date: "Immediate",
+                  iconClassName: "text-blue-500",
+                  titleClassName: "text-blue-500",
+                  className: "[grid-area:stack] translate-x-16 translate-y-10 hover:-translate-y-1 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration:700 hover:grayscale-0 before:left-0 before:top-0",
+                },
+                {
+                  icon: <Users className="size-4 text-green-300" />,
+                  title: "31% More Throughput",
+                  description: "Serve more patients effectively",
+                  date: "Ongoing",
+                  iconClassName: "text-green-500",
+                  titleClassName: "text-green-500",
+                  className: "[grid-area:stack] translate-x-32 translate-y-20 hover:translate-y-10",
+                },
+              ]} />
+            </div>
           </div>
+        </div>
         </section>
 
 

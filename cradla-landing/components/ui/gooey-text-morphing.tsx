@@ -23,6 +23,7 @@ export function FixedGooeyText({
   // @ts-ignore
   const requestRef = React.useRef<number>();
   const [isVisible, setIsVisible] = React.useState(true);
+  const [isMobile, setIsMobile] = React.useState(false);
   const filterId = React.useId(); // Generate unique ID for filter
 
   // Use Intersection Observer to detect visibility
@@ -43,6 +44,22 @@ export function FixedGooeyText({
         observer.unobserve(containerRef.current);
       }
     };
+  }, []);
+
+  // Check viewport size on mount and resize
+  React.useEffect(() => {
+    const checkViewport = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    
+    // Initial check
+    checkViewport();
+    
+    // Add resize listener
+    window.addEventListener('resize', checkViewport);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', checkViewport);
   }, []);
 
   React.useEffect(() => {
@@ -147,7 +164,8 @@ export function FixedGooeyText({
         <span
           ref={text1Ref}
           className={cn(
-            "absolute inline-block select-none text-center text-6xl md:text-[60pt]",
+            "absolute inline-block select-none text-center",
+            isMobile ? "text-2xl sm:text-xl md:text-2xl lg:text-4xl" : "text-6xl md:text-[60pt]",
             "text-foreground",
             textClassName
           )}
@@ -155,7 +173,8 @@ export function FixedGooeyText({
         <span
           ref={text2Ref}
           className={cn(
-            "absolute inline-block select-none text-center text-6xl md:text-[60pt]",
+            "absolute inline-block select-none text-center",
+            isMobile ? "text-2xl sm:text-xl md:text-2xl lg:text-4xl" : "text-6xl md:text-[60pt]",
             "text-foreground",
             textClassName
           )}
