@@ -28,11 +28,13 @@ const CradlaLanding = () => {
   const [patientCount, setPatientCount] = useState(300);
   const [sessionPrice, setSessionPrice] = useState(120);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const newPatientCount = Math.round(patientCount * 1.31); // 31% increase
   const additionalPatients = newPatientCount - patientCount;
   const additionalRevenue = additionalPatients * sessionPrice;
   const annualIncrease = additionalRevenue * 52; // 52 weeks in a year
-    const sectionRefs = {
+  
+  const sectionRefs = {
     start: useRef(null),
     products: useRef(null),
     problem: useRef(null),
@@ -41,6 +43,22 @@ const CradlaLanding = () => {
     comparison: useRef(null),
     contact: useRef(null)
   };
+
+  // Check viewport size
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Initial check
+    checkScreenSize();
+    
+    // Add event listener
+    window.addEventListener('resize', checkScreenSize);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
   // Scroll to section when nav item is clicked
   const scrollToSection = (sectionId) => {
@@ -226,63 +244,86 @@ const CradlaLanding = () => {
           <div className="container max-w-5xl mx-auto relative z-10 mt-[-80px]">
           <div className="grid grid-cols-1 gap-6 items-center lg:grid-cols-2 h-full">
             <div className="flex flex-col">
-              {/* Hide the Cradla logo + DotLottie animation on mobile */}
-              <div className="flex items-center mb-2 lg:mb-4">
-                <motion.div 
-                  initial={{ opacity: 0 }} 
-                  animate={{ opacity: 1 }} 
-                  transition={{ delay: 0.4, duration: 0.9 }}
-                  className="hidden sm:block w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 mr-2 sm:mr-3 md:mr-4"
-                >
-                  <DotLottieReact
-                    src="https://lottie.host/8cf4ba71-e5fb-44f3-8134-178c4d389417/0CCsdcgNIP.json"
-                    loop
-                    autoplay
-                    speed={0.7}
-                  />
-                </motion.div>
+              {/* Only show Cradla logo + DotLottie animation on desktop */}
+              {!isMobile && (
+                <div className="flex items-center mb-2 lg:mb-4">
+                  <motion.div 
+                    initial={{ opacity: 0 }} 
+                    animate={{ opacity: 1 }} 
+                    transition={{ delay: 0.4, duration: 0.9 }}
+                    className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 mr-2 sm:mr-3 md:mr-4"
+                  >
+                    <DotLottieReact
+                      src="https://lottie.host/8cf4ba71-e5fb-44f3-8134-178c4d389417/0CCsdcgNIP.json"
+                      loop
+                      autoplay
+                      speed={0.7}
+                    />
+                  </motion.div>
+                
+                  <div className="flex flex-col">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-800 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black text-left">
+                      Cradla
+                    </h1>
+                    <TextShimmer 
+                      as="h2"
+                      duration={1.5} 
+                      className="text-sm sm:text-lg md:text-xl lg:text-2xl font-medium mt-1 text-left [--base-color:theme(colors.gray.600)] [--base-gradient-color:theme(colors.violet.500)]"
+                    >
+                      SOTA AI Therapy Copilot
+                    </TextShimmer>
+                  </div>
+                </div>
+              )}
               
-                <div className="flex flex-col">
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-800 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black text-left">
+              {/* Mobile only title */}
+              {isMobile && (
+                <div className="mb-4">
+                  <h1 className="text-3xl font-extrabold text-gray-800 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black text-center mb-1">
                     Cradla
                   </h1>
-                  <TextShimmer 
-                    as="h2"
-                    duration={1.5} 
-                    className="text-sm sm:text-lg md:text-xl lg:text-2xl font-medium mt-1 text-left [--base-color:theme(colors.gray.600)] [--base-gradient-color:theme(colors.violet.500)]"
-                  >
-                    SOTA AI Therapy Copilot
-                  </TextShimmer>
+                  <p className="text-sm text-center text-gray-600 font-medium">
+                    AI Therapy Copilot
+                  </p>
                 </div>
-              </div>
+              )}
               
               <div className="flex flex-col">
-                {/* Increase the height for the gooey text on mobile */}
-                <div className="h-40 sm:h-32 w-full mb-4 sm:mb-6 pt-6 sm:pt-20 pb-8 sm:pb-14">
-                  <FixedGooeyText
-                    texts={[
-                      "When patient appointments slip through the cracks, we catch them.",
-                      "Reduce wait times to less than an hour",
-                      "Increase appointment throughput by 31%.",
-                      "Cut down documentation time by 75%",
-                      "Maintain continuity when patients switch therapists.",
-                      "Never lose critical patient context again.",
-                      "HIPAA-compliant therapeutic intelligence."
-                    ]}
-                    morphTime={2}
-                    cooldownTime={3.5}
-                    className="font-bold text-black w-full"
-                    textClassName="text-xl sm:text-xl md:text-2xl lg:text-4xl tracking-wide font-bold text-left"
-                  />
-                </div>
+                {/* Only show gooey text on desktop */}
+                {!isMobile ? (
+                  <div className="h-40 sm:h-32 w-full mb-4 sm:mb-6 pt-6 sm:pt-20 pb-8 sm:pb-14">
+                    <FixedGooeyText
+                      texts={[
+                        "When patient appointments slip through the cracks, we catch them.",
+                        "Reduce wait times to less than an hour",
+                        "Increase appointment throughput by 31%.",
+                        "Cut down documentation time by 75%",
+                        "Maintain continuity when patients switch therapists.",
+                        "Never lose critical patient context again.",
+                        "HIPAA-compliant therapeutic intelligence."
+                      ]}
+                      morphTime={2}
+                      cooldownTime={3.5}
+                      className="font-bold text-black w-full"
+                      textClassName="text-xl sm:text-xl md:text-2xl lg:text-4xl tracking-wide font-bold text-left"
+                    />
+                  </div>
+                ) : (
+                  /* Static heading for mobile */
+                  <div className="mb-6">
+                    <h2 className="text-xl font-bold text-center text-gray-800">
+                      When patient appointments slip through the cracks, we catch them.
+                    </h2>
+                  </div>
+                )}
                 
-                <p className="text-sm sm:text-base md:text-lg lg:text-xl font-medium text-gray-700 text-left max-w-lg mb-4 sm:mb-8">
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl font-medium text-gray-700 text-center md:text-left max-w-lg mb-4 sm:mb-8 mx-auto md:mx-0">
                   Cradla solves the mental healthcare context-sharing problem, enabling flexible provider allocation
                   while preserving the therapeutic relationship—delivering care when it's needed, with the context that makes it effective.
                 </p>
               </div>
               
-              <div className="flex flex-row gap-2 sm:gap-4">
+              <div className="flex flex-row gap-2 sm:gap-4 justify-center md:justify-start">
                 <Button 
                   variant="outline"
                   size="default"
@@ -302,42 +343,72 @@ const CradlaLanding = () => {
               </div>
             </div>
             
-            {/* Make the display cards smaller and more compressed on mobile */}
-            <div className="flex items-center justify-center h-full mt-4 lg:mt-0 scale-75 sm:scale-90 md:scale-100">
-              <DisplayCards cards={[
-                {
-                  icon: <Brain className="size-4 text-violet-300" />,
-                  title: "Context Preservation",
-                  description: "Never lose therapeutic insights",
-                  date: "Continuous",
-                  iconClassName: "text-violet-500",
-                  titleClassName: "text-violet-500",
-                  className: "[grid-area:stack] hover:-translate-y-10 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration:700 hover:grayscale-0 before:left-0 before:top-0",
-                },
-                {
-                  icon: <Clock className="size-4 text-blue-300" />,
-                  title: "Reduced Wait Times",
-                  description: "From Weeks to Under an Hour",
-                  date: "Immediate",
-                  iconClassName: "text-blue-500",
-                  titleClassName: "text-blue-500",
-                  className: "[grid-area:stack] translate-x-16 translate-y-10 hover:-translate-y-1 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration:700 hover:grayscale-0 before:left-0 before:top-0",
-                },
-                {
-                  icon: <Users className="size-4 text-green-300" />,
-                  title: "31% More Throughput",
-                  description: "Serve more patients effectively",
-                  date: "Ongoing",
-                  iconClassName: "text-green-500",
-                  titleClassName: "text-green-500",
-                  className: "[grid-area:stack] translate-x-32 translate-y-20 hover:translate-y-10",
-                },
-              ]} />
-            </div>
+            {/* Only show display cards on desktop */}
+            {!isMobile && (
+              <div className="flex items-center justify-center h-full mt-4 lg:mt-0 scale-75 sm:scale-90 md:scale-100">
+                <DisplayCards cards={[
+                  {
+                    icon: <Brain className="size-4 text-violet-300" />,
+                    title: "Context Preservation",
+                    description: "Never lose therapeutic insights",
+                    date: "Continuous",
+                    iconClassName: "text-violet-500",
+                    titleClassName: "text-violet-500",
+                    className: "[grid-area:stack] hover:-translate-y-10 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration:700 hover:grayscale-0 before:left-0 before:top-0",
+                  },
+                  {
+                    icon: <Clock className="size-4 text-blue-300" />,
+                    title: "Reduced Wait Times",
+                    description: "From Weeks to Under an Hour",
+                    date: "Immediate",
+                    iconClassName: "text-blue-500",
+                    titleClassName: "text-blue-500",
+                    className: "[grid-area:stack] translate-x-16 translate-y-10 hover:-translate-y-1 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration:700 hover:grayscale-0 before:left-0 before:top-0",
+                  },
+                  {
+                    icon: <Users className="size-4 text-green-300" />,
+                    title: "31% More Throughput",
+                    description: "Serve more patients effectively",
+                    date: "Ongoing",
+                    iconClassName: "text-green-500",
+                    titleClassName: "text-green-500",
+                    className: "[grid-area:stack] translate-x-32 translate-y-20 hover:translate-y-10",
+                  },
+                ]} />
+              </div>
+            )}
+            
+            {/* Mobile alternative to display cards - simple bullet points */}
+            {isMobile && (
+              <div className="mt-8 bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-sm">
+                <ul className="space-y-3">
+                  <li className="flex items-start">
+                    <Brain className="w-5 h-5 text-violet-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium text-violet-700">Context Preservation</p>
+                      <p className="text-xs text-gray-600">Never lose therapeutic insights</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start">
+                    <Clock className="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium text-blue-700">Reduced Wait Times</p>
+                      <p className="text-xs text-gray-600">From Weeks to Under an Hour</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start">
+                    <Users className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium text-green-700">31% More Throughput</p>
+                      <p className="text-xs text-gray-600">Serve more patients effectively</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
         </div>
         </section>
-
 
         {/* Products Section */}
         <section
