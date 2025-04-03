@@ -51,7 +51,7 @@ const InvestorsPage = () => {
       {/* Navigation */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm py-4 px-6 shadow-sm">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <a href="/" className="text-2xl font-bold text-gray-900">Cradla<span className="text-blue-600">Invest</span></a>
+          <a href="/" className="text-2xl font-bold text-gray-900">Cradla <span className="text-blue-600">Invest</span></a>
           <nav className="hidden md:flex space-x-8">
             <a href="#opportunity" className="text-gray-700 hover:text-gray-900">Opportunity</a>
             <a href="#traction" className="text-gray-700 hover:text-gray-900">Traction</a>
