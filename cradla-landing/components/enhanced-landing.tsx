@@ -118,25 +118,17 @@ const HomePage = () => {
                   <h1 className="text-4xl md:text-6xl font-extrabold text-gray-800 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black">
                     Cradla
                   </h1>
-                  <TextShimmer 
-                    as="h2"
-                    duration={1.5} 
-                    className="text-lg md:text-2xl font-medium mt-1 [--base-color:theme(colors.gray.600)] [--base-gradient-color:theme(colors.violet.500)]"
-                  >
-                    AI Therapy Copilot
-                  </TextShimmer>
+                  
                 </div>
               </div>
               
               <div className="flex flex-col max-w-lg">
                 <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
-                  When patient appointments slip through the cracks, we catch them.
+                Connected Care, Instantly Available
                 </h2>
                 
                 <p className="text-lg font-medium text-gray-700 mb-8">
-                  Cradla solves the mental healthcare context-sharing problem, enabling flexible provider allocation
-                  while preserving the therapeutic relationship—delivering care when it's needed, with the context that makes it effective.
-                </p>
+                A team of therapists standing by, all familiar with your unique story. Video connect in minutes without ever repeating yourself. As easy as booking an Uber, as healing as talking to your trusted therapist. Hop in today.              </p>
               
                 <div className="flex flex-row gap-4">
                   <Button 
@@ -160,16 +152,16 @@ const HomePage = () => {
             </div>
             
             <div className="flex items-center justify-center">
-              <div className="bg-white/80 p-6 rounded-xl shadow-lg max-w-md">
-                <h3 className="text-xl font-semibold mb-4 text-gray-900">What We Deliver</h3>
+              <div className="bg-black p-6 rounded-xl shadow-lg max-w-md">
+                <h3 className="text-xl font-semibold mb-4 text-gray-200">Our Value Proposition</h3>
                 <ul className="space-y-4">
                   <li className="flex items-start">
                     <div className="bg-violet-100 p-2 rounded-full mr-3">
                       <Brain className="w-5 h-5 text-violet-600" />
                     </div>
                     <div>
-                      <p className="font-medium">Context Preservation</p>
-                      <p className="text-sm text-gray-600">Maintain therapeutic continuity even when patients switch providers</p>
+                      <p className="font-medium text-gray-400">A New kind of Therapy Marketplace</p>
+                      <p className="text-sm text-gray-200">Meet a therapist</p>
                     </div>
                   </li>
                   <li className="flex items-start">
@@ -177,7 +169,7 @@ const HomePage = () => {
                       <Clock className="w-5 h-5 text-blue-600" />
                     </div>
                     <div>
-                      <p className="font-medium">Reduced Wait Times</p>
+                      <p className="font-medium text-gray-400">Reduced Wait Times</p>
                       <p className="text-sm text-gray-600">From weeks to under an hour with dynamic allocation</p>
                     </div>
                   </li>
