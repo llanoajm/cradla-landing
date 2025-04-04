@@ -68,7 +68,7 @@ const PRODUCTS: Product[] = [
   {
     name: "Cradla Enterprise",
     description:
-      "Do you lead a practice? Learn how cradla can help you maximize therapist utilization, reduce wait times, and improve care quality through AI-powered context sharing.",
+      "Learn how Cradla can help you maximize your practice's therapist utilization, reduce wait times, and improve care quality through AI-powered context sharing.",
     longDescription:
       "Cradla Insights provides powerful analytics and reporting tools that help therapy networks and practices understand patient outcomes, optimize scheduling, and improve operational efficiency. Gain deep understanding of practice performance and patient progress with our comprehensive dashboards.",
     features: [
@@ -273,7 +273,7 @@ function ProductCard({ product }: { product: Product }) {
     >
       <MorphingDialogTrigger>
         <motion.div
-          className="rounded-xl shadow-lg relative overflow-hidden h-80 group"
+          className="rounded-xl shadow-lg relative overflow-hidden h-60 group"
           whileHover={{
             y: -8,
             transition: { duration: 0.3, ease: "easeOut" },
@@ -399,7 +399,7 @@ export default function ProductsSection() {
       <div className="max-w-6xl mx-auto">
         <div className="bg-white bg-opacity-80 backdrop-filter backdrop-blur-md rounded-2xl p-8 shadow-xl">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 md:mb-8 text-center">
-            Visit Our Pages
+            Explore Cradla
           </h2>
 
           

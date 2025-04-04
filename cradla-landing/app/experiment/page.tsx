@@ -1,10 +1,8 @@
-
 "use client"
 
 import React, { useRef, useState, useEffect } from 'react';
 import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
 import { NoiseOverlay } from "@/components/ui/noise-overlay";
-import { FixedGooeyText } from "@/components/ui/gooey-text-morphing";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { motion } from "framer-motion";
 import { ArrowUpRight, ArrowRight, FileText, Users, Brain, Clock, MoveRight } from 'lucide-react';
@@ -47,6 +45,19 @@ const CradlaLanding = () => {
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
+  // Handle scroll for navbar background
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      setIsScrolled(scrollPosition > 10);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-white">
@@ -76,113 +87,103 @@ const CradlaLanding = () => {
       </div>
 
       {/* Navigation Bar */}
-      <header className="fixed top-4 left-0 right-0 z-50 flex justify-between items-center px-4 md:px-6">
-        {/* Logo */}
-        <div className="flex-shrink-0 flex items-center">
-          <span className="text-xl md:text-2xl font-bold text-gray-900">Cradla</span>
-        </div>
-
-        {/* Mobile Navigation - Hamburger Menu */}
-        <div className="md:hidden flex items-center">
-          <div className="flex-shrink-0 flex items-center">
-            <a href="/investors" className="mr-4 text-sm font-medium text-gray-600 hover:text-gray-900">
-              Investors
-            </a>
-            <a href="/blog" className="mr-4 text-sm font-medium text-gray-600 hover:text-gray-900">
-              Blog
-            </a>
-            <a href="#contact" className="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all">
-              Get Started
-            </a>
+      <header className={`fixed top-0 left-0 right-0 z-50 ${isScrolled ? 'bg-white shadow-md' : ''} transition-all duration-300`}>
+        <div className="container mx-auto px-4 md:px-6 py-3 flex justify-between items-center">
+          {/* Logo with Lottie Animation */}
+          <div className="flex items-center">
+            <div className="w-10 h-10 mr-2">
+              <DotLottieReact
+                src="https://lottie.host/8cf4ba71-e5fb-44f3-8134-178c4d389417/0CCsdcgNIP.json"
+                loop
+                autoplay
+                speed={0.7}
+              />
             </div>
-        </div>
+            <span className="text-xl md:text-2xl font-bold text-gray-900">Cradla</span>
+          </div>
 
-        {/* Desktop CTA */}
-        <div className="hidden md:flex flex-shrink-0 justify-end items-center">
-          <div className="flex-shrink-0 flex items-center">
-            <a href="/investors" className="mr-4 text-sm font-medium text-gray-600 hover:text-gray-900">
-              Investors
-            </a>
-            <a href="/blog" className="mr-4 text-sm font-medium text-gray-600 hover:text-gray-900">
-              Blog
-            </a>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-6">
+            <a href="#products" className="text-sm font-medium text-gray-600 hover:text-gray-900">Products</a>
+            <a href="#approach" className="text-sm font-medium text-gray-600 hover:text-gray-900">Approach</a>
+            <a href="/pitch" className="text-sm font-medium text-gray-600 hover:text-gray-900">Investors</a>
+            <a href="/blog" className="text-sm font-medium text-gray-600 hover:text-gray-900">Blog</a>
             <a href="#contact" className="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all">
               Get Started
             </a>
+          </nav>
+
+          {/* Mobile Navigation */}
+          <div className="md:hidden flex items-center">
+            <button 
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="text-gray-900 focus:outline-none"
+            >
+              {mobileMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
+            </button>
           </div>
         </div>
 
-
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-white px-4 py-3 shadow-md">
+            <nav className="flex flex-col space-y-3">
+              <a href="#products" className="text-sm font-medium text-gray-600 hover:text-gray-900">Products</a>
+              <a href="#approach" className="text-sm font-medium text-gray-600 hover:text-gray-900">Approach</a>
+              <a href="/pitch" className="text-sm font-medium text-gray-600 hover:text-gray-900">Investors</a>
+              <a href="/blog" className="text-sm font-medium text-gray-600 hover:text-gray-900">Blog</a>
+              <a href="#contact" className="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all text-center">
+                Get Started
+              </a>
+            </nav>
+          </div>
+        )}
       </header>
 
       {/* Main Content */}
-      <main className="relative pt-16">
+      <main className="relative pt-20">
         {/* Hero Section */}
         <section 
           id="start"
-          className="min-h-[75vh] flex flex-col items-center justify-center px-4 pt-4 pb-8 relative"
+          className="min-h-[75vh] flex flex-col items-center justify-center px-4 pt-16 pb-8 relative"
         >
-          
         <div className="container max-w-5xl mx-auto relative z-10">
           <div className="grid grid-cols-1 gap-6 items-center lg:grid-cols-2 h-full">
             <div className="flex flex-col">
-
-              <div className="flex flex-col">
-                {/* Logo + Animation */}
-                <div className="flex items-center mb-4">
-                  <motion.div 
-                    initial={{ opacity: 0 }} 
-                    animate={{ opacity: 1 }} 
-                    transition={{ delay: 0.4, duration: 0.9 }}
-                    className="w-24 h-24 md:w-32 md:h-32 mr-4"
+              <div className="flex flex-col max-w-lg">
+                <h1 className="text-3xl md:text-5xl font-extrabold text-gray-800 tracking-tight mb-6">
+                  Meet a therapist that understands you in under an hour. Anytime. Anywhere.
+                </h1>
+                
+                <p className="text-lg font-medium text-gray-700 mb-8">
+                  A team of therapists standing by, all familiar with your unique story. Video connect in minutes without ever repeating yourself. As easy as booking an Uber, as healing as talking to your trusted therapist. Hop in today.
+                </p>
+              
+                <div className="flex flex-row gap-4">
+                  <Button 
+                    variant="outline"
+                    size="default"
+                    onClick={() => window.location.href = '#contact'}
+                    className="flex items-center gap-2"
                   >
-                    <DotLottieReact
-                      src="https://lottie.host/8cf4ba71-e5fb-44f3-8134-178c4d389417/0CCsdcgNIP.json"
-                      loop
-                      autoplay
-                      speed={0.7}
-                    />
-                  </motion.div>
-                
-                  <div className="flex flex-col">
-                    <h1 className="text-4xl md:text-6xl font-extrabold text-gray-800 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black">
-                      Cradla
-                    </h1>
-                    
-                  </div>
-                </div>
-                
-                <div className="flex flex-col max-w-lg">
-                  <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
-                  Connected Care, Instantly Available
-                  </h2>
-                  
-                  <p className="text-lg font-medium text-gray-700 mb-8">
-                  A team of therapists standing by, all familiar with your unique story. Video connect in minutes without ever repeating yourself. As easy as booking an Uber, as healing as talking to your trusted therapist. Hop in today.              </p>
-                
-                  <div className="flex flex-row gap-4">
-                    <Button 
-                      variant="outline"
-                      size="default"
-                      onClick={() => window.location.href = '#contact'}
-                      className="flex items-center gap-2"
-                    >
-                      Book a Demo <ArrowRight className="w-4 h-4" />
-                    </Button>
-                    <Button 
-                      variant="default"
-                      size="default"
-                      onClick={() => window.location.href = '#products'}
-                      className="flex items-center gap-2"
-                    >
-                      Visit our Sites <ArrowRight className="w-4 h-4" />
-                    </Button>
-                  </div>
+                    Book a Demo <ArrowRight className="w-4 h-4" />
+                  </Button>
+                  <Button 
+                    variant="default"
+                    size="default"
+                    onClick={() => window.location.href = '#products'}
+                    className="flex items-center gap-2"
+                  >
+                    Visit our Sites <ArrowRight className="w-4 h-4" />
+                  </Button>
                 </div>
               </div>
-              
-              
             </div>
+
             <div className="flex items-center justify-center">
               <div className="bg-black p-6 rounded-xl shadow-lg max-w-md">
                 <h3 className="text-xl font-semibold mb-4 text-gray-200">Our Value Proposition</h3>
@@ -226,8 +227,6 @@ const CradlaLanding = () => {
                 </ul>
               </div>
             </div>
-            
-
           </div>
         </div>
         </section>
@@ -239,8 +238,7 @@ const CradlaLanding = () => {
           <ProductsSection/>
         </section>
 
-        {/* Modern Calculator Section - Not in navbar */}
-        <section className="relative py-16 px-4 w-full bg-white">
+        <section className="relative py-16 px-4 w-full bg-white" id="approach">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 tracking-tight">
@@ -252,11 +250,6 @@ const CradlaLanding = () => {
             </div>
           </div>
         </section>
-
-
-
-       
-
 
         <Footer></Footer>
       </main>
