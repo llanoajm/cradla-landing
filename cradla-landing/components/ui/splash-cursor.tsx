@@ -1144,7 +1144,8 @@ function SplashCursor({
         const colors = [
 
             { r: 255/255, g: 255/255, b: 255/255 },   // 240, 43, 105
-            { r: 171/255, g: 120/255, b: 162/255 } 
+            { r: 171/255, g: 120/255, b: 162/255 },
+            { r: 0, g: 0, b: 0} 
           ];
           
           // Pick a random color from the array
