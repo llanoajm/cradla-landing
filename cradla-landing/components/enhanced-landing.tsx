@@ -101,7 +101,9 @@ const CradlaLanding = () => {
   }, []);
 
   return (
+    
     <div className="relative min-h-screen overflow-x-hidden bg-white">
+      <Analytics/>
       {/* Main Background */}
       <div className="fixed inset-0 z-0">
         <AnimatedGradientBackground 

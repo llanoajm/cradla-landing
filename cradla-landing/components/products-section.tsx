@@ -421,7 +421,7 @@ export default function ProductsSection() {
             </a>
             
             <a 
-              href="https://investors.cradla.com" 
+              href="/pitch" 
               className="flex items-center justify-between bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all"
             >
               <div>
