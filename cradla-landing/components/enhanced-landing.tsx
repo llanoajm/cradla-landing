@@ -16,6 +16,7 @@ import FeaturesSection from "@/components/feature-section";
 import Footer from '@/components/ui/footer';
 import { Menu, X } from "lucide-react";
 import heroImage from './images/heroimage.png';
+import { Analytics } from "@vercel/analytics/react"
 
 
 const CradlaLanding = () => {
