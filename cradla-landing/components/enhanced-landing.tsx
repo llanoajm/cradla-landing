@@ -53,7 +53,7 @@ const CradlaLanding = () => {
     },
     {
       id: 3,
-      title: "As personal as 1:1 Care",
+      title: "As effective as 1:1 Care",
       description: "All therapists in your care circle are always fully updated on your unique story and progress.",
       icon: Users,
       position: { top: "70%", left: "50%" },
