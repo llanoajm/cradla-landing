@@ -17,6 +17,7 @@ import Footer from '@/components/ui/footer';
 import { Menu, X } from "lucide-react";
 import heroImage from './images/heroimage.png';
 import { Analytics } from "@vercel/analytics/react"
+import OnboardingQuestionnaire from '@/components/onboarding-questionnaire'
 
 
 const CradlaLanding = () => {
@@ -105,7 +106,7 @@ const CradlaLanding = () => {
     <div className="relative min-h-screen overflow-x-hidden bg-white">
       <Analytics/>
       {/* Main Background */}
-      <div className="fixed inset-0 z-0">
+      <div className="fixed inset-0 z-[0]">
         <AnimatedGradientBackground 
           gradientColors={[
             "#FFFFFF", // White center
@@ -296,6 +297,7 @@ const CradlaLanding = () => {
           </div>
         </div>
         </section>
+        <OnboardingQuestionnaire />
 
         {/* Products Section */}
         <section
