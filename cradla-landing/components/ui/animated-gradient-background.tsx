@@ -143,7 +143,7 @@ const AnimatedGradientBackground: React.FC<AnimatedGradientBackgroundProps> = ({
             scale: 1.5,
          }}
          animate={{
-            opacity: 1,
+            opacity: 0.8,
             scale: 1,
             transition: {
                duration: 2,

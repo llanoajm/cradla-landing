@@ -16,6 +16,7 @@ import FeaturesSection from "@/components/feature-section";
 import Footer from '@/components/ui/footer';
 import { Menu, X } from "lucide-react";
 import heroImage from './images/heroimage.png';
+import detailImage from './images/detailImage.png'
 import { Analytics } from "@vercel/analytics/react"
 import OnboardingQuestionnaire from '@/components/onboarding-questionnaire'
 
@@ -34,27 +35,68 @@ const CradlaLanding = () => {
   const additionalPatients = newPatientCount - patientCount;
   const additionalRevenue = additionalPatients * sessionPrice;
   const annualIncrease = additionalRevenue * 52; // 52 weeks in a year
+
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  // Function to handle email submission
+  const handleSubmitEmail = async () => {
+    const emailInput = document.getElementById('email-input');
+    const email = emailInput.value;
+    
+    // Simple validation
+    if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+      alert('Please enter a valid email address');
+      return;
+    }
+    
+    setIsSubmitting(true);
+    
+    try {
+      // Option 1: FormSubmit.co (No sign up required, works immediately)
+      // Replace "youremail@example.com" with your actual email
+      const response = await fetch('https://formsubmit.co/llano@stanford.edu', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          email: email,
+          source: 'landing_page_cta'
+        })
+      });
+      
+      if (response.ok) {
+        // Show success message
+        setSubmitSuccess(true);
+        document.getElementById('success-message').classList.remove('hidden');
+        emailInput.value = '';
+      } else {
+        alert('Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   
   // Value propositions data
   const valueProps = [
+
     {
       id: 1,
-      title: "Instant Care Network",
-      description: "On-demand, Omegle-style therapy.",
-      icon: Users,
-      position: { top: "13%", left: "0%" },
-      color: "#DE3163"
-    },
-    {
-      id: 2,
-      title: "Reduced Wait Times",
-      description: "Patients wait 42 days for therapy on average. We'll deliver care in under an hour with an available therapist.",
+      title: "Instant like Omegle",
+      description: "Other services take 42 days on average. We'll deliver in minutes.",
       icon: Clock,
       position: { top: "36%", left: "64%" },
       color: "#E195AB"
     },
     {
-      id: 3,
+      id: 2,
       title: "As effective as 1:1 Care",
       description: "All therapists in your care circle are always fully updated on your unique story and progress.",
       icon: Users,
@@ -62,7 +104,7 @@ const CradlaLanding = () => {
       color: "#BFC261"
     },
     {
-      id: 4,
+      id: 3,
       title: "Bookmark favorite therapists",
       description: "Meet the next available one or choose your favorites.",
       icon: FileText,
@@ -135,7 +177,8 @@ const CradlaLanding = () => {
         <div className="container mx-auto px-4 md:px-6 py-3 flex justify-between items-center">
           {/* Logo with Lottie Animation */}
           <div className="flex items-center">
-            <div className="w-15 h-15 mr-2">
+            <span className="text-xl md:text-3xl font-bold font-raleway text-[#ed70c1] mr-[-18]">Cradla</span>
+            <div className="w-18 h-18 mr-2 pb-1">
               <DotLottieReact
                 src="https://lottie.host/8cf4ba71-e5fb-44f3-8134-178c4d389417/0CCsdcgNIP.json"
                 loop
@@ -143,7 +186,7 @@ const CradlaLanding = () => {
                 speed={0.7}
               />
             </div>
-            <span className="text-xl md:text-2xl font-bold text-gray-900">Cradla</span>
+            
           </div>
 
           {/* Desktop Navigation */}
@@ -191,6 +234,7 @@ const CradlaLanding = () => {
       {/* Main Content */}
       <main className="relative pt-10">
         {/* Hero Section */}
+        {/* Hero Section - Updated with email input and Talk Now button */}
         <section 
           id="start"
           className="min-h-[75vh] flex flex-col items-center justify-center px-4 pt-16 pb-8 relative"
@@ -199,31 +243,41 @@ const CradlaLanding = () => {
           <div className="grid grid-cols-1 gap-6 items-center lg:grid-cols-2 h-full">
             <div className="flex flex-col">
               <div className="flex flex-col max-w-lg">
-                <h1 className="text-3xl md:text-5xl font-extrabold text-gray-800 tracking-tight mb-6">
-                  Get Mental Therapy faster than booking an Uber.
-                </h1>
                 
-                <p className="text-xl font-medium text-gray-700 mb-8">
-                  A team of therapists is already working together for you. Hop on a call with one of them in minutes.
+                  
+                  <div className='mb-2'><h1 className="text-5xl md:text-5xl font-extrabold text-gray-800 tracking-tight ">On-Demand Therapy.</h1> </div>
+                  <div className='mb-2'><h1 className="text-5xl md:text-5xl font-extrabold text-gray-800 tracking-tight ">Alternating Therapists.</h1> </div>
+                  <div className='mb-2'><h1 className="text-5xl md:text-5xl font-extrabold text-gray-800 tracking-tight ">No catch-up required. </h1> </div>
+                  <div><h1 className="text-5xl md:text-5xl font-extrabold text-gray-800 tracking-tight mb-6"></h1></div>
+                  
+                
+                <p className='text-gray-500'>No appointments. Just therapy when you need it </p>
+                <p className='text-gray-500 mb-3'>Talk to a licensed therapist within 1 hour.</p>
+                 {/* New Email Form and Talk Now Button */}
+                 <div className="flex flex-col sm:flex-row gap-3 w-full">
+                  <input 
+                    type="email" 
+                    placeholder="name@email.com"
+                    className="flex-grow p-3 bg-gray-100 rounded-lg border border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent"
+                    id="email-input"
+                  />
+                  <button 
+                    className="px-6 py-3 text-white font-medium rounded-lg bg-pink-500 hover:bg-pink-600 transition-all flex items-center justify-center"
+                    onClick={handleSubmitEmail}
+                  >
+                    Join Now
+                  </button>
+                </div>
+
+                <p className="text-[20px] font-medium text-gray-700 mt-8 mb-8">
+                  
                 </p>
               
-                <div className="flex flex-row gap-4">
-                  <Button 
-                    variant="outline"
-                    size="default"
-                    onClick={() => window.location.href = 'mailto:llano@stanford.edu?subject=Cradla&body=Hello, I would like to book a demo.'}
-                    className="flex items-center gap-2"
-                  >
-                    Book a Demo <ArrowRight className="w-4 h-4" />
-                  </Button>
-                  <Button 
-                    variant="default"
-                    size="default"
-                    onClick={() => window.location.href = '#products'}
-                    className="flex items-center gap-2"
-                  >
-                    Visit our Sites <ArrowRight className="w-4 h-4" />
-                  </Button>
+               
+                
+                {/* Success message - initially hidden */}
+                <div id="success-message" className="mt-4 text-gray-600 font-medium hidden">
+                  Thanks! You're now in the waitlist. We'll reach out soon. ✅
                 </div>
               </div>
             </div>
@@ -297,7 +351,66 @@ const CradlaLanding = () => {
           </div>
         </div>
         </section>
+
+
+
+        {/* Team of Therapists Section */}
+        <section className="pb-16 px-4 w-full">
+        <div className="max-w-6xl mx-auto">
+          <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
+              {/* Left side - Image (smaller) */}
+              <div className="lg:col-span-5 relative">
+                <div className="h-full flex items-center justify-center p-6">
+                  <div className="relative">
+                    <img 
+                      src={detailImage.src} 
+                      alt="Cradla app interface showing therapist selection" 
+                      className="rounded-lg"
+                    />
+                    <div className="absolute bottom-2 right-2 bg-pink-100 text-pink-700 px-2 py-1 rounded text-xs font-medium">
+                      <div className="flex items-center">
+                        <Clock className="w-3 h-3 mr-1" />
+                        <span>Available in minutes</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Right side - Text content (larger) */}
+              <div className="lg:col-span-7 p-8 bg-gradient-to-br from-white to-gray-50">
+                <h2 className="text-4xl md:text-6xl font-bold mb-4 text-gray-900 tracking-tight leading-tight">
+                  A Team of Therapists Working Together for You
+                </h2>
+                <p className="text-xl md:text-2xl text-gray-700 mb-3">
+                  Meet a new available therapist every session, but they all work together and share notes to help you.
+                </p>
+                <p className="text-xl md:text-2xl text-gray-700 mb-6">
+                  Never start from scratch, even with a new therapist.
+                </p>
+                
+                {/* Benefits list */}
+                <div className="space-y-3 mb-6">
+
+                  
+                  <div className="flex items-start">
+                    <div className="bg-pink-100 p-2 rounded-full mr-3">
+                      <Clock className="w-4 h-4 text-pink-500" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900">Therapy On Your Schedule</h4>
+                      <p className="text-gray-600">Get help when you need it, not weeks later</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </section>
         <OnboardingQuestionnaire />
+        
 
         {/* Products Section */}
         <section
