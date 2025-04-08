@@ -29,7 +29,7 @@ const TestimonialSection = () => {
   return (
     <section className="w-full relative py-10 backdrop-blur-md bg-white/30">
       <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">What Patients Say</h2>
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">From our Patient Interviews</h2>
         
         <div className="flex flex-row overflow-x-auto gap-4 pb-4">
           {testimonials.map((testimonial) => (
@@ -41,11 +41,6 @@ const TestimonialSection = () => {
 
                 <div>
                   <h3 className="font-bold text-gray-800">{testimonial.name}</h3>
-                  <div className="flex">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} size={14} fill="rgb(194, 146, 0)" color="rgb(214, 161, 0)" />
-                    ))}
-                  </div>
                 </div>
               </div>
 

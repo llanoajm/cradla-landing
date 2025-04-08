@@ -5,11 +5,10 @@ import comparisonImage from './images/comparison.png';
 import TestimonialSection from "./ui/testimonials";
 
 const partnerLogos = [
-  { id: 1, name: "American Psychological Association", src: "/api/placeholder/200/80" },
-  { id: 2, name: "Psychology Today", src: "/api/placeholder/200/80" },
-  { id: 3, name: "Mental Health America", src: "/api/placeholder/200/80" },
-  { id: 4, name: "National Alliance on Mental Health", src: "/api/placeholder/200/80" },
-  { id: 5, name: "Anxiety and Depression Association", src: "/api/placeholder/200/80" },
+  { id: 1, name: "Stanford NLP Group", src: "/api/placeholder/200/80" },
+  { id: 2, name: "Stanford HCI", src: "/api/placeholder/200/80" },
+  { id: 3, name: "Harvard Psychiatry", src: "/api/placeholder/200/80" },
+  { id: 4, name: "The Bridge", src: "/api/placeholder/200/80" }
 ];
 
 const TrustedPartners = () => {
@@ -21,7 +20,7 @@ const TrustedPartners = () => {
             <div className="p-8 flex flex-col justify-center">
               <div className="mb-6">
                 <p className="text-sm font-medium tracking-widest text-gray-500 mb-2 text-center">
-                  TRUSTED BY 6000+ PATIENTS
+                  BACKED BY FIELD EXPERTS
                 </p>
                 <h2 className="text-3xl font-bold tracking-tight text-gray-800 leading-tight text-center">
                   Our Partners in Mental Wellness
