@@ -200,11 +200,11 @@ const CradlaLanding = () => {
             <div className="flex flex-col">
               <div className="flex flex-col max-w-lg">
                 <h1 className="text-3xl md:text-5xl font-extrabold text-gray-800 tracking-tight mb-6">
-                  Meet a therapist that understands you in under an hour. Anytime. Anywhere.
+                  Get Mental Therapy faster than booking an Uber.
                 </h1>
                 
-                <p className="text-lg font-medium text-gray-700 mb-8">
-                  A team of therapists standing by, all familiar with your unique story. Video connect in minutes without ever repeating yourself. As easy as calling an Uber, as healing as talking to your trusted therapist. Hop in today.
+                <p className="text-xl font-medium text-gray-700 mb-8">
+                  A team of therapists is already working together for you. Hop on a call with one of them in minutes.
                 </p>
               
                 <div className="flex flex-row gap-4">
