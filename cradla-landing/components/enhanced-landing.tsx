@@ -19,6 +19,8 @@ import heroImage from './images/heroimage.png';
 import detailImage from './images/detailImage.png'
 import { Analytics } from "@vercel/analytics/react"
 import OnboardingQuestionnaire from '@/components/onboarding-questionnaire'
+import TrustedPartners from './ trusted-partners';
+
 
 
 const CradlaLanding = () => {
@@ -192,7 +194,6 @@ const CradlaLanding = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
             <a href="#products" className="text-sm font-medium text-gray-600 hover:text-gray-900">Products</a>
-            <a href="#approach" className="text-sm font-medium text-gray-600 hover:text-gray-900">Approach</a>
             <a href="/pitch" className="text-sm font-medium text-gray-600 hover:text-gray-900">Investors</a>
             <a href="/" className="text-sm font-medium text-gray-600 hover:text-gray-900">Blog</a>
             <a href="mailto:llano@stanford.edu?subject=Cradla&body=Hello, I would like to book a demo." className="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all">
@@ -220,7 +221,6 @@ const CradlaLanding = () => {
           <div className="md:hidden bg-white px-4 py-3 shadow-md">
             <nav className="flex flex-col space-y-3">
               <a href="#products" className="text-sm font-medium text-gray-600 hover:text-gray-900">Products</a>
-              <a href="#approach" className="text-sm font-medium text-gray-600 hover:text-gray-900">Approach</a>
               <a href="/pitch" className="text-sm font-medium text-gray-600 hover:text-gray-900">Investors</a>
               <a href="/blog" className="text-sm font-medium text-gray-600 hover:text-gray-900">Blog</a>
               <a href="mailto:llano@stanford.edu?subject=Cradla&body=Hello, I would like to book a demo." className="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all text-center">
@@ -232,8 +232,7 @@ const CradlaLanding = () => {
       </header>
 
       {/* Main Content */}
-      <main className="relative pt-10">
-        {/* Hero Section */}
+      <main className="relative pt-7">
         {/* Hero Section - Updated with email input and Talk Now button */}
         <section 
           id="start"
@@ -409,6 +408,8 @@ const CradlaLanding = () => {
           </div>
         </div>
         </section>
+
+        <TrustedPartners />
         <OnboardingQuestionnaire />
         
 
@@ -419,18 +420,7 @@ const CradlaLanding = () => {
           <ProductsSection/>
         </section>
 
-        <section className="relative py-16 px-4 w-full bg-white" id="approach">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 tracking-tight">
-               Therapy Truly On-Demand.
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Just as ride-sharing apps ensure you get to your destination without needing a specific driver, Cradla enables any qualified therapist to guide a patient's journey without losing context. Our technology preserves therapeutic history, emotional patterns, and treatment progress—so switching therapists feels like switching Uber drivers: effortless, intuitive, and always moving forward. By removing bottlenecks, we make therapy more accessible and flexible than ever before, and allow therapists to cut down time spent on paperwork by 75% while increasing patient throughput by 31%, ultimately reducing wait times and improving care availability when patients need it most.
-              </p>
-            </div>
-          </div>
-        </section>
+
 
         <Footer></Footer>
       </main>
