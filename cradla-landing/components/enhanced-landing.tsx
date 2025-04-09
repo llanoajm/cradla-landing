@@ -58,7 +58,7 @@ const CradlaLanding = () => {
     try {
       // Option 1: FormSubmit.co (No sign up required, works immediately)
       // Replace "youremail@example.com" with your actual email
-      const response = await fetch('https://formsubmit.co/llano@stanford.edu', {
+      const response = await fetch('https://formsubmit.co/contact@cradla.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -223,7 +223,7 @@ const CradlaLanding = () => {
               <a href="#products" className="text-sm font-medium text-gray-600 hover:text-gray-900">Products</a>
               <a href="/pitch" className="text-sm font-medium text-gray-600 hover:text-gray-900">Investors</a>
               <a href="/blog" className="text-sm font-medium text-gray-600 hover:text-gray-900">Blog</a>
-              <a href="mailto:llano@stanford.edu?subject=Cradla&body=Hello, I would like to book a demo." className="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all text-center">
+              <a href="mailto:contact@cradla.com?subject=Cradla&body=Hello, I would like to book a demo." className="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all text-center">
                 Get Started
               </a>
             </nav>
