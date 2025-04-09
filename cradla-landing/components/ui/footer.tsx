@@ -13,7 +13,7 @@ const Footer = () => {
           </div>
           
           <div className="flex flex-wrap justify-center gap-6">
-            <a href="mailto:llano@stanford.edu" className="text-xl text-white hover:text-gray-900">
+            <a href="mailto:contact@cradla.edu" className="text-xl text-white hover:text-gray-900">
               Contact
             </a>
             <a href="/pitch" className="text-xl text-white hover:text-gray-900">
