@@ -147,7 +147,7 @@ const CradlaLanding = () => {
 
   return (
     
-    <div className="relative min-h-screen overflow-x-hidden bg-white">
+    <div className="relative min-h-screen overflow-x-hidden bg-white"  style={{ fontFamily: 'Raleway, sans-serif' }}>
       <Analytics/>
       {/* Main Background */}
       <div className="fixed inset-0 z-[0]">
@@ -179,7 +179,7 @@ const CradlaLanding = () => {
         <div className="container mx-auto px-4 md:px-6 py-3 flex justify-between items-center">
           {/* Logo with Lottie Animation */}
           <div className="flex items-center">
-            <span className="text-xl md:text-3xl font-bold font-raleway text-[#ed70c1] mr-[-18]">Cradla</span>
+            <span className="text-xl md:text-3xl font-bold text-[#ed70c1] mr-[-18]">Cradla</span>
             <div className="w-18 h-18 mr-2 pb-1">
               <DotLottieReact
                 src="https://lottie.host/8cf4ba71-e5fb-44f3-8134-178c4d389417/0CCsdcgNIP.json"
@@ -244,10 +244,9 @@ const CradlaLanding = () => {
               <div className="flex flex-col max-w-lg">
                 
                   
-                  <div className='mb-2'><h1 className="text-5xl md:text-5xl font-extrabold text-gray-800 tracking-tight ">On-Demand Therapy.</h1> </div>
-                  <div className='mb-2'><h1 className="text-5xl md:text-5xl font-extrabold text-gray-800 tracking-tight ">Alternating Therapists.</h1> </div>
-                  <div className='mb-2'><h1 className="text-5xl md:text-5xl font-extrabold text-gray-800 tracking-tight ">No catch-up required. </h1> </div>
-                  <div><h1 className="text-5xl md:text-5xl font-extrabold text-gray-800 tracking-tight mb-6"></h1></div>
+                  <div className='mb-2'><h1 className="text-5xl md:text-5xl font-extrabold text-gray-800 tracking-tight ">On-Demand Therapy</h1> </div>
+                  <div className='mb-2'><h1 className="text-5xl md:text-5xl font-extrabold text-gray-800 tracking-tight ">Alternating Therapists</h1> </div>
+                  <div className='mb-2'><h1 className="text-5xl md:text-5xl font-extrabold text-gray-800 tracking-tight ">No catch-up required </h1> </div>
                   
                 
                 <p className='text-gray-500'>No appointments. Just therapy when you need it </p>
