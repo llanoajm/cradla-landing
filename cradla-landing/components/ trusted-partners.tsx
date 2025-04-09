@@ -3,12 +3,16 @@ import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import comparisonImage from './images/comparison.png';
 import TestimonialSection from "./ui/testimonials";
+import stanfordNLPLogo from "@/components/images/stanfordNLP.jpg"
+import stanfordHAI from "@/components/images/hai.png"
+import theBridge from "@/components/images/theBridge.png"
+import harvardMedLogo from "@/components/images/harvardMed.png"
 
 const partnerLogos = [
-  { id: 1, name: "Stanford NLP Group", src: "/api/placeholder/200/80" },
-  { id: 2, name: "Stanford HCI", src: "/api/placeholder/200/80" },
-  { id: 3, name: "Harvard Psychiatry", src: "/api/placeholder/200/80" },
-  { id: 4, name: "The Bridge", src: "/api/placeholder/200/80" }
+  { id: 1, name: "Stanford NLP Group", src: harvardMedLogo.src },
+  { id: 2, name: "Stanford HCI", src: stanfordHAI.src },
+  { id: 3, name: "H", src: stanfordNLPLogo.src },
+  { id: 4, name: "The Bridge", src: theBridge.src }
 ];
 
 const TrustedPartners = () => {
