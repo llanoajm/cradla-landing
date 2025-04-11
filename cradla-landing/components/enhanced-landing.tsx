@@ -239,16 +239,16 @@ const CradlaLanding = () => {
           className="min-h-[75vh] flex flex-col items-center justify-center px-4 pt-16 pb-8 relative"
         >
           <div className="container max-w-5xl mx-auto relative z-10">
-            <div className="grid grid-cols-1 gap-6 items-center lg:grid-cols-2 h-full">
+            <div className="grid grid-cols-1 gap-6 items-center lg:grid-cols-2 h-full mt-4 lg:mt-0">
               {/* Text Content - Centered on mobile */}
-              <div className="flex flex-col items-center lg:items-start">
+              <div className="flex flex-col items-center lg:items-start mt-6 lg:mt-0">
                 <div className="flex flex-col max-w-lg text-center lg:text-left">
                   <div className='mb-2'><h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">On-Demand Therapy</h1></div>
                   <div className='mb-2'><h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">Alternating Therapists</h1></div>
                   <div className='mb-2'><h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">No catch-up required</h1></div>
                   
-                  <p className='text-gray-500'>No appointments. Just therapy when you need it</p>
-                  <p className='text-gray-500 mb-3'>Talk to a licensed therapist within 1 hour.</p>
+                  <p className='text-gray-700'>No appointments. Just therapy when you need it</p>
+                  <p className='text-gray-700 mb-3'>Talk to a licensed therapist within 1 hour.</p>
                   
                   {/* Email form - Full width on mobile, constrained on desktop */}
                   <div className="flex flex-col sm:flex-row gap-3 w-full">
