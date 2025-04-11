@@ -348,58 +348,56 @@ const CradlaLanding = () => {
 
         {/* Team of Therapists Section */}
         <section className="pb-16 px-4 w-full">
-        <div className="max-w-6xl mx-auto">
-          <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
-              {/* Left side - Image (smaller) */}
-              <div className="lg:col-span-5 relative">
-                <div className="h-full flex items-center justify-center p-6">
-                  <div className="relative">
-                    <img 
-                      src={detailImage.src} 
-                      alt="Cradla app interface showing therapist selection" 
-                      className="rounded-lg"
-                    />
-                    <div className="absolute bottom-2 right-2 bg-pink-100 text-pink-700 px-2 py-1 rounded text-xs font-medium">
-                      <div className="flex items-center">
-                        <Clock className="w-3 h-3 mr-1" />
-                        <span>Available in minutes</span>
+          <div className="max-w-6xl mx-auto">
+            <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
+                {/* Left side - Image (smaller) */}
+                <div className="lg:col-span-5 relative order-2 lg:order-1">
+                  <div className="h-full flex items-center justify-center p-6">
+                    <div className="relative max-w-xs md:max-w-sm mx-auto">
+                      <img 
+                        src={detailImage.src} 
+                        alt="Cradla app interface showing therapist selection" 
+                        className="rounded-lg w-full h-auto"
+                      />
+                      <div className="absolute bottom-2 right-2 bg-pink-100 text-pink-700 px-2 py-1 rounded text-xs font-medium">
+                        <div className="flex items-center">
+                          <Clock className="w-3 h-3 mr-1" />
+                          <span>Available in minutes</span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              
-              {/* Right side - Text content (larger) */}
-              <div className="lg:col-span-7 p-8 bg-gradient-to-br from-white to-gray-50">
-                <h2 className="text-4xl md:text-6xl font-bold mb-4 text-gray-900 tracking-tight leading-tight">
-                  A Team of Therapists Working Together for You
-                </h2>
-                <p className="text-xl md:text-2xl text-gray-700 mb-3">
-                  Meet a new available therapist every session, but they all work together and share notes to help you.
-                </p>
-                <p className="text-xl md:text-2xl text-gray-700 mb-6">
-                  Never start from scratch, even with a new therapist.
-                </p>
                 
-                {/* Benefits list */}
-                <div className="space-y-3 mb-6">
-
+                {/* Right side - Text content (larger) */}
+                <div className="lg:col-span-7 p-6 md:p-8 bg-gradient-to-br from-white to-gray-50 order-1 lg:order-2">
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-gray-900 tracking-tight leading-tight">
+                    A Team of Therapists Working Together for You
+                  </h2>
+                  <p className="text-lg sm:text-xl md:text-2xl text-gray-700 mb-3">
+                    Meet a new available therapist every session, but they all work together and share notes to help you.
+                  </p>
+                  <p className="text-lg sm:text-xl md:text-2xl text-gray-700 mb-6">
+                    Never start from scratch, even with a new therapist.
+                  </p>
                   
-                  <div className="flex items-start">
-                    <div className="bg-pink-100 p-2 rounded-full mr-3">
-                      <Clock className="w-4 h-4 text-pink-500" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900">Therapy On Your Schedule</h4>
-                      <p className="text-gray-600">Get help when you need it, not weeks later</p>
+                  {/* Benefits list */}
+                  <div className="space-y-3 mb-6">
+                    <div className="flex items-start">
+                      <div className="bg-pink-100 p-2 rounded-full mr-3 flex-shrink-0">
+                        <Clock className="w-4 h-4 text-pink-500" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-gray-900">Therapy On Your Schedule</h4>
+                        <p className="text-gray-600">Get help when you need it, not weeks later</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
         </section>
 
         <TrustedPartners />
