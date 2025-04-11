@@ -233,121 +233,115 @@ const CradlaLanding = () => {
 
       {/* Main Content */}
       <main className="relative pt-7">
-        {/* Hero Section - Updated with email input and Talk Now button */}
+        {/* Hero Section - Updated with responsive improvements */}
         <section 
           id="start"
           className="min-h-[75vh] flex flex-col items-center justify-center px-4 pt-16 pb-8 relative"
         >
-        <div className="container max-w-5xl mx-auto relative z-10">
-          <div className="grid grid-cols-1 gap-6 items-center lg:grid-cols-2 h-full">
-            <div className="flex flex-col">
-              <div className="flex flex-col max-w-lg">
-                
+          <div className="container max-w-5xl mx-auto relative z-10">
+            <div className="grid grid-cols-1 gap-6 items-center lg:grid-cols-2 h-full">
+              {/* Text Content - Centered on mobile */}
+              <div className="flex flex-col items-center lg:items-start">
+                <div className="flex flex-col max-w-lg text-center lg:text-left">
+                  <div className='mb-2'><h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">On-Demand Therapy</h1></div>
+                  <div className='mb-2'><h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">Alternating Therapists</h1></div>
+                  <div className='mb-2'><h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">No catch-up required</h1></div>
                   
-                  <div className='mb-2'><h1 className="text-5xl md:text-5xl font-extrabold text-gray-800 tracking-tight ">On-Demand Therapy</h1> </div>
-                  <div className='mb-2'><h1 className="text-5xl md:text-5xl font-extrabold text-gray-800 tracking-tight ">Alternating Therapists</h1> </div>
-                  <div className='mb-2'><h1 className="text-5xl md:text-5xl font-extrabold text-gray-800 tracking-tight ">No catch-up required </h1> </div>
+                  <p className='text-gray-500'>No appointments. Just therapy when you need it</p>
+                  <p className='text-gray-500 mb-3'>Talk to a licensed therapist within 1 hour.</p>
                   
-                
-                <p className='text-gray-500'>No appointments. Just therapy when you need it </p>
-                <p className='text-gray-500 mb-3'>Talk to a licensed therapist within 1 hour.</p>
-                 {/* New Email Form and Talk Now Button */}
-                 <div className="flex flex-col sm:flex-row gap-3 w-full">
-                  <input 
-                    type="email" 
-                    placeholder="name@email.com"
-                    className="flex-grow p-3 bg-gray-100 rounded-lg border border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent"
-                    id="email-input"
-                  />
-                  <button 
-                    className="px-6 py-3 text-white font-medium rounded-lg bg-pink-500 hover:bg-pink-600 transition-all flex items-center justify-center"
-                    onClick={handleSubmitEmail}
-                  >
-                    Join Now
-                  </button>
-                </div>
+                  {/* Email form - Full width on mobile, constrained on desktop */}
+                  <div className="flex flex-col sm:flex-row gap-3 w-full">
+                    <input 
+                      type="email" 
+                      placeholder="name@email.com"
+                      className="flex-grow p-3 bg-gray-100 rounded-lg border border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent"
+                      id="email-input"
+                    />
+                    <button 
+                      className="px-6 py-3 text-white font-medium rounded-lg bg-pink-500 hover:bg-pink-600 transition-all flex items-center justify-center"
+                      onClick={handleSubmitEmail}
+                    >
+                      Join Now
+                    </button>
+                  </div>
 
-                <p className="text-[20px] font-medium text-gray-700 mt-8 mb-8">
+                  <p className="text-[20px] font-medium text-gray-700 mt-8 mb-8"></p>
                   
-                </p>
-              
-               
-                
-                {/* Success message - initially hidden */}
-                <div id="success-message" className="mt-4 text-gray-600 font-medium hidden">
-                  Thanks! You're now in the waitlist. We'll reach out soon. ✅
+                  {/* Success message - initially hidden */}
+                  <div id="success-message" className="mt-4 text-gray-600 font-medium hidden">
+                    Thanks! You're now in the waitlist. We'll reach out soon. ✅
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="flex items-center justify-center">
-              {/* Interactive Image with Value Proposition Dots */}
-              <div className="relative max-w-md rounded-xl">
-                <img 
-                  src={heroImage.src}
-                  alt="Therapy session visualization" 
-                  className="w-full h-auto rounded-xl"
-                />
-                
-                {/* Interactive Dots */}
-                {valueProps.map((prop) => (
-                  <div key={prop.id}>
-                    {/* Dot with title */}
-                    <motion.div
-                      className="absolute z-10 cursor-pointer flex items-center"
-                      style={{
-                        top: prop.position.top,
-                        left: prop.position.left,
-                      }}
-                      initial={{ scale: 1 }}
-                      whileHover={{ scale: 1.1 }}
-                      onMouseEnter={() => setActiveValueProp(prop.id)}
-                      onMouseLeave={() => setActiveValueProp(null)}
-                    >
-                      <div 
-                        className="flex items-center"
-                      >
-                        <div 
-                          className="w-8 h-8 rounded-full flex items-center justify-center shadow-lg"
-                          style={{ backgroundColor: prop.color }}
-                        >
-                          <prop.icon className="w-4 h-4 text-white" />
-                        </div>
-                        <div 
-                          className="ml-2 bg-white px-2 py-1 rounded-md shadow-md text-xs font-medium"
-                          style={{ borderLeft: `3px solid ${prop.color}` }}
-                        >
-                          {prop.title}
-                        </div>
-                      </div>
-                    </motion.div>
-                    
-                    {/* Popup content on hover */}
-                    {activeValueProp === prop.id && (
+              {/* Image Container - Centered on all screens with responsive sizing */}
+              <div className="flex items-center justify-center w-full">
+                {/* Interactive Image with Value Proposition Dots */}
+                <div className="relative w-full max-w-sm md:max-w-md mx-auto lg:mx-0 lg:ml-auto rounded-xl">
+                  <img 
+                    src={heroImage.src}
+                    alt="Therapy session visualization" 
+                    className="w-full h-auto rounded-xl"
+                  />
+                  
+                  {/* Interactive Dots - These will adjust relative to image size */}
+                  {valueProps.map((prop) => (
+                    <div key={prop.id}>
+                      {/* Dot with title */}
                       <motion.div
-                        className="absolute z-20 bg-white p-4 rounded-lg shadow-lg max-w-xs"
+                        className="absolute z-10 cursor-pointer flex items-center"
                         style={{
-                          top: `calc(${prop.position.top} + 30px)`,
+                          top: prop.position.top,
                           left: prop.position.left,
-                          transform: "translateX(-50%)",
                         }}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.2 }}
+                        initial={{ scale: 1 }}
+                        whileHover={{ scale: 1.1 }}
+                        onMouseEnter={() => setActiveValueProp(prop.id)}
+                        onMouseLeave={() => setActiveValueProp(null)}
                       >
-                        <div 
-                          className="w-4 h-4 bg-white absolute -top-2 left-1/2 transform -translate-x-1/2 rotate-45"
-                        />
-                        <h4 className="font-semibold text-gray-900 mb-1">{prop.title}</h4>
-                        <p className="text-sm text-gray-700">{prop.description}</p>
+                        <div className="flex items-center">
+                          <div 
+                            className="w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center shadow-lg"
+                            style={{ backgroundColor: prop.color }}
+                          >
+                            <prop.icon className="w-3 h-3 md:w-4 md:h-4 text-white" />
+                          </div>
+                          <div 
+                            className="ml-2 bg-white px-2 py-1 rounded-md shadow-md text-xs font-medium"
+                            style={{ borderLeft: `3px solid ${prop.color}` }}
+                          >
+                            {prop.title}
+                          </div>
+                        </div>
                       </motion.div>
-                    )}
-                  </div>
-                ))}
+                      
+                      {/* Popup content on hover */}
+                      {activeValueProp === prop.id && (
+                        <motion.div
+                          className="absolute z-20 bg-white p-3 md:p-4 rounded-lg shadow-lg max-w-xs"
+                          style={{
+                            top: `calc(${prop.position.top} + 30px)`,
+                            left: prop.position.left,
+                            transform: "translateX(-50%)",
+                          }}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <div 
+                            className="w-4 h-4 bg-white absolute -top-2 left-1/2 transform -translate-x-1/2 rotate-45"
+                          />
+                          <h4 className="font-semibold text-gray-900 mb-1">{prop.title}</h4>
+                          <p className="text-sm text-gray-700">{prop.description}</p>
+                        </motion.div>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        </div>
         </section>
 
 
