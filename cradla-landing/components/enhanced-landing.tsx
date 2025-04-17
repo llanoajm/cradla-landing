@@ -239,16 +239,13 @@ const CradlaLanding = () => {
           className="min-h-[75vh] flex flex-col items-center justify-center px-4 pt-16 pb-8 relative"
         >
           <div className="container max-w-5xl mx-auto relative z-10">
-            <div className="grid grid-cols-1 gap-6 items-center lg:grid-cols-2 h-full mt-4 lg:mt-0">
+            <div className="grid grid-cols-1 gap-6 items-center lg:grid-cols-12 h-full mt-4 lg:mt-0">
               {/* Text Content - Centered on mobile */}
-              <div className="flex flex-col items-center lg:items-start mt-6 lg:mt-0">
+              <div className="flex flex-col items-center lg:items-start mt-6 lg:mt-0 lg:col-span-7  /* ← span 7/12ths on lg+ */">
                 <div className="flex flex-col max-w-lg text-center lg:text-left">
-                  <div className='mb-2'><h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">On-Demand Therapy</h1></div>
-                  <div className='mb-2'><h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">Alternating Therapists</h1></div>
-                  <div className='mb-2'><h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">No catch-up required</h1></div>
-                  
-                  <p className='text-gray-700'>No appointments. Just therapy when you need it</p>
-                  <p className='text-gray-700 mb-3'>Talk to a licensed therapist within 1 hour.</p>
+                  <div className='mb-2'><h1 className="text-4xl md:text-[2.5rem] font-bold text-gray-800 tracking-tight">Talk to a therapist that understands you in minutes.</h1></div>
+                  <div className='mb-5'><h1 className="text-4xl md:text-[2.5rem] font-bold text-[#60613f] tracking-tight">As easy as Omegle.</h1></div>
+                  <p className='text-gray-700 mb-5'>Every therapist in your care circle is already synced with everything they need to know about you to help you. </p>
                   
                   {/* Email form - Full width on mobile, constrained on desktop */}
                   <div className="flex flex-col sm:flex-row gap-3 w-full">
@@ -276,7 +273,7 @@ const CradlaLanding = () => {
               </div>
 
               {/* Image Container - Centered on all screens with responsive sizing */}
-              <div className="flex items-center justify-center w-full">
+              <div className="flex items-center justify-center w-full lg:col-span-5  /* ← span remaining 5/12ths */">
                 {/* Interactive Image with Value Proposition Dots */}
                 <div className="relative w-full max-w-sm md:max-w-md mx-auto lg:mx-0 lg:ml-auto rounded-xl">
                   <img 
