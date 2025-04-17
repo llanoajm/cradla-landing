@@ -460,14 +460,24 @@ export default function ProductsSection() {
             <Slideshow images={slideshowImages[selectedProduct]} />
           </div> */}
 
-           
 
+          <div className="mt-8 py-8 flex justify-center">
+                <div className="w-full max-w-3xl aspect-video">
+                  <iframe
+                    src="https://www.youtube.com/embed/0iKAEPvk-6Q"
+                    title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full rounded-lg shadow"
+                  />
+                </div>
+          </div>
           <div className="mt-12 text-center">
             <p className="text-gray-700 mb-6">
               All Cradla products work seamlessly together to create a unified
               platform for mental healthcare providers and patients.
               <br />
-              Watch a demo video of our old offering:{" "}
+              Watch a demo video of our past therapist intelligence offering:{" "}
               <a
                 href="https://www.youtube.com/watch?v=-aFMDuSvPDc&feature=youtu.be"
                 className="text-blue-600"
